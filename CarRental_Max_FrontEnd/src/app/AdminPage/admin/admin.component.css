@@ -1,0 +1,20 @@
+.admin-dashboard {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  main {
+    padding: 20px;
+    background-color: #f4f4f4;
+    height: calc(100vh - 56px); /* Account for header height */
+    overflow-y: auto;
+  }
+  
+  .offcanvas-lg {
+    width: 250px; /* Fixed sidebar width on larger screens */
+  }
+  

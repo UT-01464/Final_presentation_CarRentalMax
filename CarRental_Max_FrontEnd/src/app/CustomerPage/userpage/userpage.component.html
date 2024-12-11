@@ -1,0 +1,29 @@
+<div class="dashboard container">
+    <header class="d-flex justify-content-between align-items-center">
+      <h1>Welcome, {{ userName }}</h1>
+      <div class="menu">
+        <button class="btn btn-primary" (click)="toggleMenu()">☰</button>
+        <div class="off-canvas" id="offCanvasMenu" style="display: none;">
+          <ul class="list-unstyled">
+            <li (click)="editProfile()" class="p-2">Profile</li>
+            <li (click)="viewRentals()" class="p-2">Rental Details</li>
+            <li (click)="logout()" class="p-2">Logout</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  
+    <div class="search-bar">
+      <input type="text" class="form-control" placeholder="Search by car model..." [(ngModel)]="searchQuery" (input)="filterCars()" />
+    </div>
+  
+    <div class="car-grid">
+      <div *ngFor="let car of filteredCars" class="car-card border">
+        <h3>{{ car.model }}</h3>
+        <p *ngIf="car.available" class="text-success">Available</p>
+        <p *ngIf="!car.available" class="text-danger">Not Available</p>
+      </div>
+    </div>
+  
+    <app-rental-details *ngIf="showRentalDetails"></app-rental-details> <!-- Rental details component -->
+  </div>

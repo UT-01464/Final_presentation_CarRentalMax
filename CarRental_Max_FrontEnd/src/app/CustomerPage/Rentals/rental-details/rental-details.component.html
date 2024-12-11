@@ -1,0 +1,61 @@
+<h2>Rental Details</h2>
+
+<h3>Pending Requests</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Car Model</th>
+      <th>Request Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of pendingRequests">
+      <td>{{ request.id }}</td>
+      <td>{{ request.model }}</td>
+      <td>{{ request.requestDate }}</td>
+      <td>{{ request.status }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Rented Cars</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Car Model</th>
+      <th>Rental Date</th>
+      <th>Return Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rented of rentedCars">
+      <td>{{ rented.id }}</td>
+      <td>{{ rented.model }}</td>
+      <td>{{ rented.rentalDate }}</td>
+      <td>{{ rented.returnDate }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Returned Cars</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Car Model</th>
+      <th>Rental Date</th>
+      <th>Return Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let returned of returnedCars">
+      <td>{{ returned.id }}</td>
+      <td>{{ returned.model }}</td>
+      <td>{{ returned.rentalDate }}</td>
+      <td>{{ returned.returnDate }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,544 @@
+
+<section class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+  
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+          <img src="/images/logo/white.png" alt="Car Rental Logo" class="navbar-logo" />
+        </a>
+  
+  
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="home">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">SERVICES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">CARS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">FEEDBACKS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">CONTACT US</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+  
+  
+  <div class="backround">
+  
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center">
+          <!-- Left Content -->
+          <div class="col-lg-6 col-md-12 hero-col-content text-light">
+            <h1 class="hero-title">We Rent the Highest Caliber Automobiles</h1>
+            <p class="hero-description">Discover our range of premium vehicles tailored for your needs. Rent with ease and luxury.</p>
+            <div class="hero-btn-group">
+              <button class="btn hero-btn-primary btn-lg" (click)="getstart()">Rent Now</button>
+              <button class="btn hero-btn-secondary btn-lg">Learn More</button>
+            </div>
+          </div>
+          <!-- Right Image -->
+          <div class="col-lg-6 col-md-12 hero-col-image">
+            <div class="hero-light-behind"></div>
+            <img src="/images/bg.car.png" alt="Car" class="hero-image img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+  
+  
+  
+    
+  
+    <section>
+  
+  
+      <div class="booking-card">
+        <div class="card-body">
+          <div class="form-row">
+            <!-- Location -->
+            <div class="input-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="Enter location">
+            </div>
+      
+            <!-- Rental Date -->
+            <div class="input-group">
+              <label for="rentaldate">Rental Date</label>
+              <input type="date" id="rentaldate">
+            </div>
+      
+            <!-- Return Date -->
+            <div class="input-group">
+              <label for="returndate">Return Date</label>
+              <input type="date" id="returndate">
+            </div>
+      
+            <!-- Search Button -->
+            <div class="input-group">
+              <br>
+              <button class="search-btn">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  
+  
+  
+  
+  
+    </section>
+  
+  
+    <section>
+  
+      <div class=" logos text-center d-none d-md-block">
+        <div class="row align-items-center">
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/1.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/3.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/4.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/5.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/6.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/8.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/9.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/10.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/11.png" alt="">
+          </div>
+          <div class="col-1 grayscale">
+            <img src="/images/carlogo/12.png" alt="">
+          </div>
+          
+        </div>
+      </div>
+  
+  
+  
+    </section>
+  
+  
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+   <!-- Features Section -->
+  <section class="features">
+    <p>How it works</p>
+    <h2>Our Working Step</h2>
+    <div class="row feature-cards">
+      <div class="col-md-4 col-12 mb-4">
+        <div class="icard">
+          <i class="bi bi-geo-alt"></i>
+          <h5>Choose Location</h5>
+          <p class="d-none d-md-block">Select and categorize rental vehicles by location for easy management.
+            This feature allows customers to quickly find cars in their preferred area.
+            Streamline the booking process and enhance fleet organization.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-12 mb-4">
+        <div class="icard">
+          <i class="bi bi-calendar2-check"></i>
+          <h5>Pick-Up Date</h5>
+          <p class="d-none d-md-block">Easily choose the date for car pick-up to schedule your rental.
+            Track and manage rental history to ensure timely pickups.
+            This feature helps streamline the rental process and improve customer experience.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-12 mb-4">
+        <div class="icard">
+          <i class="bi bi-car-front-fill"></i>
+          <h5>Book Your Car</h5>
+          <p class="d-none d-md-block">Quickly browse and select the car that suits your needs.
+            Reserve your vehicle with ease for a seamless rental experience.
+            This feature simplifies the booking process and ensures availability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+    <!-- About Section -->
+  
+  
+    
+    <section class="about-us py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- Image Section -->
+          <div class="col-md-6 about-image">
+            <img src="/images/about1.png" alt="Car Rental Service" class="img-fluid rounded shadow" />
+          </div>
+          <!-- Content Section -->
+          <div class="col-md-6 about-content">
+            <h2 class="about-title">About Us</h2>
+            <p class="about-text">
+              Welcome to <strong>DriveEasy Rentals</strong>, your trusted partner for hassle-free car rentals. We pride
+              ourselves on offering a diverse fleet of vehicles, exceptional customer service, and competitive pricing to
+              meet your travel needs.
+              <span class="more-text d-none">
+                Whether you're planning a road trip, business journey, or simply exploring the city, we ensure you travel in
+                comfort and style. At DriveEasy Rentals, your satisfaction is our priority.
+              </span>
+            </p>
+            <button class="btn btn-primary toggle-btn">Read More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  
+    <!-- -------------------------------------------------Experience  -->
+  
+  
+    <section class="rental-section">
+      <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center">
+          <!-- Image Section -->
+          <div class="col-lg-6 text-center mb-4 mb-lg-0">
+            <img src="/images/about.png" alt="Luxury Car" class="img-fluid rental-car-img">
+          </div>
+          <!-- Text Section -->
+          <!-- Static Text for Large Screens -->
+          <div class="col-lg-6 d-none d-lg-block">
+            <h1 class="rental-main-title">Feel The Best Experience <br> With Our Rental Deals</h1>
+  
+            <div class="rental-feature-item d-flex align-items-start mb-4">
+              <div class="border border-secondary p-2  rental-icon me-4 ">
+                <i class="bi bi-wallet2 "></i>
+              </div>
+              <div>
+                <h4 class="rental-feature-title">Deals for every budget</h4>
+                <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+              </div>
+            </div>
+  
+            <div class="rental-feature-item d-flex align-items-start mb-4">
+              <div class="border border-secondary p-2  rental-icon me-4">
+                <i class="bi bi-currency-exchange"></i>
+              </div>
+              <div>
+                <h4 class="rental-feature-title">Best price guaranteed</h4>
+                <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+              </div>
+            </div>
+            
+            <div class="rental-feature-item d-flex align-items-start">
+              <div class="border border-secondary p-2 rental-icon me-4">
+                <i class="bi bi-gear-fill"></i>
+              </div>
+              <div>
+                <h4 class="rental-feature-title">24/7 Support</h4>
+                <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel for Small Screens -->
+          <div class="col-lg-6 d-lg-none">
+            <div id="textCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                  <h1 class="rental-main-title">Feel The Best Experience <br> With Our Rental Deals</h1>
+                  <div class="rental-feature-item d-flex align-items-start mb-4">
+                    <div class="rental-icon me-4">
+                     
+                    </div>
+                    <div>
+                      <h4 class="rental-feature-title">Deals for every budget</h4>
+                      <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                  <h1 class="rental-main-title">Best Price Guaranteed</h1>
+                  <div class="rental-feature-item d-flex align-items-start mb-4">
+                    <div class="rental-icon me-4">
+                     
+                    </div>
+                    <div>
+                      <h4 class="rental-feature-title">Best price guaranteed</h4>
+                      <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                  <h1 class="rental-main-title">24/7 Support</h1>
+                  <div class="rental-feature-item d-flex align-items-start mb-4">
+                    <div class="rental-icon me-4">
+                      
+                    </div>
+                    <div>
+                      <h4 class="rental-feature-title">Always Here for You</h4>
+                      <p class="rental-feature-description">Looking for a car rental for your next trip? Here are some tips to help you find.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#textCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#textCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    <!-- cars -->
+  
+    
+  
+  
+   
+  
+    <div class="container py-4">
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <input
+            type="text"
+            class="form-control w-50 mx-auto"
+            placeholder="Search cars..."
+            [(ngModel)]="filterText"
+            (input)="filterCars()"
+          />
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 6)">
+          <section class="car-section">
+            <img class="card-img" [src]="car.image" alt="Car image" />
+            <div class="carName">
+              <h3>{{ car.name }}</h3>
+            </div>
+            <div class="carprice">
+              <h4>{{ car.price }}</h4>
+            </div>
+            <div class="carbtn">
+              <button (click)="openCarDetails(car)">Detail</button>
+              <button>Rent</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    
+      <!-- Modal for Car Details -->
+      <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
+    </div>
+
+
+    <!-- View All Button -->
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
+  </div>
+  
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  <!-- ------------------------------------------------------------------feedback -->
+  
+  <section class="testimonial-section d-none d-md-block">
+    <div class="container">
+      <h2 class="text-center mb-4 text-light">What Our Clients Say</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- Carousel Row -->
+          <div class="carousel-item active">
+            <div class="d-flex">
+              <div class="testimonial-card">
+                <img src="/images/customer/cus6.jpg" alt="Customer 1">
+                <div class="testimonial-feedback">
+                  "Excellent service and support!"
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <img src="/images/customer/cus2.jpg" alt="Customer 2">
+                <div class="testimonial-feedback">
+                  "Highly recommended for quality!"
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <img src="/images/customer/cus3.jpg" alt="Customer 3">
+                <div class="testimonial-feedback">
+                  "I loved the quick process!"
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="d-flex">
+              <div class="testimonial-card">
+                <img src="/images/customer/cus4.jpg" alt="Customer 4">
+                <div class="testimonial-feedback">
+                  "Amazing experience overall!"
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <img src="/images/customer/cus5.jpg" alt="Customer 5">
+                <div class="testimonial-feedback">
+                  "Very professional team!"
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <img src="/images/customer/cus6.jpg" alt="Customer 6">
+                <div class="testimonial-feedback">
+                  "They exceeded expectations!"
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <!-- Contact Section -->
+    <section id="contact-map" class="py-5">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <!-- Map Section -->
+          <div class="col-lg-6 col-md-12 d-flex">
+            <div class="map-container w-100">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.1753323716516!2d80.00656377450504!3d9.66605567869288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe570010da0795%3A0x642cc900b494e9a3!2sUnicom%20TIC!5e0!3m2!1sen!2slk!4v1732564879316!5m2!1sen!2slk"
+               width="100%"
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+          <!-- Contact Us Form -->
+          <div class="col-lg-6 col-md-12 d-flex">
+            <div class="contact-form w-100">
+              <h3 class="text-light mb-4">Contact Us</h3>
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control bg-dark text-light" id="name" placeholder="Your Name">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control bg-dark text-light" id="email" placeholder="Your Email">
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control bg-dark text-light" id="message" rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-light w-100">Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="bg-dark p-2">
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <p class="text-light">&copy; 2024 Car Rental Max. All rights reserved.</p>
+              <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+  
+  
+  

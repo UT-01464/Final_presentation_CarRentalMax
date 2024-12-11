@@ -1,0 +1,24 @@
+<div class="login-page">
+  <div class="form">
+    <form *ngIf="!isRegistering" class="login-form" (ngSubmit)="onLogin()">
+      <h2>Login</h2>
+      <input type="text" placeholder="NIC" required [(ngModel)]="loginData.nic" name="nic" />
+      <input type="password" placeholder="Password" required [(ngModel)]="loginData.password" name="password" />
+      <button type="submit" class="btn">Sign in</button>
+      <p class="message">Not registered? <a (click)="toggleForm()">Create an account</a></p>
+    </form>
+    
+    <form *ngIf="isRegistering" class="register-form" (ngSubmit)="onRegister()">
+      <h2>Register</h2>
+      <input type="text" placeholder="First Name *" required [(ngModel)]="registerData.firstName" name="firstName" />
+      <input type="text" placeholder="Last Name *" required [(ngModel)]="registerData.lastName" name="lastName" />
+      <input type="email" placeholder="Email *" required [(ngModel)]="registerData.email" name="email" />
+      <input type="text" placeholder="Phone Number *" required [(ngModel)]="registerData.phoneNumber" name="phoneNumber" />
+      <input type="text" placeholder="Driver License Number *" required [(ngModel)]="registerData.driverLicenseNumber" name="driverLicenseNumber" />
+      <input type="text" placeholder="NIC *" required [(ngModel)]="registerData.nic" name="nic" />
+      <input type="password" placeholder="Password *" required [(ngModel)]="registerData.password" name="password" />
+      <button type="submit" class="btn">Create</button>
+      <p class="message">Already registered? <a (click)="toggleForm()">Sign In</a></p>
+    </form>
+  </div>
+</div>

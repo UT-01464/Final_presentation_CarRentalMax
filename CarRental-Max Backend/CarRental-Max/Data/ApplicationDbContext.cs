@@ -1,0 +1,56 @@
+﻿using CAR_RENTAL_MS_III.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace CAR_RENTAL_MS_III.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+
+        public DbSet<CarCategory> CarCategories { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<User> Users { get; set; }
+
+
+        public DbSet<Model> Models { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.Model)
+                .WithMany(m => m.Cars)
+                .HasForeignKey(c => c.ModelId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete for ModelId
+
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.Category)
+                .WithMany(cc => cc.Cars)
+                .HasForeignKey(c => c.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade); // Keep cascading delete for CategoryId
+
+            modelBuilder.Entity<Rental>()
+         .HasOne(r => r.Car)
+         .WithMany()
+         .HasForeignKey(r => r.CarId)
+         .OnDelete(DeleteBehavior.Cascade); // Adjust as necessary
+
+
+
+
+
+        }
+
+
+
+
+    }
+}

@@ -1,0 +1,136 @@
+<section id="manage-car" class="container-fluid">
+    <h2 class="text-primary mb-4">Manage Cars</h2>
+
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <select (change)="onStatsChange($event)" class="form-select">
+                <option value="">Select Statistics</option>
+                <option value="total-cars">Total Cars</option>
+                <option value="available-cars">Available Cars</option>
+                <option value="rented-cars">Rented Cars</option>
+                <option value="maintenance-cars">Maintenance Cars</option>
+            </select>
+        </div>
+        <div class="mx-auto">
+            <input type="text" placeholder="Search by Registration Number..." [(ngModel)]="searchTerm" class="form-control" />
+        </div>
+        <div>
+            <button class="btn btn-success" (click)="showAddCarModal = true">Add New Car</button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Registration Number</th>
+                <th>Model ID</th>
+                <th>Price per Day</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of paginatedCars">
+                <td><img [src]="car.imageUrl" alt="Car Image" width="100"></td>
+                <td>{{ car.registrationNumber }}</td>
+                <td>{{ car.modelId }}</td>
+                <td>{{ car.pricePerDay | currency }}</td>
+                <td>{{ car.isAvailable ? 'Available' : 'Rented' }}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="onEditCar(car)">Edit</button>
+                    <button class="btn btn-danger" (click)="onDeleteCar(car.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }}</span>
+        <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= onSearch(searchTerm).length">Next</button>
+    </div>
+
+
+<!-- Add Car -->
+
+<div *ngIf="showAddCarModal" class="modal fade show" style="display: block;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ newCar.id ? 'Edit Car' : 'Add New Car' }}</h5>
+                <button type="button" class="close" (click)="showAddCarModal = false" style="border: none; background: none; color: white; font-size: 24px;">&times;</button>
+            </div>
+            <form (ngSubmit)="onAddCar()" class="p-3" #carForm="ngForm">
+                <div class="mb-3">
+                    <label for="modelId" class="form-label">Model</label>
+                    <select id="modelId" [(ngModel)]="newCar.modelId" name="modelId" class="form-control bg-secondary text-white" required>
+                        <option *ngFor="let model of carModels" [value]="model.id">{{ model.name }}</option>
+                    </select>
+                    <div *ngIf="carForm.submitted && !newCar.modelId" class="text-danger">Model is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="categoryId" class="form-label">Category</label>
+                    <select id="categoryId" [(ngModel)]="newCar.categoryId" name="categoryId" class="form-control bg-secondary text-white" required>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                    </select>
+                    <div *ngIf="carForm.submitted && !newCar.categoryId" class="text-danger">Category is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="year" class="form-label">Year</label>
+                    <input id="year" [(ngModel)]="newCar.year" name="year" type="number" class="form-control bg-secondary text-white" placeholder="Enter Year" required />
+                    <div *ngIf="carForm.submitted && !newCar.year" class="text-danger">Year is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="registrationNumber" class="form-label">Registration Number</label>
+                    <input id="registrationNumber" [(ngModel)]="newCar.registrationNumber" name="registrationNumber" class="form-control bg-secondary text-white" placeholder="Enter Registration Number" required />
+                    <div *ngIf="carForm.submitted && !newCar.registrationNumber" class="text-danger">Registration Number is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="pricePerDay" class="form-label">Price per Day</label>
+                    <input id="pricePerDay" [(ngModel)]="newCar.pricePerDay" name="pricePerDay" type="number" class="form-control bg-secondary text-white" placeholder="Enter Price per Day" required />
+                    <div *ngIf="carForm.submitted && !newCar.pricePerDay" class="text-danger">Price per Day is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="carImage" class="form-label">Car Image</label>
+                    <input type="file" id="carImage" (change)="onFileChange($event)" accept="image/*" class="form-control" />
+                </div>
+                <div *ngIf="imagePreview">
+                    <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; margin-top: 10px;" />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">{{ newCar.id ? 'Update Car' : 'Add Car' }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <!-- Statistics Modal -->
+    <div *ngIf="showStatsModal" class="modal fade show" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <span class="close" (click)="showStatsModal = false">&times;</span>
+                <h2>{{ selectedStatus | titlecase }} Cars</h2>
+                <input type="text" placeholder="Search by Registration Number" [(ngModel)]="searchTerm" class="form-control bg-secondary text-white" />
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th>Registration Number</th>
+                            <th>Model ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let car of onSearch(searchTerm, selectedStatus)">
+                            <td>{{ car.registrationNumber }}</td>
+                            <td>{{ car.modelId }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

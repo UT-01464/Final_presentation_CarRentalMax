@@ -1,0 +1,6 @@
+@CarRental_Max_HostAddress = http://localhost:5092
+
+GET {{CarRental_Max_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
