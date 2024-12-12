@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CarDto } from '../Cars/car.service';
+import { Customer } from '../Customer/customer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,9 @@ export class RentalService {
 
   private apiUrl = 'https://localhost:7038/api/Rentals'; // Base URL for the rental API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    
+  ) {}
 
   // Get all rentals
   getRentals(): Observable<Rental[]> {
@@ -67,20 +71,46 @@ export class RentalService {
     return this.http.get<Rental[]>(`${this.apiUrl}/overdue`);
   }
 
+
+  // Get pending rentals
+  getPendingRentals(): Observable<Rental[]> {
+    return this.http.get<Rental[]>(`${this.apiUrl}/pending`); // Call the pending rentals API
+  }
+
+
+
+  // Get count of pending rentals
+  getPendingCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/pending/count`);
+  }
+
+  // Get count of accepted rentals
+  getAcceptedCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/accepted/count`);
+  }
+
+  // Get count of rejected rentals
+  getRejectedCount(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/rejected/count`);
+  }
+
  
 }
 
 
+
 export interface Rental {
   id: number;
-  customerId: number;
-  carId: number;
+  car: CarDto; // Including the car information
+  customer: Customer; // Include customer details
   rentalDate: Date;
-  status: RentalStatus; // You can define this enum in the same file or separately
+  status: RentalStatus;
   returnDate?: Date;
   pricePerDay: number;
   overdueFees: number;
+  isOverdue: boolean; // Indicate if the rental is overdue
 }
+
 
 export enum RentalStatus {
   Pending = 'Pending',
@@ -89,3 +119,4 @@ export enum RentalStatus {
   Rented = 'Rented',
   Returned = 'Returned'
 }
+

@@ -1,80 +1,88 @@
-<section id="customer" class="container-fluid">
-    <h2 class="text-primary mb-4">Customer Management</h2>
-
+<div class="container">
+    <h2>Customer Details</h2>
+  
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search customers..." />
+  
     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>NIC</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of filteredCustomers">
+          <td>{{ customer.firstName }}</td>
+          <td>{{ customer.lastName }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.phoneNumber }}</td>
+          <td>{{ customer.nic }}</td>
+          <td>
+            <button (click)="onEdit(customer)">Edit</button>
+            <button (click)="onViewRentals(customer.nic)">View Rentals</button>
+            <button (click)="onDelete(customer.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="loadingCustomers">Loading customers...</div>
+  
+    <h3 *ngIf="selectedCustomer">Edit Customer</h3>
+    <form *ngIf="selectedCustomer" (ngSubmit)="onSave()">
+      <input [(ngModel)]="selectedCustomer.firstName" placeholder="First Name" required />
+      <input [(ngModel)]="selectedCustomer.lastName" placeholder="Last Name" required />
+      <input [(ngModel)]="selectedCustomer.email" placeholder="Email" required />
+      <input [(ngModel)]="selectedCustomer.phoneNumber" placeholder="Phone Number" required />
+      <input [(ngModel)]="selectedCustomer.nic" placeholder="NIC" required />
+      <button type="submit">Save</button>
+    </form>
+  
+    <h3>Add New Customer</h3>
+    <form (ngSubmit)="onAddCustomer()">
+      <input [(ngModel)]="newCustomer.firstName" placeholder="First Name" required />
+      <input [(ngModel)]="newCustomer.lastName" placeholder="Last Name" required />
+      <input [(ngModel)]="newCustomer.email" placeholder="Email" required />
+      <input [(ngModel)]="newCustomer.phoneNumber" placeholder="Phone Number" required />
+      <input [(ngModel)]="newCustomer.nic" placeholder="NIC" required />
+      <button type="submit">Add Customer</button>
+    </form>
+  
+    <!-- Rental History Modal -->
+    <!-- Rental History Modal -->
+<div *ngIf="showRentalModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="onCloseModal()">&times;</span>
+      <h2>Rental History for {{ selectedCustomer?.firstName }} {{ selectedCustomer?.lastName }}</h2>
+      <table class="table table-striped">
         <thead>
-            <tr>
-                <th>NIC</th>
-                <th>Customer Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-            </tr>
+          <tr>
+            <th>Car Model ID</th>
+            <th>Year</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Is Overdue?</th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let customer of customers">
-                <td>{{ customer.nic }}</td>
-                <td>{{ customer.firstName }} {{ customer.lastName }}</td>
-                <td>{{ customer.email }}</td>
-                <td>{{ customer.phoneNumber }}</td>
-                <td>
-                    <button class="btn btn-primary" (click)="onEdit(customer)">Edit</button>
-                    <button class="btn btn-info" (click)="onViewRentals(customer.id)">View Rentals</button>
-                </td>
-            </tr>
+            <tr *ngIf="rentalHistory.length === 0">
+                <td colspan="6" class="text-center">No rentals found for this customer.</td>
+              </tr>
+          <tr *ngFor="let rental of rentalHistory">
+            <td>{{ rental.car.modelId }}</td>
+            <td>{{ rental.car.year }}</td>
+            <td>{{ rental.rentalDate | date }}</td>
+            <td>{{ rental.returnDate ? (rental.returnDate | date) : 'N/A' }}</td>
+            <td>{{ rental.status }}</td>
+            <td>{{ rental.isOverdue ? 'Yes' : 'No' }}</td>
+          </tr>
         </tbody>
-    </table>
-
-    <!-- Edit Customer Modal -->
-    <div *ngIf="selectedCustomer" class="modal">
-        <div class="modal-content">
-            <span class="close" (click)="selectedCustomer = null">&times;</span>
-            <h2>Edit Customer</h2>
-            <form (ngSubmit)="onSave()">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input id="firstName" [(ngModel)]="selectedCustomer.firstName" name="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName" [(ngModel)]="selectedCustomer.lastName" name="lastName" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" [(ngModel)]="selectedCustomer.email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input id="phoneNumber" [(ngModel)]="selectedCustomer.phoneNumber" name="phoneNumber" required>
-                </div>
-                <button type="submit" class="btn btn-success">Save</button>
-            </form>
-        </div>
+      </table>
     </div>
-
-    <!-- Rental History Modal -->
-    <div *ngIf="showRentalModal" class="modal">
-        <div class="modal-content">
-            <span class="close" (click)="onCloseModal()">&times;</span>
-            <h2>Rental History</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Car Registration Number</th>
-                        <th>Rental Date</th>
-                        <th>Return Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rental of rentalHistory">
-                        <td>{{ rental.carRegistrationNumber }}</td>
-                        <td>{{ rental.rentalDate }}</td>
-                        <td>{{ rental.returnDate }}</td>
-                        <td>{{ rental.status }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+  </div>
+  </div>

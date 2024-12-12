@@ -1,4 +1,102 @@
 
+.navbar {
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; 
+ 
+ 
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+
+.nav-link {
+  transition: color 0.3s ease;
+  font-size: 1rem; 
+}
+
+.nav-link:hover {
+  color: #283fe9;
+}
+
+.nav-item {
+  padding: 10px 15px;
+}
+
+
+.container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 767px) {
+  .navbar-nav .nav-link {
+    font-size: 1.2rem; 
+  }
+
+  .navbar-logo {
+    height: 40px;
+  }
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+}
+
+
+
+.navbar-logo {
+  height: 50px; 
+  width: auto;  
+  object-fit: contain; 
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0; 
+}
+
+
+
+@media (max-width: 1200px) {
+  .navbar-nav .nav-item {
+    padding: 8px 12px; 
+  }
+
+  .navbar {
+    padding: 15px 0; 
+  }
+}
+
+
+.backround
+  {
+      background-color: rgba(33,37,51,255);
+  }
+  
+
+
+
 .car h2 {
     color: white;
     text-align: center;

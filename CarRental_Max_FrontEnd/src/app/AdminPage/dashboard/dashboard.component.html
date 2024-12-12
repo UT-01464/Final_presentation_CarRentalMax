@@ -6,24 +6,24 @@
         <div class="col-md-4 col-sm-12 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Total Rentals</h5>
-                    <p class="card-text">{{ totalRentals }} rentals currently active.</p>
+                    <h5 class="card-title">Total Pending Rentals</h5>
+                    <p class="card-text">{{ totalPendingRentals }} rentals currently pending.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Total Cars</h5>
-                    <p class="card-text">{{ totalCars }} cars available for rent.</p>
+                    <h5 class="card-title">Total Accepted Rentals</h5>
+                    <p class="card-text">{{ totalAcceptedRentals }} rentals accepted.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Total Customers</h5>
-                    <p class="card-text">{{ totalCustomers }} registered customers.</p>
+                    <h5 class="card-title">Total Rejected Rentals</h5>
+                    <p class="card-text">{{ totalRejectedRentals }} rentals rejected.</p>
                 </div>
             </div>
         </div>
@@ -45,28 +45,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>ABC1234</td>
-                    <td>John Doe</td>
-                    <td>123456789V</td>
-                    <td>(123) 456-7890</td>
-                    <td>2024-12-01</td>
-                    <td>2024-12-10</td>
+                <tr *ngFor="let rental of rentalRequests">
+                    <td>{{ rental.car.registrationNumber }}</td>
+                    <td>{{ rental.customer.firstName}}</td>
+                    <td>{{ rental.customer.nic }}</td>
+                    <td>{{ rental.customer.phoneNumber }}</td>
+                    <td>{{ rental.rentalDate | date }}</td>
+                    <td>{{ rental.returnDate | date }}</td>
                     <td>
-                        <button class="btn btn-success">Approve</button>
-                        <button class="btn btn-danger">Reject</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>XYZ5678</td>
-                    <td>Jane Smith</td>
-                    <td>987654321V</td>
-                    <td>(987) 654-3210</td>
-                    <td>2024-12-05</td>
-                    <td>2024-12-15</td>
-                    <td>
-                        <button class="btn btn-success">Approve</button>
-                        <button class="btn btn-danger">Reject</button>
+                        <button class="btn btn-success" (click)="approveRental(rental.id)">Approve</button>
+                        <button class="btn btn-danger" (click)="rejectRental(rental.id)">Reject</button>
                     </td>
                 </tr>
             </tbody>

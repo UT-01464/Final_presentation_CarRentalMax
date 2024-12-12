@@ -29,6 +29,7 @@
     </div>
 
     <div class="accordion" id="reportAccordion">
+        <!-- Car History Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCarHistory">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarHistory" aria-expanded="true" aria-controls="collapseCarHistory">
@@ -37,36 +38,31 @@
             </h2>
             <div id="collapseCarHistory" class="accordion-collapse collapse show" aria-labelledby="headingCarHistory" data-bs-parent="#reportAccordion">
                 <div class="accordion-body">
-                    <input type="text" placeholder="Search by Registration Number" [(ngModel)]="searchCarHistory" class="form-control mb-3" />
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Registration Number</th>
                                 <th>Model</th>
-                                <th>Rental Date</th>
-                                <th>Return Date</th>
+                                <th>Year</th>
+                                <th>Price per Day</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let car of paginatedCarHistories">
+                            <tr *ngFor="let car of carHistories">
+                                <td>{{ car.id }}</td>
                                 <td>{{ car.registrationNumber }}</td>
-                                <td>{{ car.model }}</td>
-                                <td>{{ car.rentalDate }}</td>
-                                <td>{{ car.returnDate }}</td>
+                                <td>{{ car.modelId }}</td>
+                                <td>{{ car.year }}</td>
+                                <td>{{ car.pricePerDay | currency }}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" (click)="previousCarPage()" [disabled]="currentCarPage === 1">Previous</button>
-                        <span>Page {{ currentCarPage }}</span>
-                        <button class="btn btn-secondary" (click)="nextCarPage()" [disabled]="currentCarPage * itemsPerPage >= carHistories.length">Next</button>
-                    </div>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('month')">Print Monthly History</button>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('week')">Print Weekly History</button>
                 </div>
             </div>
         </div>
 
+        <!-- Customer History Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCustomerHistory">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomerHistory" aria-expanded="false" aria-controls="collapseCustomerHistory">
@@ -75,68 +71,64 @@
             </h2>
             <div id="collapseCustomerHistory" class="accordion-collapse collapse" aria-labelledby="headingCustomerHistory" data-bs-parent="#reportAccordion">
                 <div class="accordion-body">
-                    <input type="text" placeholder="Search by Registration Number" [(ngModel)]="searchCustomerHistory" class="form-control mb-3" />
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
-                                <th>Registration Number</th>
-                                <th>Rental Date</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let customer of paginatedCustomerHistories">
-                                <td>{{ customer.name }}</td>
-                                <td>{{ customer.registrationNumber }}</td>
-                                <td>{{ customer.rentalDate }}</td>
+                            <tr *ngFor="let customer of customerHistories">
+                                <td>{{ customer.id }}</td>
+                                <td>{{ customer.firstName }} {{ customer.lastName }}</td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.phoneNumber }}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" (click)="previousCustomerPage()" [disabled]="currentCustomerPage === 1">Previous</button>
-                        <span>Page {{ currentCustomerPage }}</span>
-                        <button class="btn btn-secondary" (click)="nextCustomerPage()" [disabled]="currentCustomerPage * itemsPerPage >= customerHistories.length">Next</button>
-                    </div>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('month')">Print Monthly History</button>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('week')">Print Weekly History</button>
                 </div>
             </div>
         </div>
 
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingManageCarHistory">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseManageCarHistory" aria-expanded="false" aria-controls="collapseManageCarHistory">
-                    Manage Car History
-                </button>
-            </h2>
-            <div id="collapseManageCarHistory" class="accordion-collapse collapse" aria-labelledby="headingManageCarHistory" data-bs-parent="#reportAccordion">
-                <div class="accordion-body">
-                    <input type="text" placeholder="Search by Registration Number" [(ngModel)]="searchManageCarHistory" class="form-control mb-3" />
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Registration Number</th>
-                                <th>Action</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let history of paginatedManageCarHistories">
-                                <td>{{ history.registrationNumber }}</td>
-                                <td>{{ history.action }}</td>
-                                <td>{{ history.date }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" (click)="previousManageCarPage()" [disabled]="currentManageCarPage === 1">Previous</button>
-                        <span>Page {{ currentManageCarPage }}</span>
-                        <button class="btn btn-secondary" (click)="nextManageCarPage()" [disabled]="currentManageCarPage * itemsPerPage >= manageCarHistories.length">Next</button>
-                    </div>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('month')">Print Monthly History</button>
-                    <button class="btn btn-primary mt-3" (click)="printHistory('week')">Print Weekly History</button>
-                </div>
-            </div>
+        <!-- Rental History Section -->
+        <!-- Rental History Section -->
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingRentalHistory">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRentalHistory" aria-expanded="false" aria-controls="collapseRentalHistory">
+            Rental History
+        </button>
+    </h2>
+    <div id="collapseRentalHistory" class="accordion-collapse collapse" aria-labelledby="headingRentalHistory" data-bs-parent="#reportAccordion">
+        <div class="accordion-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer Name</th>
+                        <th>Car Registration Number</th>
+                        <th>Rental Date</th>
+                        <th>Status</th>
+                        <th>Return Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rental of paginatedRentalHistories">
+                        <td>{{ rental.id }}</td>
+                        <td>{{ rental.customer.firstName }} {{ rental.customer.lastName }}</td>
+                        <td>{{ rental.car.registrationNumber }}</td>
+                        <td>{{ rental.rentalDate | date:'shortDate' }}</td>
+                        <td>{{ rental.status }}</td>
+                        <td>{{ rental.returnDate | date:'shortDate' }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
+    </div>
+
+
 </section>

@@ -1,3 +1,120 @@
+/* .container {
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  max-width: 100%; 
+  overflow: hidden; 
+}
+
+
+
+.navbar {
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; 
+ 
+ 
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+
+.nav-link {
+  transition: color 0.3s ease;
+  font-size: 1rem; 
+}
+
+.nav-link:hover {
+  color: #283fe9;
+}
+
+.nav-item {
+  padding: 10px 15px;
+}
+
+
+.container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+@media (max-width: 767px) {
+  .navbar-nav .nav-link {
+    font-size: 1.2rem; 
+  }
+
+  .navbar-logo {
+    height: 40px;
+  }
+
+  .navbar-toggler {
+    border: none;
+  }
+
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+}
+
+
+
+.navbar-logo {
+  height: 50px; 
+  width: auto;  
+  object-fit: contain; 
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0; 
+}
+
+
+
+@media (max-width: 1200px) {
+  .navbar-nav .nav-item {
+    padding: 8px 12px; 
+  }
+
+  .navbar {
+    padding: 15px 0; 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .dashboard {
     padding: 20px;
   }
@@ -16,13 +133,13 @@
   }
   
   .off-canvas {
-    display: none; /* Hidden by default */
+    display: none; 
     position: absolute;
     right: 0;
     background: white;
     border: 1px solid #dee2e6;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure it appears above other content */
+    z-index: 1000; 
   }
   
   .off-canvas ul {
@@ -80,4 +197,198 @@
   
   th {
     background-color: #f8f9fa;
+  } */
+
+  body {
+    background-color: #121212; /* Dark background for the body */
+    color: #ffffff; /* Light text color for readability */
+}
+
+.navbar {
+    background-color: #1e1e1e; /* Dark navbar background */
+}
+
+.nav-link {
+    color: #ffffff; /* White text for navbar links */
+}
+
+.nav-link:hover {
+    color: #ba68c8; /* Light purple on hover */
+}
+
+.modal {
+    background-color: rgba(30, 30, 30, 0.9); /* Semi-transparent dark background for modal */
+}
+
+.modal-header {
+    border-bottom: 1px solid #444444; /* Dark border for modal header */
+}
+
+.modal-title {
+    color: #ffffff; /* White title color */
+}
+
+.btn-close {
+    background: transparent; /* Transparent background for close button */
+    color: #ffffff; /* White color for close button */
+}
+
+.modal-body {
+    background-color: #1e1e1e; /* Dark background for modal body */
+    color: #ffffff; /* White text color */
+}
+
+.form-control {
+    background-color: #333333; /* Dark input background */
+    color: #ffffff; /* White text in inputs */
+    border: 1px solid #444444; /* Dark border for inputs */
+}
+
+.form-control:focus {
+    border-color: #ba68c8; /* Light purple border on focus */
+    box-shadow: none; /* No shadow */
+}
+
+.labels {
+    font-size: 12px; /* Slightly larger label font */
+    color: #aaaaaa; /* Light gray for labels */
+}
+
+.profile-button {
+    background: #ba68c8; /* Light purple button color */
+    border: none; /* No border */
+}
+
+.profile-button:hover {
+    background: #682773; /* Darker purple on hover */
+}
+
+.profile-button:focus {
+    background: #682773; /* Darker purple on focus */
+    box-shadow: none; /* No shadow */
+}
+
+.add-experience {
+    background: transparent; /* Transparent background */
+    color: #ba68c8; /* Light purple text */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-experience:hover {
+    background: #ba68c8; /* Light purple background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  .navbar {
+    background-color: #343a40; /* Adjust color as needed */
   }
+  
+  .navbar-logo {
+    height: 40px; /* Adjust logo size */
+  }
+  
+  .nav-link {
+    color: #ffffff; /* Link color */
+    padding: 15px; /* Adjust padding */
+  }
+  
+  .search-bar {
+    margin-top: 20px; /* Space above search bar */
+  }
+  
+  .car-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between car cards */
+  }
+  
+  .car-card {
+    flex: 1 1 calc(33.333% - 20px); /* Responsive card layout */
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+  }
+
+
+
+  /*---------------------------------------------cars---------------------------------*/
+
+  .car h2 {
+    color: white;
+    text-align: center;
+    padding-top: 2%;
+  }
+  
+  .car-section {
+    border: 1px solid black;
+   
+    color: white;
+    background-color: rgba(0, 0, 0, 0.842);
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .card-img {
+    border-top: 20px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.514);
+  }
+  
+  .carprice {
+    background-color: black;
+    padding: 1%;
+    box-shadow: 1px white;
+    box-shadow: 0px 0px 1px rgba(250, 250, 250, 0.75);
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .carbtn {
+    display: flex;
+    width: 100%;
+  }
+  
+  .carbtn button {
+    flex: 1;
+    padding: 20px;
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .carbtn button:hover {
+    background-color: #005bb5;
+  }
+  
+
+
+
+
+
+

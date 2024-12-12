@@ -1,35 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-interface CarHistory {
-  registrationNumber: string;
-  model: string;
-  rentalDate: string;
-  returnDate: string;
-}
-
-interface CustomerHistory {
-  name: string;
-  registrationNumber: string;
-  rentalDate: string;
-}
-
-interface ManageCarHistory {
-  registrationNumber: string;
-  action: string;
-  date: string;
-}
-
-
-
-
-
-
-
-
-
-
+import { Customer, CustomerService } from '../Services/Customer/customer.service';
+import { Rental, RentalService } from '../Services/Rental/rental.service';
+import { CarDto, CarService } from '../Services/Cars/car.service';
 
 
 @Component({
@@ -38,38 +12,68 @@ interface ManageCarHistory {
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
-export class ReportComponent {
-
-  totalRentals: number = 15; // Sample total rentals
-  totalCustomers: number = 10; // Sample total customers
-  totalCars: number = 20; // Sample total cars
-  carHistories: CarHistory[] = [
-    { registrationNumber: 'ABC1234', model: 'Toyota Camry', rentalDate: '2023-10-01', returnDate: '2023-10-05' },
-    { registrationNumber: 'XYZ5678', model: 'Honda Accord', rentalDate: '2023-10-02', returnDate: '2023-10-07' },
-    { registrationNumber: 'LMN9101', model: 'Ford Focus', rentalDate: '2023-10-03', returnDate: '2023-10-08' },
-    // Add more sample data as needed
-  ];
-  
-  customerHistories: CustomerHistory[] = [
-    { name: 'John Doe', registrationNumber: 'ABC1234', rentalDate: '2023-10-01' },
-    { name: 'Jane Smith', registrationNumber: 'XYZ5678', rentalDate: '2023-10-02' },
-    // Add more sample data as needed
-  ];
-  
-  manageCarHistories: ManageCarHistory[] = [
-    { registrationNumber: 'ABC1234', action: 'Rented', date: '2023-10-01' },
-    { registrationNumber: 'XYZ5678', action: 'Returned', date: '2023-10-02' },
-    // Add more sample data as needed
-  ];
+export class ReportComponent implements OnInit {
+  totalRentals: number = 0;
+  totalCustomers: number = 0;
+  totalCars: number = 0;
+  carHistories: CarDto[] = []; // Use CarDto directly
+  customerHistories: Customer[] = []; // Use existing Customer interface
+  rentalHistories: Rental[] = []; // Use Rental interface directly
 
   searchCarHistory: string = '';
   searchCustomerHistory: string = '';
-  searchManageCarHistory: string = '';
+  searchRentalHistory: string = ''; // Search for rental history
 
   currentCarPage: number = 1;
   currentCustomerPage: number = 1;
-  currentManageCarPage: number = 1;
+  currentRentalPage: number = 1; // Current page for rental history
   itemsPerPage: number = 5;
+
+  constructor(
+    private carService: CarService,
+    private customerService: CustomerService,
+    private rentalService: RentalService
+  ) {}
+
+  ngOnInit() {
+    this.loadData();
+    console.log('Initial state:', {
+        carHistories: this.carHistories,
+        customerHistories: this.customerHistories,
+        rentalHistories: this.rentalHistories
+    });
+}
+
+  loadData() {
+    console.log('Loading data...'); // Log when data loading begins
+
+    // Load car data
+    this.carService.getCars().subscribe(cars => {
+        console.log('Cars fetched:', cars); // Log the fetched car data
+        this.totalCars = cars.length;
+        this.carHistories = cars || []; // Ensure it's an array
+    }, error => {
+        console.error('Error fetching cars:', error); // Log any errors
+    });
+
+    // Load customer data
+    this.customerService.getAllCustomers().subscribe(customers => {
+        console.log('Customers fetched:', customers); // Log the fetched customer data
+        this.totalCustomers = customers.length;
+        this.customerHistories = customers || []; // Ensure it's an array
+    }, error => {
+        console.error('Error fetching customers:', error); // Log any errors
+    });
+
+    // Load rental data
+    this.rentalService.getRentals().subscribe(rentals => {
+        console.log('Rentals fetched:', rentals); // Log the fetched rental data
+        this.totalRentals = rentals.length;
+        this.rentalHistories = rentals || []; // Ensure it's an array
+    }, error => {
+        console.error('Error fetching rentals:', error); // Log any errors
+    });
+}
 
   get paginatedCarHistories() {
     return this.carHistories.filter(car => car.registrationNumber.includes(this.searchCarHistory))
@@ -77,13 +81,16 @@ export class ReportComponent {
   }
 
   get paginatedCustomerHistories() {
-    return this.customerHistories.filter(customer => customer.registrationNumber.includes(this.searchCustomerHistory))
+    return this.customerHistories.filter(customer => 
+      `${customer.firstName} ${customer.lastName}`.includes(this.searchCustomerHistory))
       .slice((this.currentCustomerPage - 1) * this.itemsPerPage, this.currentCustomerPage * this.itemsPerPage);
   }
 
-  get paginatedManageCarHistories() {
-    return this.manageCarHistories.filter(history => history.registrationNumber.includes(this.searchManageCarHistory))
-      .slice((this.currentManageCarPage - 1) * this.itemsPerPage, this.currentManageCarPage * this.itemsPerPage);
+  get paginatedRentalHistories() {
+    return this.rentalHistories.filter(rental => 
+      rental.car.registrationNumber.includes(this.searchRentalHistory) || 
+      `${rental.customer.firstName} ${rental.customer.lastName}`.includes(this.searchRentalHistory))
+      .slice((this.currentRentalPage - 1) * this.itemsPerPage, this.currentRentalPage * this.itemsPerPage);
   }
 
   nextCarPage() {
@@ -110,21 +117,19 @@ export class ReportComponent {
     }
   }
 
-  nextManageCarPage() {
-    if (this.currentManageCarPage * this.itemsPerPage < this.manageCarHistories.length) {
-      this.currentManageCarPage++;
+  nextRentalPage() {
+    if (this.currentRentalPage * this.itemsPerPage < this.rentalHistories.length) {
+      this.currentRentalPage++;
     }
   }
 
-  previousManageCarPage() {
-    if (this.currentManageCarPage > 1) {
-      this.currentManageCarPage--;
+  previousRentalPage() {
+    if (this.currentRentalPage > 1) {
+      this.currentRentalPage--;
     }
   }
 
   printHistory(filterBy: 'month' | 'week') {
-    // Implement logic for printing based on filterBy
     console.log(`Printing history filtered by: ${filterBy}`);
   }
-
 }

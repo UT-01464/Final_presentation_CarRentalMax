@@ -1,61 +1,86 @@
-<h2>Rental Details</h2>
+<div class="container mt-4">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" (click)="goBack()" style="cursor: pointer;">
+      <i class="fas fa-arrow-left"></i> Back to User Page
+    </a>
+  </nav>
 
-<h3>Pending Requests</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Car Model</th>
-      <th>Request Date</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let request of pendingRequests">
-      <td>{{ request.id }}</td>
-      <td>{{ request.model }}</td>
-      <td>{{ request.requestDate }}</td>
-      <td>{{ request.status }}</td>
-    </tr>
-  </tbody>
-</table>
+  <h2 class="mt-4">Rental Details</h2>
 
-<h3>Rented Cars</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Car Model</th>
-      <th>Rental Date</th>
-      <th>Return Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let rented of rentedCars">
-      <td>{{ rented.id }}</td>
-      <td>{{ rented.model }}</td>
-      <td>{{ rented.rentalDate }}</td>
-      <td>{{ rented.returnDate }}</td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Pending Requests Table -->
+  <h4>Pending Requests</h4>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Car Image</th>
+        <th>Registration Number</th>
+        <th>Model</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of pendingRequests">
+        <td><img [src]="request.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ request.registrationNumber }}</td>
+        <td>{{ request.model }}</td>
+        <td>{{ request.rentDate | date }}</td>
+        <td>{{ request.returnDate | date }}</td>
+        <td>{{ request.status }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h3>Returned Cars</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Car Model</th>
-      <th>Rental Date</th>
-      <th>Return Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let returned of returnedCars">
-      <td>{{ returned.id }}</td>
-      <td>{{ returned.model }}</td>
-      <td>{{ returned.rentalDate }}</td>
-      <td>{{ returned.returnDate }}</td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Rented Table -->
+  <h4>Rented</h4>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Car Image</th>
+        <th>Registration Number</th>
+        <th>Model</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th>Overdue</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rental of rentedCars">
+        <td><img [src]="rental.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ rental.registrationNumber }}</td>
+        <td>{{ rental.model }}</td>
+        <td>{{ rental.rentDate | date }}</td>
+        <td>{{ rental.returnDate | date }}</td>
+        <td>{{ rental.isOverdue ? 'Yes' : 'No' }}</td>
+        <td>{{ rental.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Return History Table -->
+  <h4>Return History</h4>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Car Image</th>
+        <th>Registration Number</th>
+        <th>Model</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let history of returnHistory">
+        <td><img [src]="history.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ history.registrationNumber }}</td>
+        <td>{{ history.model }}</td>
+        <td>{{ history.rentDate | date }}</td>
+        <td>{{ history.returnDate | date }}</td>
+        <td>{{ history.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

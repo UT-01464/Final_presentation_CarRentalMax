@@ -1,6 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+interface Rental {
+  carImage: string;
+  registrationNumber: string;
+  model: string;
+  rentDate: Date;
+  returnDate: Date;
+  isOverdue?: boolean;
+  status: string;
+}
+
+
+
+
+
+
 
 @Component({
   selector: 'app-rental-details',
@@ -10,18 +27,54 @@ import { FormsModule } from '@angular/forms';
 })
 export class RentalDetailsComponent {
 
-  pendingRequests = [
-    { id: 1, model: 'Toyota Camry', requestDate: '2023-12-01', status: 'Pending' },
-    { id: 2, model: 'Honda Accord', requestDate: '2023-12-02', status: 'Pending' }
-  ];
+  pendingRequests: Rental[] = []; // Populate this with actual data
+  rentedCars: Rental[] = []; // Populate this with actual data
+  returnHistory: Rental[] = []; // Populate this with actual data
 
-  rentedCars = [
-    { id: 1, model: 'Ford Mustang', rentalDate: '2023-11-20', returnDate: '2023-11-27' },
-    { id: 2, model: 'Chevrolet Impala', rentalDate: '2023-11-22', returnDate: '2023-11-29' }
-  ];
+  constructor(private router: Router) {}
 
-  returnedCars = [
-    { id: 1, model: 'Toyota Camry', rentalDate: '2023-11-10', returnDate: '2023-11-15' }
-  ];
+  ngOnInit() {
+    // Fetch rental data here (e.g., from a service)
+    this.loadRentalData();
+  }
+
+  loadRentalData() {
+    // Simulated data for demonstration
+    this.pendingRequests = [
+      {
+        carImage: 'path/to/car1.jpg',
+        registrationNumber: 'ABC123',
+        model: 'Toyota Camry',
+        rentDate: new Date(),
+        returnDate: new Date(),
+        status: 'Pending'
+      }
+    ];
+    this.rentedCars = [
+      {
+        carImage: 'path/to/car2.jpg',
+        registrationNumber: 'XYZ789',
+        model: 'Honda Civic',
+        rentDate: new Date(),
+        returnDate: new Date(),
+        isOverdue: false,
+        status: 'Rented'
+      }
+    ];
+    this.returnHistory = [
+      {
+        carImage: 'path/to/car3.jpg',
+        registrationNumber: 'LMN456',
+        model: 'Ford Focus',
+        rentDate: new Date(),
+        returnDate: new Date(),
+        status: 'Returned'
+      }
+    ];
+  }
+
+  goBack(): void {
+    this.router.navigate(['/userpage']); // Navigate back to User Page
+  }
 
 }
