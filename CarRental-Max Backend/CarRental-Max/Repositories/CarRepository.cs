@@ -21,6 +21,11 @@ namespace CAR_RENTAL_MS_III.Repositories
             return await _context.Cars.Include(c => c.Model).Include(c => c.Category).ToListAsync();
         }
 
+        public async Task<bool> CarExistsAsync(int carId)
+        {
+            return await _context.Cars.AnyAsync(c => c.Id == carId);
+        }
+
         public async Task<Car> GetCarByIdAsync(int id)
         {
             return await _context.Cars.Include(c => c.Model).Include(c => c.Category).FirstOrDefaultAsync(c => c.Id == id);

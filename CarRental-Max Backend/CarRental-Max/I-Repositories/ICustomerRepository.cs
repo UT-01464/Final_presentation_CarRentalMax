@@ -12,5 +12,6 @@ namespace CAR_RENTAL_MS_III.I_Repositories
         Task UpdateCustomerAsync(Customer customer);
         Task DeleteCustomerAsync(int id);
         Task<IEnumerable<Customer>> GetAllCustomersAsync();
+        Task<bool> CustomerExistsAsync(int customerId);
     }
 }

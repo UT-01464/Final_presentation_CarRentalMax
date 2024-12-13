@@ -11,6 +11,7 @@ import { UserpageComponent } from './CustomerPage/userpage/userpage.component';
 import { RentalDetailsComponent } from './CustomerPage/Rentals/rental-details/rental-details.component';
 import { CardetailsComponent } from './LandingPage/CarDetails/cardetails/cardetails.component';
 
+
 export const routes: Routes = [
     {path:'',component:LandingpageComponent},
     {path:'all-cars',component:AllCarsComponent},
@@ -18,6 +19,7 @@ export const routes: Routes = [
     {path:'userpage',component:UserpageComponent},
     {path:'rental-details',component:RentalDetailsComponent},
     {path:'cardetails',component:CardetailsComponent},
+    
 
     {
         path: 'admin',

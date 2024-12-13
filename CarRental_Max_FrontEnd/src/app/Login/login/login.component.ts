@@ -44,6 +44,7 @@ export class LoginComponent {
         // Decode the token to extract user ID
         const userDetails = this.parseJwt(token);
         localStorage.setItem('userId', userDetails.nameid); // Store the user ID (nameid claim)
+        this.authService.saveCurrentUser(response);
 
         this.router.navigate(['/userpage']); // Navigate to user page
     }, error => {

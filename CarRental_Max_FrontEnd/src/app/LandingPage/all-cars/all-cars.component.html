@@ -1,17 +1,14 @@
-
-
 <div class="container py-4">
 
   <section class="container">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark p-2">
       <div class="container-fluid">
-  
+
         <!-- Logo -->
         <a class="navbar-brand" href="#">
           <img src="/images/logo/white.png" alt="Car Rental Logo" class="navbar-logo" />
         </a>
-  
-  
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -36,15 +33,14 @@
             <li class="nav-item">
               <a class="nav-link text-light" href="#">CONTACT US</a>
             </li>
-            
           </ul>
         </div>
       </div>
     </nav>
   </section>
 
-
-    <!-- Search Filter -->
+  <!-- Search Filter -->
+  <div class="container py-4" style="margin-top: 80px;"> <!-- Adjust margin-top to account for navbar height -->
     <div class="row mb-4">
       <div class="col-12 text-center">
         <input
@@ -56,155 +52,54 @@
         />
       </div>
     </div>
-  
-    <!-- Grid for Large and Medium Screens -->
-    <!-- <div class="row d-none d-md-flex ">
-      <div
-        class="col-lg-4 col-md-6 col-sm-12 mb-4"
-        *ngFor="let car of filteredCars"
-      >
-        <section class="car-section">
-          <div>
-            <img class="card-img" [src]="car.image" alt="Car image" />
-          </div>
-          <div class="carName">
-            <h3>{{ car.name }}</h3>
-          </div>
-          <div class="carprice">
-            <h4>{{ car.price }}</h4>
-          </div>
-          <div>
-            <div class="row">
-              <div class="col-6">
-                <p><i class="bi bi-car-front"></i> {{ car.type }}</p>
-              </div>
-              <div class="col-6">
-                <p><i class="bi bi-person"></i> {{ car.seats }} Seats</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <p><i class="bi bi-door-open"></i> {{ car.doors }} Doors</p>
-              </div>
-              <div class="col-6">
-                <p><i class="bi bi-snow2"></i> AC</p>
-              </div>
-            </div>
-          </div>
-          <div class="carbtn">
-            <button>Detail</button>
-            <button>Rent</button>
-          </div>
-        </section>
-      </div>
-    </div> -->
-  
-    <!-- Carousel for All Screens -->
-    <!-- <div id="carCarousel" class="carousel slide d-md-none" data-bs-ride="carousel">
-      <div class="carousel-inner">
+
+
+
+    
+      <div class="row">
         <div
-          class="carousel-item"
-          *ngFor="let car of filteredCars; let i = index"
-          [class.active]="i === 0"
+          class="col-12 col-md-6 col-lg-4 mb-4"
+          *ngFor="let car of filteredCars"
         >
-          <section class="car-section mx-auto">
+          <section class="car-section">
             <div>
-              <img class="card-img" [src]="car.image" alt="Car image" />
+              <img class="card-img" [src]="car.imageUrl" alt="Car image" />
             </div>
             <div class="carName">
-              <h3>{{ car.name }}</h3>
+              <h3>{{ car.registrationNumber }}</h3>
             </div>
             <div class="carprice">
-              <h4>{{ car.price }}</h4>
+              <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
             </div>
             <div>
               <div class="row">
                 <div class="col-6">
-                  <p><i class="bi bi-car-front"></i> {{ car.type }}</p>
+                  <p><i class="bi bi-car-front"></i> {{ car.transmissionId }}</p>
                 </div>
                 <div class="col-6">
-                  <p><i class="bi bi-person"></i> {{ car.seats }} Seats</p>
+                  <p><i class="bi bi-person"></i> {{ car.numberOfSeats }} Seats</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <p><i class="bi bi-door-open"></i> {{ car.doors }} Doors</p>
+                  <p><i class="bi bi-door-open"></i> {{ car.featureIds}} Doors</p>
                 </div>
                 <div class="col-6">
-                  <p><i class="bi bi-snow2"></i> AC</p>
+                  <p><i class="bi bi-snow2"></i> {{ car.featureIds ? 'Yes' : 'No' }}</p>
                 </div>
               </div>
             </div>
             <div class="carbtn">
-              <button>Detail</button>
-              <button>Rent</button>
+              <button (click)="openCarDetails(car)">Detail</button>
+              <button (click)=" getstart()">Rent</button>
             </div>
           </section>
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>     -->
-  <!-- </div> -->
-  
-
-  <div class="row">
-    <div
-      class="col-12 col-md-6 col-lg-4 mb-4"
-      *ngFor="let car of filteredCars"
-    >
-      <section class="car-section">
-        <div>
-          <img class="card-img" [src]="car.image" alt="Car image" />
-        </div>
-        <div class="carName">
-          <h3>{{ car.name }}</h3>
-        </div>
-        <div class="carprice">
-          <h4>{{ car.price }}</h4>
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-6">
-              <p><i class="bi bi-car-front"></i> {{ car.type }}</p>
-            </div>
-            <div class="col-6">
-              <p><i class="bi bi-person"></i> {{ car.seats }} Seats</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <p><i class="bi bi-door-open"></i> {{ car.doors }} Doors</p>
-            </div>
-            <div class="col-6">
-              <p><i class="bi bi-snow2"></i> AC</p>
-            </div>
-          </div>
-        </div>
-        <div class="carbtn">
-          <button>Detail</button>
-          <button>Rent</button>
-        </div>
-      </section>
+    
+      <!-- Modal for Car Details -->
+      <app-cardetails *ngIf="selectedCar" [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
     </div>
-  </div>
-
 
   <section class="bg-dark p-2">
     <footer class="footer">

@@ -9,6 +9,6 @@
         public string PhoneNumber { get; set; }
         public string DriverLicenseNumber { get; set; }
         public string Nic { get; set; } // National Identity Card
-        public AddressDto Address { get; set; } // Address details
+        public AddressDto? Address { get; set; } // Address details
     }
 }

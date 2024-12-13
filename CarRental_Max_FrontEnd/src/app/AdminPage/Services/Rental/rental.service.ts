@@ -31,10 +31,9 @@ export class RentalService {
     return this.http.get<Rental[]>(`${this.apiUrl}/details/${nic}`);
   }
 
-  // Rent a car
-  rentCar(rental: Rental): Observable<Rental> {
-    return this.http.post<Rental>(`${this.apiUrl}/rent`, rental);
-  }
+  rentCar(rentalRequest: { customerId: number; carId: number }): Observable<RentalResponse> {
+    return this.http.post<RentalResponse>(`${this.apiUrl}/rent`, rentalRequest);
+}
 
   // Return a rented car
   returnCar(rentalId: number): Observable<void> {
@@ -109,6 +108,7 @@ export interface Rental {
   pricePerDay: number;
   overdueFees: number;
   isOverdue: boolean; // Indicate if the rental is overdue
+  userId: string;
 }
 
 
@@ -120,3 +120,6 @@ export enum RentalStatus {
   Returned = 'Returned'
 }
 
+export interface RentalResponse {
+  message: string;
+}

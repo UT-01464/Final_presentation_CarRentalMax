@@ -1,150 +1,187 @@
 <section class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container-fluid">
-          <!-- Logo -->
-          <a class="navbar-brand" href="#">
-              <img src="/images/logo/white.png" alt="Car Rental Logo" class="navbar-logo" />
-          </a>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar"
-              aria-controls="userNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="userNavbar">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item">
-                      <a class="nav-link text-light" href="#">HOME</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-light" href="#" (click)="openProfileModal(); $event.preventDefault()">PROFILE</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-light" href="#" (click)="viewRentals(); $event.preventDefault()">RENTAL DETAILS</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-light" href="#" (click)="logout()">LOGOUT</a>
-                  </li>
-              </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo/white.png" alt="Car Rental Logo" class="navbar-logo" />
+            </a>
+  
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar"
+                aria-controls="userNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="userNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#" (click)="openProfileModal(); $event.preventDefault()">PROFILE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#" (click)="viewRentals(); $event.preventDefault()">RENTAL DETAILS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#" (click)="logout()">LOGOUT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  
+    <!-- Profile Modal -->
+    <div *ngIf="isProfileModalOpen" class="container rounded bg-white mt-2 mb-2">
+        <h2>User Profile
+            <button class="close" (click)="closeModal()" style="float: right; margin-left: auto;">
+                &times; <!-- Close symbol -->
+            </button>
+        </h2>
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" 
+                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" 
+                         alt="User Profile Picture">
+                    <span class="font-weight-bold">{{ customer.firstName }} {{ customer.lastName }}</span>
+                    <span class="text-black-50">{{ customer.email }}</span>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">First Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.firstName" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Last Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.lastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Email</label>
+                            <input type="email" class="form-control" [(ngModel)]="customer.email" placeholder="Enter Email">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">Mobile Number</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.phoneNumber" placeholder="Enter Phone Number">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="labels">NIC</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.nic" placeholder="Enter NIC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <h5>Address</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Street</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.address.street" placeholder="Enter Street">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">City</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.address.city" placeholder="Enter City">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">State</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.address.state" placeholder="Enter State">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Zip Code</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.address.zipCode" placeholder="Enter Zip Code">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Country</label>
+                            <input type="text" class="form-control" [(ngModel)]="customer.address.country" placeholder="Enter Country">
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="button" (click)="saveProfile()">Save Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  
+  <div class="container py-4 search-container">
+      <div class="filter-section">
+          <div class="filter-item">
+              <label for="transmission">Transmission:</label>
+              <select id="transmission" [(ngModel)]="selectedTransmission" (change)="filterCars()">
+                  <option value="">Select Transmission</option>
+                  <option *ngFor="let transmission of transmissions" [value]="transmission.id">{{ transmission.type }}</option>
+              </select>
           </div>
+  
+          <div class="filter-item">
+              <label for="fuelType">Fuel Type:</label>
+              <select id="fuelType" [(ngModel)]="selectedFuelType" (change)="filterCars()">
+                  <option value="">Select Fuel Type</option>
+                  <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.id">{{ fuelType.type }}</option>
+              </select>
+          </div>
+  
+          <div class="filter-item">
+              <label for="seats">Number of Seats:</label>
+              <select id="seats" [(ngModel)]="selectedSeats" (change)="filterCars()">
+                  <option value="">Select Seats</option>
+                  <option *ngFor="let seat of [2, 4, 5, 7, 8]" [value]="seat">{{ seat }}</option>
+              </select>
+          </div>
+  
+          <div class="filter-item">
+              <label for="model">Model:</label>
+              <select id="model" [(ngModel)]="selectedModel" (change)="filterCars()">
+                  <option value="">Select Model</option>
+                  <option *ngFor="let model of carModels" [value]="model.id">{{ model.name }}</option>
+              </select>
+          </div>
+  
+          <button (click)="clearFilters()">Clear Filters</button>
       </div>
-  </nav>
-
-  <!-- Profile Modal -->
-  <div *ngIf="isProfileModalOpen" class="container rounded bg-white mt-2 mb-2">
-      <h2>User Profile
-          <button class="close" (click)="closeModal()" style="float: right; margin-left: auto;">
-              &times; <!-- Close symbol -->
-          </button>
-      </h2>
+  
+      
+    
       <div class="row">
-          <div class="col-md-3 border-right">
-              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                  <img class="rounded-circle mt-5" width="150px" 
-                       src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" 
-                       alt="User Profile Picture">
-                  <span class="font-weight-bold">{{ customer.firstName }} {{ customer.lastName }}</span>
-                  <span class="text-black-50">{{ customer.email }}</span>
-              </div>
-          </div>
-          <div class="col-md-5 border-right">
-              <div class="p-3 py-5">
-                  <div class="row mt-2">
-                      <div class="col-md-6">
-                          <label class="labels">First Name</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.firstName" placeholder="First Name">
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 6)">
+              <section class="car-section">
+                  <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+                  <div class="carName">
+                      <h3>{{ car.registrationNumber }}</h3>
+                  </div>
+                  <div class="carprice">
+                      <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
+                  </div>
+                  <div class="carFeatures">
+                      <div *ngIf="car.transmissionId">
+                          <i class="fas fa-snowflake"></i> AC
                       </div>
-                      <div class="col-md-6">
-                          <label class="labels">Last Name</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.lastName" placeholder="Last Name">
+                      <div>
+                          <i class="fas fa-door-open"></i> {{ car.fuelTypeId }} Doors
+                      </div>
+                      <div>
+                          <i class="fas fa-users"></i> {{ car.numberOfSeats }} Seats
                       </div>
                   </div>
-                  <div class="row mt-3">
-                      <div class="col-md-12">
-                          <label class="labels">Email</label>
-                          <input type="email" class="form-control" [(ngModel)]="customer.email" placeholder="Enter Email">
-                      </div>
-                      <div class="col-md-12">
-                          <label class="labels">Mobile Number</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.phoneNumber" placeholder="Enter Phone Number">
-                      </div>
-                      <div class="col-md-12">
-                          <label class="labels">NIC</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.nic" placeholder="Enter NIC">
-                      </div>
+                  <div class="carbtn">
+                      <button (click)="openCarDetails(car)">Detail</button>
+                      <button (click)="rentCar(car)">Rent</button>
                   </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="p-3 py-5">
-                  <h5>Address</h5>
-                  <div class="row mt-3">
-                      <div class="col-md-12">
-                          <label class="labels">Street</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.address.street" placeholder="Enter Street">
-                      </div>
-                      <div class="col-md-6">
-                          <label class="labels">City</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.address.city" placeholder="Enter City">
-                      </div>
-                      <div class="col-md-6">
-                          <label class="labels">State</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.address.state" placeholder="Enter State">
-                      </div>
-                      <div class="col-md-6">
-                          <label class="labels">Zip Code</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.address.zipCode" placeholder="Enter Zip Code">
-                      </div>
-                      <div class="col-md-6">
-                          <label class="labels">Country</label>
-                          <input type="text" class="form-control" [(ngModel)]="customer.address.country" placeholder="Enter Country">
-                      </div>
-                  </div>
-                  <div class="mt-5 text-center">
-                      <button class="btn btn-primary profile-button" type="button" (click)="saveProfile()">Save Profile</button>
-                  </div>
-              </div>
+              </section>
           </div>
       </div>
-  </div>
-</section>
-
-<div class="container py-4">
-  <div class="row mb-4">
-      <div class="col-12 text-center">
-          <input
-              type="text"
-              class="form-control w-50 mx-auto"
-              placeholder="Search cars..."
-              [(ngModel)]="filterText"
-              (input)="filterCars()"
-          />
+    
+      <!-- Modal for Car Details -->
+      <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
+    
+      <!-- View All Button -->
+      <div class="text-center mt-4">
+          <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
       </div>
   </div>
-
-  <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 6)">
-          <section class="car-section">
-              <img class="card-img" [src]="car.image" alt="Car image" />
-              <div class="carName">
-                  <h3>{{ car.name }}</h3>
-              </div>
-              <div class="carprice">
-                  <h4>{{ car.price }}</h4>
-              </div>
-              <div class="carbtn">
-                  <button (click)="openCarDetails(car)">Detail</button>
-                  <button>Rent</button>
-              </div>
-          </section>
-      </div>
-  </div>
-
-  <!-- Modal for Car Details -->
-  <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
-</div>
-
-<!-- View All Button -->
-<div class="text-center mt-4">
-  <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
-</div>

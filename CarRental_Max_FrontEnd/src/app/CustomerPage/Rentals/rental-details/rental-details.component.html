@@ -22,10 +22,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let request of pendingRequests">
-        <td><img [src]="request.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
-        <td>{{ request.registrationNumber }}</td>
-        <td>{{ request.model }}</td>
-        <td>{{ request.rentDate | date }}</td>
+        <td><img [src]="request.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ request.car.registrationNumber }}</td>
+        <td>{{ request.car.modelId}}</td>
+        <td>{{ request.rentalDate | date }}</td>
         <td>{{ request.returnDate | date }}</td>
         <td>{{ request.status }}</td>
       </tr>
@@ -33,7 +33,7 @@
   </table>
 
   <!-- Rented Table -->
-  <h4>Rented</h4>
+  <h4>Rented Cars</h4>
   <table class="table table-dark table-striped">
     <thead>
       <tr>
@@ -48,10 +48,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let rental of rentedCars">
-        <td><img [src]="rental.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
-        <td>{{ rental.registrationNumber }}</td>
-        <td>{{ rental.model }}</td>
-        <td>{{ rental.rentDate | date }}</td>
+        <td><img [src]="rental.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ rental.car.registrationNumber }}</td>
+        <td>{{ rental.car.modelId}}</td>
+        <td>{{ rental.rentalDate | date }}</td>
         <td>{{ rental.returnDate | date }}</td>
         <td>{{ rental.isOverdue ? 'Yes' : 'No' }}</td>
         <td>{{ rental.status }}</td>
@@ -74,10 +74,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let history of returnHistory">
-        <td><img [src]="history.carImage" alt="Car Image" style="width: 100px; height: auto;"></td>
-        <td>{{ history.registrationNumber }}</td>
-        <td>{{ history.model }}</td>
-        <td>{{ history.rentDate | date }}</td>
+        <td><img [src]="history.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
+        <td>{{ history.car.registrationNumber }}</td>
+        <td>{{ history.car.modelId}}</td>
+        <td>{{ history.rentalDate | date }}</td>
         <td>{{ history.returnDate | date }}</td>
         <td>{{ history.status }}</td>
       </tr>

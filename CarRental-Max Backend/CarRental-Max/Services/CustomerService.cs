@@ -58,11 +58,33 @@ namespace CAR_RENTAL_MS_III.Services
             await _customerRepository.AddCustomerAsync(customer);
         }
 
+        //public async Task<string> LoginAsync(LoginDto loginDto)
+        //{
+        //    var customer = await _customerRepository.GetCustomerByNicAsync(loginDto.Nic);
+        //    if (customer == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, customer.PasswordHash))
+        //    {
+        //        throw new UnauthorizedAccessException("Invalid credentials");
+        //    }
+
+        //    return GenerateToken(customer);
+        //}
+
+
         public async Task<string> LoginAsync(LoginDto loginDto)
         {
             var customer = await _customerRepository.GetCustomerByNicAsync(loginDto.Nic);
-            if (customer == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, customer.PasswordHash))
+
+            if (customer == null)
             {
+                // Log for debugging
+                Console.WriteLine($"Login attempt failed: User with NIC {loginDto.Nic} not found.");
+                throw new UnauthorizedAccessException("Invalid credentials");
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, customer.PasswordHash))
+            {
+                // Log for debugging
+                Console.WriteLine($"Login attempt failed: Password mismatch for NIC {loginDto.Nic}.");
                 throw new UnauthorizedAccessException("Invalid credentials");
             }
 
@@ -129,16 +151,38 @@ namespace CAR_RENTAL_MS_III.Services
                 PhoneNumber = customer.PhoneNumber,
                 DriverLicenseNumber = customer.DriverLicenseNumber,
                 Nic = customer.Nic,
-                Address = new AddressDto
+                Address = customer.Address != null ? new AddressDto
                 {
                     Street = customer.Address.Street,
                     City = customer.Address.City,
                     State = customer.Address.State,
                     ZipCode = customer.Address.ZipCode,
                     Country = customer.Address.Country
-                }
+                } : null // Handle null Address
             };
         }
+
+        //public async Task UpdateCustomerAsync(CustomerDto customerDto)
+        //{
+        //    var customer = await _customerRepository.GetCustomerByIdAsync(customerDto.Id);
+        //    if (customer == null) throw new Exception("Customer not found");
+
+        //    customer.FirstName = customerDto.FirstName;
+        //    customer.LastName = customerDto.LastName;
+        //    customer.Email = customerDto.Email;
+        //    customer.PhoneNumber = customerDto.PhoneNumber;
+        //    customer.DriverLicenseNumber = customerDto.DriverLicenseNumber;
+        //    customer.Nic = customerDto.Nic;
+
+        //    // Update address
+        //    customer.Address.Street = customerDto.Address.Street;
+        //    customer.Address.City = customerDto.Address.City;
+        //    customer.Address.State = customerDto.Address.State;
+        //    customer.Address.ZipCode = customerDto.Address.ZipCode;
+        //    customer.Address.Country = customerDto.Address.Country;
+
+        //    await _customerRepository.UpdateCustomerAsync(customer);
+        //}
 
         public async Task UpdateCustomerAsync(CustomerDto customerDto)
         {
@@ -152,15 +196,24 @@ namespace CAR_RENTAL_MS_III.Services
             customer.DriverLicenseNumber = customerDto.DriverLicenseNumber;
             customer.Nic = customerDto.Nic;
 
-            // Update address
-            customer.Address.Street = customerDto.Address.Street;
-            customer.Address.City = customerDto.Address.City;
-            customer.Address.State = customerDto.Address.State;
-            customer.Address.ZipCode = customerDto.Address.ZipCode;
-            customer.Address.Country = customerDto.Address.Country;
+            // Handle nullable Address
+            if (customerDto.Address == null)
+            {
+                customer.Address = null;
+            }
+            else
+            {
+                customer.Address ??= new Address(); // Create Address if it doesn't exist
+                customer.Address.Street = customerDto.Address.Street;
+                customer.Address.City = customerDto.Address.City;
+                customer.Address.State = customerDto.Address.State;
+                customer.Address.ZipCode = customerDto.Address.ZipCode;
+                customer.Address.Country = customerDto.Address.Country;
+            }
 
             await _customerRepository.UpdateCustomerAsync(customer);
         }
+
 
         public async Task DeleteCustomerAsync(int id)
         {

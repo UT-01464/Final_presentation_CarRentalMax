@@ -8,8 +8,16 @@ namespace CAR_RENTAL_MS_III.I_Repositories
         Task<IEnumerable<Rental>> GetAllRentalsAsync();
         Task AddRentalAsync(Rental rental);
         Task UpdateRentalAsync(Rental rental);
-        Task<IEnumerable<Rental>> GetRentalsByCustomerIdAsync(int customerId);
+        //Task<IEnumerable<Rental>> GetRentalsByCustomerIdAsync(int customerId);
+        Task<List<Rental>> GetRentalsByCustomerIdAsync(int customerId);
         Task<Rental> GetRentalByNicAndCarRegistrationAsync(string nic, string carRegistrationNumber);
 
+
+        Task<int> GetPendingCountAsync();
+        Task<int> GetAcceptedCountAsync();
+        Task<int> GetRejectedCountAsync();
+
+        
+        Task<bool> RentalExistsAsync(int rentalId);
     }
 }

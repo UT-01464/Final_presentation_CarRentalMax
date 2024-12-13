@@ -89,6 +89,11 @@
 }
 
 
+.search-bar {
+  position: relative; /* Ensure it's not fixed since we adjusted with margins */
+  margin-top: 20px; /* Additional spacing if needed */
+}
+
 .backround
   {
       background-color: rgba(33,37,51,255);

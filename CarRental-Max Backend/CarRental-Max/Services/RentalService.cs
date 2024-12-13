@@ -1,20 +1,18 @@
 ﻿using CAR_RENTAL_MS_III.Entities;
 using CAR_RENTAL_MS_III.I_Repositories;
-
 using CarRental_Max.Models.Car;
 using CarRental_Max.Models.Rentals;
 using Microsoft.EntityFrameworkCore;
 
 namespace CAR_RENTAL_MS_III.Services
 {
-    public class RentalService: IRentalService
+    public class RentalService : IRentalService
     {
-
         private readonly IRentalRepository _rentalRepository;
         private readonly ICarRepository _carRepository;
         private readonly ICustomerRepository _customerRepository;
 
-        public RentalService(IRentalRepository rentalRepository, ICarRepository carRepository,ICustomerRepository customerRepository)
+        public RentalService(IRentalRepository rentalRepository, ICarRepository carRepository, ICustomerRepository customerRepository)
         {
             _rentalRepository = rentalRepository;
             _carRepository = carRepository;
@@ -77,15 +75,23 @@ namespace CAR_RENTAL_MS_III.Services
         public async Task<RentalDetailsDto> GetRentalDetailsByNicAsync(string nic)
         {
             var customer = await _customerRepository.GetCustomerByNicAsync(nic);
-            if (customer == null) return null;
+            if (customer == null)
+            {
+                throw new ArgumentException("Customer not found for the provided NIC.");
+            }
 
             var rentals = await _rentalRepository.GetRentalsByCustomerIdAsync(customer.Id);
-
-            // Assuming we need only the latest rental for details
             var rental = rentals.OrderByDescending(r => r.RentalDate).FirstOrDefault();
-            if (rental == null) return null;
+            if (rental == null)
+            {
+                throw new InvalidOperationException("No rentals found for this customer.");
+            }
 
             var car = await _carRepository.GetCarByIdAsync(rental.CarId);
+            if (car == null)
+            {
+                throw new InvalidOperationException("Car not found for the rental.");
+            }
 
             return new RentalDetailsDto
             {
@@ -106,28 +112,41 @@ namespace CAR_RENTAL_MS_III.Services
 
         public async Task RentCarAsync(int customerId, int carId)
         {
+            // Check if the customer exists
+            var customerExists = await _customerRepository.CustomerExistsAsync(customerId);
+            if (!customerExists)
+            {
+                throw new ArgumentException("Customer does not exist.");
+            }
+
+            // Check if the car exists
+            var carExists = await _carRepository.CarExistsAsync(carId);
+            if (!carExists)
+            {
+                throw new ArgumentException("Car does not exist.");
+            }
+
+            // Create the rental object
             var rental = new Rental
             {
                 CustomerId = customerId,
                 CarId = carId,
                 RentalDate = DateTime.UtcNow,
                 Status = RentalStatus.Pending,
-                
             };
 
+            // Add the rental to the repository
             await _rentalRepository.AddRentalAsync(rental);
         }
 
         public async Task<string> ReturnCarByNicAndRegistrationAsync(string nic, string carRegistrationNumber)
         {
-            // Step 1: Retrieve rental details using NIC and registration number
             var rental = await _rentalRepository.GetRentalByNicAndCarRegistrationAsync(nic, carRegistrationNumber);
             if (rental == null)
             {
                 return "No active rental found for this customer and specified car.";
             }
 
-            // Proceed to return the car
             var currentDate = DateTime.UtcNow;
             var dueDate = rental.ReturnDate ?? currentDate;
             bool isOverdue = currentDate > dueDate;
@@ -151,6 +170,7 @@ namespace CAR_RENTAL_MS_III.Services
                 ? $"Car returned successfully. Total cost: {totalCost:C}. Overdue fees: {overdueFees:C}."
                 : $"Car returned successfully. Total cost: {totalCost:C}.";
         }
+
         public async Task<string> AcceptRentalAsync(int rentalId)
         {
             var rental = await _rentalRepository.GetRentalByIdAsync(rentalId);
@@ -198,13 +218,6 @@ namespace CAR_RENTAL_MS_III.Services
             return rentalDtos;
         }
 
-
-
-
-
-
-
-
         public async Task<string> ExtendRentalPeriodAsync(ExtendRentalDto extendRentalDto)
         {
             var rental = await _rentalRepository.GetRentalByIdAsync(extendRentalDto.RentalId);
@@ -248,10 +261,65 @@ namespace CAR_RENTAL_MS_III.Services
             return overdueCars;
         }
 
-
         public async Task<string> UpdateOverdueFeeAsync(UpdateOverdueFeeDto updateOverdueFeeDto)
         {
             return $"Overdue fee updated to {updateOverdueFeeDto.NewOverdueFee}";
+        }
+
+
+
+
+        public async Task<IEnumerable<RentalDto>> GetPendingRentalsAsync()
+        {
+            var rentals = await _rentalRepository.GetAllRentalsAsync();
+            var pendingRentals = rentals.Where(r => r.Status == RentalStatus.Pending);
+            var rentalDtos = new List<RentalDto>();
+
+            foreach (var rental in pendingRentals)
+            {
+                var car = await _carRepository.GetCarByIdAsync(rental.CarId);
+                var customer = await _customerRepository.GetCustomerByIdAsync(rental.CustomerId);
+
+                rentalDtos.Add(new RentalDto
+                {
+                    Id = rental.Id,
+                    Car = new CarDto
+                    {
+                        Id = car.Id,
+                        ModelId = car.ModelId,
+                        Year = car.Year
+                    },
+                    CustomerName = $"{customer.FirstName} {customer.LastName}",
+                    RentalDate = rental.RentalDate,
+                    Status = rental.Status,
+                    ReturnDate = rental.ReturnDate
+                });
+            }
+
+            return rentalDtos;
+        }
+
+
+
+
+        public RentalService(IRentalRepository rentalRepository)
+        {
+            _rentalRepository = rentalRepository;
+        }
+
+        public async Task<int> GetPendingCountAsync()
+        {
+            return await _rentalRepository.GetPendingCountAsync();
+        }
+
+        public async Task<int> GetAcceptedCountAsync()
+        {
+            return await _rentalRepository.GetAcceptedCountAsync();
+        }
+
+        public async Task<int> GetRejectedCountAsync()
+        {
+            return await _rentalRepository.GetRejectedCountAsync();
         }
 
 
@@ -263,18 +331,5 @@ namespace CAR_RENTAL_MS_III.Services
 
 
 
-
-
-
-
-
-
-
-
-
     }
-
-
-
 }
-

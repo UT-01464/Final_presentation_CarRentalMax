@@ -9,6 +9,7 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
+          <th>Licence</th>
           <th>Phone Number</th>
           <th>NIC</th>
           <th>Actions</th>
@@ -19,6 +20,7 @@
           <td>{{ customer.firstName }}</td>
           <td>{{ customer.lastName }}</td>
           <td>{{ customer.email }}</td>
+          <td>{{customer.driverLicenseNumber}}</td>
           <td>{{ customer.phoneNumber }}</td>
           <td>{{ customer.nic }}</td>
           <td>
@@ -37,6 +39,7 @@
       <input [(ngModel)]="selectedCustomer.firstName" placeholder="First Name" required />
       <input [(ngModel)]="selectedCustomer.lastName" placeholder="Last Name" required />
       <input [(ngModel)]="selectedCustomer.email" placeholder="Email" required />
+      <input [(ngModel)]="selectedCustomer.driverLicenseNumber" placeholder="Licence" required/>
       <input [(ngModel)]="selectedCustomer.phoneNumber" placeholder="Phone Number" required />
       <input [(ngModel)]="selectedCustomer.nic" placeholder="NIC" required />
       <button type="submit">Save</button>
@@ -47,6 +50,7 @@
       <input [(ngModel)]="newCustomer.firstName" placeholder="First Name" required />
       <input [(ngModel)]="newCustomer.lastName" placeholder="Last Name" required />
       <input [(ngModel)]="newCustomer.email" placeholder="Email" required />
+      <input [(ngModel)]="newCustomer.driverLicenseNumber" placeholder="Licence" required/>
       <input [(ngModel)]="newCustomer.phoneNumber" placeholder="Phone Number" required />
       <input [(ngModel)]="newCustomer.nic" placeholder="NIC" required />
       <button type="submit">Add Customer</button>

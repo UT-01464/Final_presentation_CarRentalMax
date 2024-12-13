@@ -338,3 +338,4 @@ E:\.MILE STONE 03\MS-III\CarRental-Max Backend\CarRental-Max\obj\Debug\net8.0\re
 E:\.MILE STONE 03\MS-III\CarRental-Max Backend\CarRental-Max\obj\Debug\net8.0\CarRental-Max.pdb
 E:\.MILE STONE 03\MS-III\CarRental-Max Backend\CarRental-Max\obj\Debug\net8.0\CarRental-Max.genruntimeconfig.cache
 E:\.MILE STONE 03\MS-III\CarRental-Max Backend\CarRental-Max\obj\Debug\net8.0\ref\CarRental-Max.dll
+E:\.MILE STONE 03\MS-III\CarRental-Max Backend\CarRental-Max\obj\Debug\net8.0\CarRental-Max.sourcelink.json

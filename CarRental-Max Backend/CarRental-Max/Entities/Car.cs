@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using CarRental_Max.Entities.CarDetails;
 
 
 namespace CAR_RENTAL_MS_III.Entities
@@ -15,7 +16,10 @@ namespace CAR_RENTAL_MS_III.Entities
         
         public bool IsAvailable { get; set; } // Availability status
         public string ImageUrl { get; set; } // URL of the car image
-
+        public int TransmissionId { get; set; } // Ensure this property exists
+        public int FuelTypeId { get; set; } // Ensure this property exists
+       
+        
 
         [ForeignKey("Model")] // Explicitly define the foreign key relationship
         public int ModelId { get; set; } // Foreign key to Model
@@ -28,6 +32,13 @@ namespace CAR_RENTAL_MS_III.Entities
 
         public ICollection<Rental>Rentals { get; set; }
 
+
+        public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
+
+        public virtual Transmission Transmission { get; set; }
+        public virtual FuelType FuelType { get; set; }
+        public virtual ICollection<Feature> Features { get; set; }
+       
 
 
     }

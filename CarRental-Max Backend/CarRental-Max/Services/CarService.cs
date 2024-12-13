@@ -4,6 +4,8 @@ using CAR_RENTAL_MS_III.I_Repositories;
 using CAR_RENTAL_MS_III.I_Services;
 using CAR_RENTAL_MS_III.Models.Car;
 using CAR_RENTAL_MS_III.Repositories;
+using CarRental_Max.Entities.CarDetails;
+using CarRental_Max.I_Repositories.CarDetails;
 using CarRental_Max.Models.Car;
 
 namespace CAR_RENTAL_MS_III.Services
@@ -11,11 +13,13 @@ namespace CAR_RENTAL_MS_III.Services
     public class CarService : ICarService
     {
         private readonly ICarRepository _carRepository;
+        private readonly IFeatureRepository _featureRepository;
 
 
-        public CarService(ICarRepository carRepository)
+        public CarService(ICarRepository carRepository, IFeatureRepository featureRepository)
         {
             _carRepository = carRepository;
+            _featureRepository = featureRepository;
 
         }
 
@@ -53,21 +57,98 @@ namespace CAR_RENTAL_MS_III.Services
             };
         }
 
+        //public async Task AddCarAsync(CarDto carDto)
+        //{
+        //    var car = new Car
+        //    {
+
+        //        ModelId = carDto.ModelId,
+        //        Year = carDto.Year,
+        //        RegistrationNumber = carDto.RegistrationNumber,
+        //        CategoryId = carDto.CategoryId,
+        //        IsAvailable = carDto.IsAvailable,
+        //        PricePerDay = carDto.PricePerDay,
+        //        ImageUrl = carDto.ImageUrl
+        //    };
+        //    await _carRepository.AddCarAsync(car);
+        //}
+
+
+        //public async Task AddCarAsync(CarDto carDto)
+        //{
+        //    var car = new Car
+        //    {
+        //        ModelId = carDto.ModelId,
+        //        Year = carDto.Year,
+        //        RegistrationNumber = carDto.RegistrationNumber,
+        //        CategoryId = carDto.CategoryId,
+        //        IsAvailable = carDto.IsAvailable,
+        //        PricePerDay = carDto.PricePerDay,
+        //        ImageUrl = carDto.ImageUrl,
+        //        Seat = carDto.NumberOfSeats,
+        //        TransmissionId = carDto.TransmissionId,
+        //        FuelTypeId = carDto.FuelTypeId,
+        //        Features = new List<Feature>() // Initialize the features list
+        //    };
+
+        //    // Add features based on FeatureIds
+        //    if (carDto.FeatureIds != null)
+        //    {
+        //        foreach (var featureId in carDto.FeatureIds)
+        //        {
+        //            var feature = await _featureRepository.GetFeatureByIdAsync(featureId);
+        //            if (feature != null)
+        //            {
+        //                car.Features.Add(feature);
+        //            }
+        //        }
+        //    }
+
+        //    await _carRepository.AddCarAsync(car);
+        //}
+
+
         public async Task AddCarAsync(CarDto carDto)
         {
             var car = new Car
             {
-               
                 ModelId = carDto.ModelId,
                 Year = carDto.Year,
                 RegistrationNumber = carDto.RegistrationNumber,
                 CategoryId = carDto.CategoryId,
                 IsAvailable = carDto.IsAvailable,
                 PricePerDay = carDto.PricePerDay,
-                ImageUrl = carDto.ImageUrl
+                ImageUrl = carDto.ImageUrl,
+                TransmissionId = carDto.TransmissionId,
+                FuelTypeId = carDto.FuelTypeId,
+                Features = new List<Feature>(), // Initialize the features list
+                Seats = new List<Seat>() // Initialize the seats list
             };
+
+            // Add the number of seats
+            for (int i = 0; i < carDto.NumberOfSeats; i++)
+            {
+                car.Seats.Add(new Seat { Id = i + 1, Type = $"Seat {i + 1}" }); // Create seat instances
+            }
+
+            // Add features based on FeatureIds
+            if (carDto.FeatureIds != null)
+            {
+                foreach (var featureId in carDto.FeatureIds)
+                {
+                    var feature = await _featureRepository.GetFeatureByIdAsync(featureId);
+                    if (feature != null)
+                    {
+                        car.Features.Add(feature);
+                    }
+                }
+            }
+
             await _carRepository.AddCarAsync(car);
         }
+
+
+
 
         public async Task UpdateCarAsync(CarDto carDto)
         {

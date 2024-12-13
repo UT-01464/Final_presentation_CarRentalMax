@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CardetailsComponent } from '../CarDetails/cardetails/cardetails.component';
+import { CarService, CarDto } from '../../AdminPage/Services/Cars/car.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -18,118 +19,57 @@ export class LandingpageComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private carService: CarService) {}
 
   getstart() {
     this.router.navigate(['/login']);
   }
 
+  cars: CarDto[] = [];
+  filterText: string = '';
+  filteredCars: CarDto[] = [];
+  selectedCar: CarDto | null = null;
   
 
-  cars = [
-    {
-      name: 'BMW',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'BMW',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'BMW',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'BMW',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Honda',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Ferrari',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Audi',
-      price: 'Starting from $100/Day',
-      image: '/images/homecar.jpg',
-      type: 'SUV',
-      seats: 5,
-      doors: 5,
-      ac: true,
-    },
-    // Add more cars here if needed
-  ];
-
-  filterText: string = '';
-  filteredCars = [...this.cars];
   visibleCars: any[] = []; // Cars to display (up to 6)
-  selectedCar: any;
+  
 
   ngOnInit(): void {
     this.filterCars();
+    this.loadCars();
+  }
+  loadCars(): void {
+    this.carService.getCars().subscribe(
+      (data: CarDto[]) => {
+        this.cars = data;
+        this.filteredCars = data; // Initialize filteredCars with fetched data
+      },
+      (error) => {
+        console.error('Error fetching cars:', error);
+      }
+    );
   }
 
   filterCars(): void {
     this.filteredCars = this.cars.filter((car) =>
-      car.name.toLowerCase().includes(this.filterText.toLowerCase())
+      car.registrationNumber.toLowerCase().includes(this.filterText.toLowerCase())
     );
-    this.setVisibleCars(); // Update visible cars after filtering
   }
 
-  
-
-  viewAllCars(): void {
-    this.router.navigate(['/all-cars']); // Navigate to the page that shows all cars
-  }
-
- 
-
-
-
-  setVisibleCars(): void {
-    this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
-  }
-
-
-  openCarDetails(car: any) {
+  openCarDetails(car: CarDto): void {
     this.selectedCar = car; // Set the selected car
   }
 
-  closeCarDetails() {
+  closeCarDetails(): void {
     this.selectedCar = null; // Clear the selected car to close the modal
+  }
+
+  viewAllCars(): void {
+    this.router.navigate(['/all-cars']);
+  }
+  
+  setVisibleCars(): void {
+    this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
   }
 
 

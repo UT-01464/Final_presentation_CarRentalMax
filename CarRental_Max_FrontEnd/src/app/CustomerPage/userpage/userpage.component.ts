@@ -5,18 +5,9 @@ import { CardetailsComponent } from '../../LandingPage/CarDetails/cardetails/car
 import { Router } from '@angular/router';
 import { Customer, CustomerService } from '../../AdminPage/Services/Customer/customer.service';
 import { AuthServiceService } from '../../Services/auth-service.service';
-
-// Define the Car interface
-interface Car {
-  name: string;
-  price: string;
-  image: string;
-  type: string;
-  seats: number;
-  doors: number;
-  ac: boolean;
-}
-
+import { CarDto, CarModel, CarService } from '../../AdminPage/Services/Cars/car.service';
+import { CarDetailsServiceService, FuelType, Transmission } from '../../AdminPage/Services/CarDetaile/car-details-service.service';
+import { RentalService } from '../../AdminPage/Services/Rental/rental.service';
 
 @Component({
   selector: 'app-userpage',
@@ -25,9 +16,7 @@ interface Car {
   styleUrls: ['./userpage.component.css']
 })
 export class UserpageComponent {
-  filterText: string = '';
-  filteredCars: Car[] = []; // Specify the type for filteredCars
-  selectedCar: Car | null = null; // Specify type for selectedCar
+  
   isProfileModalOpen: boolean = false; 
 
   isModalOpen: boolean = false;
@@ -50,52 +39,35 @@ export class UserpageComponent {
     }
   };
 
+cars: CarDto[] = [];
+  filterText: string = '';
+  filteredCars: CarDto[] = [];
+  selectedCar: CarDto | null = null;
+  visibleCars: any[] = []; 
 
-  cars: Car[] = [ // Specify the type for cars
-    {
-      name: 'BMW',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Honda',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Ferrari',
-      price: 'Starting from $80/Day',
-      image: '/images/homecar.jpg',
-      type: 'Sedan',
-      seats: 4,
-      doors: 4,
-      ac: true,
-    },
-    {
-      name: 'Audi',
-      price: 'Starting from $100/Day',
-      image: '/images/homecar.jpg',
-      type: 'SUV',
-      seats: 5,
-      doors: 5,
-      ac: true,
-    },
-    // Add more cars here if needed
-  ];
+  transmissions: Transmission[] = [];
+  fuelTypes: FuelType[] = [];
+  carModels: CarModel[] = [];
+  
+  selectedTransmission: number | null = null;
+  selectedFuelType: number | null = null;
+  selectedSeats: number | null = null;
+  selectedModel: number | null = null;
 
-  constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService ) {}
+  constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService,
+    private carService: CarService,private cardetailService:CarDetailsServiceService , private rentalService: RentalService
+   ) {}
+
+
+
 
   ngOnInit(): void {
     this.filteredCars = this.cars; // Initialize filteredCars with all cars
     this.loadUserData();
+    this.filterCars();
+    this.loadCars();
+   
+    this.loadFilters();
   }
 
 
@@ -139,33 +111,87 @@ export class UserpageComponent {
 
 
 
-  filterCars(): void {
-    this.filteredCars = this.cars.filter(car =>
-      car.name.toLowerCase().includes(this.filterText.toLowerCase())
+  loadCars(): void {
+    this.carService.getCars().subscribe(
+      (data: CarDto[]) => {
+        this.cars = data;
+        this.filteredCars = data; // Initialize filteredCars with fetched data
+      },
+      (error) => {
+        console.error('Error fetching cars:', error);
+      }
     );
   }
 
-  viewAllCars(): void {
-    this.router.navigate(['/all-cars']); // Navigate to the page that shows all cars
-  }
-
-  openCarDetails(car: Car): void {
+  openCarDetails(car: CarDto): void {
     this.selectedCar = car; // Set the selected car
   }
 
   closeCarDetails(): void {
     this.selectedCar = null; // Clear the selected car to close the modal
   }
+
+  viewAllCars(): void {
+    this.router.navigate(['/all-cars']);
+  }
   
+  setVisibleCars(): void {
+    this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
+  }
+
+
+
+  loadFilters(): void {
+    this.cardetailService.getTransmissions().subscribe(transmissions => this.transmissions = transmissions);
+    this.cardetailService.getFuelTypes().subscribe(fuelTypes => this.fuelTypes = fuelTypes);
+    this.carService.getCarModels().subscribe(carModels => this.carModels = carModels);
+  }
+
+  filterCars(): void {
+    this.filteredCars = this.cars.filter(car => {
+      const matchesTransmission = this.selectedTransmission ? car.transmissionId === this.selectedTransmission : true;
+      const matchesFuelType = this.selectedFuelType ? car.fuelTypeId === this.selectedFuelType : true;
+      const matchesSeats = this.selectedSeats ? car.numberOfSeats === this.selectedSeats : true;
+      const matchesModel = this.selectedModel ? car.modelId === this.selectedModel : true;
+
+      return matchesTransmission && matchesFuelType && matchesSeats && matchesModel;
+    });
+  }
+
+  clearFilters(): void {
+    this.selectedTransmission = null;
+    this.selectedFuelType = null;
+    this.selectedSeats = null;
+    this.selectedModel = null;
+    this.filterCars(); // Reset to show all cars
+  }
+
+
+  
+
+
+
+
+
+
 
 logout(): void {
     console.log('Logging out');
     // Implement logout logic
 }
 
+
+
+
+
+
   closeProfileModal(): void {
     this.isModalOpen = false;
   }
+
+
+
+
 
   
   viewRentals(): void {
@@ -174,10 +200,31 @@ logout(): void {
 
 
   closeModal(): void {
-    // Logic to close the modal, e.g., navigate away or hide it
-    // For example, if using a modal library, you might call a function to close it
-    window.history.back(); // Navigate back to the previous page
+    window.history.back();
   }
 
-  
+
+
+
+  rentCar(car: CarDto): void {
+    const customerId = this.customer.id; // Get the logged-in customer ID
+    const carId = car.id;
+
+    const rentalRequest = {
+        customerId: customerId,
+        carId: carId
+    };
+
+    this.rentalService.rentCar(rentalRequest).subscribe(
+        response => {
+            console.log('Rental response:', response); // Log the response
+            alert(response.message); // Now this should work without error
+        },
+        error => {
+            console.error('Error submitting rental request', error);
+            let errorMessage = error.error?.message || 'Failed to submit rental request. Please try again.';
+            alert(errorMessage);
+        }
+    );
+}
 }

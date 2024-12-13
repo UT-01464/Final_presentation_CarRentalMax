@@ -1,4 +1,5 @@
 ﻿using CAR_RENTAL_MS_III.Entities;
+using CarRental_Max.Entities.CarDetails;
 using Microsoft.EntityFrameworkCore;
 
 namespace CAR_RENTAL_MS_III.Data
@@ -21,27 +22,43 @@ namespace CAR_RENTAL_MS_III.Data
 
         public DbSet<Model> Models { get; set; }
 
+        public DbSet<Transmission> Transmissions { get; set; }
+        public DbSet<FuelType> FuelTypes { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Seat> Seats { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Car>()
-                .HasOne(c => c.Model)
-                .WithMany(m => m.Cars)
-                .HasForeignKey(c => c.ModelId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete for ModelId
+       .HasOne(c => c.Model)
+       .WithMany(m => m.Cars)
+       .HasForeignKey(c => c.ModelId)
+       .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.Category)
                 .WithMany(cc => cc.Cars)
                 .HasForeignKey(c => c.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade); // Keep cascading delete for CategoryId
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Rental>()
-         .HasOne(r => r.Car)
-         .WithMany()
-         .HasForeignKey(r => r.CarId)
-         .OnDelete(DeleteBehavior.Cascade); // Adjust as necessary
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.Transmission)
+                .WithMany()
+                .HasForeignKey(c => c.TransmissionId);
+
+            modelBuilder.Entity<Car>()
+                .HasOne(c => c.FuelType)
+                .WithMany()
+                .HasForeignKey(c => c.FuelTypeId);
+
+           
+
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.Seats)
+                .WithOne()
+                .HasForeignKey("CarId");
 
 
 

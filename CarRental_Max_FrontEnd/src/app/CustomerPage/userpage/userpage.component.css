@@ -130,6 +130,60 @@
 
 
 
+
+
+  /*---------------------------filter-----------------------*/
+
+  .search-container {
+    margin-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter-item {
+    margin-right: 10px;
+}
+
+.filter-item label {
+    margin-right: 5px;
+}
+
+.cars-section {
+    margin-top: 20px;
+}
+
+.car-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.navbar {
+    z-index: 1000; /* Ensure the navbar is above other elements */
+}
+
+@media (max-width: 600px) {
+    .filter-section {
+        flex-direction: column;
+    }
+
+    .filter-item {
+        margin-bottom: 10px;
+    }
+}
+
+
+
   /*---------------------------------------------cars---------------------------------*/
 
   .car h2 {
