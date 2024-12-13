@@ -101,6 +101,10 @@ export interface CarDto {
     pricePerDay: number;
     isAvailable: boolean;
     imageUrl: string;
+    numberOfSeats: number;
+    transmissionId: number;
+    fuelTypeId: number;
+    featureIds: []
 
 }
 

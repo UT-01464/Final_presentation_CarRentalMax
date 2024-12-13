@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardetailsComponent } from '../../LandingPage/CarDetails/cardetails/cardetails.component';
 import { Router } from '@angular/router';
+import { Customer, CustomerService } from '../../AdminPage/Services/Customer/customer.service';
+import { AuthServiceService } from '../../Services/auth-service.service';
 
 // Define the Car interface
 interface Car {
@@ -16,28 +18,6 @@ interface Car {
 }
 
 
-interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
-
-interface Customer {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  nic: string;
-  address: Address;
-}
-
-
-
-
-
 @Component({
   selector: 'app-userpage',
   imports: [CommonModule, FormsModule,CardetailsComponent],
@@ -48,16 +28,20 @@ export class UserpageComponent {
   filterText: string = '';
   filteredCars: Car[] = []; // Specify the type for filteredCars
   selectedCar: Car | null = null; // Specify type for selectedCar
+  isProfileModalOpen: boolean = false; 
 
   isModalOpen: boolean = false;
   customer: Customer = {
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phoneNumber: '+1-234-567-890',
-    nic: '123456789V',
+    id: 0, // Set this to the actual ID of the customer
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    driverLicenseNumber: '',
+    nic: '',
+    roleId: 0,
     address: {
+      id:0,
       street: '',
       city: '',
       state: '',
@@ -107,11 +91,53 @@ export class UserpageComponent {
     // Add more cars here if needed
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService ) {}
 
   ngOnInit(): void {
     this.filteredCars = this.cars; // Initialize filteredCars with all cars
+    this.loadUserData();
   }
+
+
+
+
+  loadUserData(): void {
+    const userIdString = localStorage.getItem('userId'); // Retrieve user ID from local storage
+    if (userIdString) {
+      const userId = Number(userIdString); // Convert to number
+      this.customerService.getCustomerById(userId).subscribe((data) => {
+        this.customer = data; // Set the retrieved customer data
+      }, error => {
+        console.error('Error fetching user data', error);
+      });
+    }
+  }
+
+
+  saveProfile(): void {
+    const customerId = this.customer.id; // Get the customer ID from the customer object
+    this.customerService.updateCustomer(customerId, this.customer).subscribe(() => {
+      // Update local storage with the new customer data
+      localStorage.setItem('user', JSON.stringify(this.customer));
+      alert('Profile updated successfully!'); // Notify user of success
+    }, error => {
+      console.error('Failed to update profile', error);
+      alert('Failed to update profile. Please try again.'); // Notify user of error
+    });
+  }
+
+
+
+
+
+
+
+
+  openProfileModal(): void {
+    this.isProfileModalOpen = !this.isProfileModalOpen; // Toggle modal state
+  }
+
+
 
   filterCars(): void {
     this.filteredCars = this.cars.filter(car =>
@@ -130,10 +156,7 @@ export class UserpageComponent {
   closeCarDetails(): void {
     this.selectedCar = null; // Clear the selected car to close the modal
   }
-  openProfileModal(): void {
-    console.log('Opening profile modal');
-    this.isModalOpen = true;
-}
+  
 
 logout(): void {
     console.log('Logging out');
@@ -144,14 +167,16 @@ logout(): void {
     this.isModalOpen = false;
   }
 
-  saveProfile(): void {
-    // Implement save logic here, e.g., send the updated customer data to a server
-    console.log('Profile saved:', this.customer);
-    this.closeProfileModal();
-  }
-
+  
   viewRentals(): void {
     this.router.navigate(['/rental-details'])
+  }
+
+
+  closeModal(): void {
+    // Logic to close the modal, e.g., navigate away or hide it
+    // For example, if using a modal library, you might call a function to close it
+    window.history.back(); // Navigate back to the previous page
   }
 
   

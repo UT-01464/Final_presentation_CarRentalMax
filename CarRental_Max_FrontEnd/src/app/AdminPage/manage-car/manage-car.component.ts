@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarService } from '../Services/Cars/car.service';
 import { CarDto,Category,CarModel } from '../Services/Cars/car.service';
 import { CloudinaryService } from '../../Services/Cloudinary/cloudinary.service';
+import { CarDetailsServiceService, Feature, FuelType, Transmission } from '../Services/CarDetaile/car-details-service.service';
 
 @Component({
   selector: 'app-manage-car',
@@ -20,6 +21,9 @@ export class ManageCarComponent implements OnInit {
 
   categories: Category[] = [];
   carModels: CarModel[] = [];
+  transmissions:Transmission[] = [];
+  fuelTypes: FuelType[] = [];
+  features: Feature[] = [];
 
 
   newCar: CarDto = this.initializeNewCar();
@@ -33,12 +37,16 @@ export class ManageCarComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  constructor(private carService: CarService , private cloudinaryService:CloudinaryService) {}
+  constructor(private carService: CarService , private cloudinaryService:CloudinaryService,
+    private carDetailsService: CarDetailsServiceService) {}
 
   ngOnInit(): void {
     this.loadCars(); // Load cars on initialization
     this.loadCategories();
     this.loadCarModels();
+    this.loadTransmissions();
+    this.loadFuelTypes();
+    this.loadFeatures();
   }
 
 
@@ -81,7 +89,32 @@ export class ManageCarComponent implements OnInit {
   }
 
 
+  loadTransmissions() {
+    this.carDetailsService.getTransmissions().subscribe(transmissions => {
+        this.transmissions = transmissions;
+        console.log('Transmissions:', transmissions); // Log the data
+    }, error => {
+        console.error('Error loading transmissions:', error);
+    });
+}
 
+loadFuelTypes() {
+    this.carDetailsService.getFuelTypes().subscribe(fuelTypes => {
+        this.fuelTypes = fuelTypes;
+        console.log('Fuel Types:', fuelTypes); // Log the data
+    }, error => {
+        console.error('Error loading fuel types:', error);
+    });
+}
+
+loadFeatures() {
+    this.carDetailsService.getFeatures().subscribe(features => {
+        this.features = features;
+        console.log('Features:', features); // Log the data
+    }, error => {
+        console.error('Error loading features:', error);
+    });
+}
 
 
 
@@ -165,7 +198,11 @@ export class ManageCarComponent implements OnInit {
       categoryId: 0,
       pricePerDay: 0,
       isAvailable: true,
-      imageUrl: ''
+      imageUrl: '',
+      numberOfSeats: 0,
+      transmissionId: 0,
+      fuelTypeId: 0,
+      featureIds: []
     };
   }
 

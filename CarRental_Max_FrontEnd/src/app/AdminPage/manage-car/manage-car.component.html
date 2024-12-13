@@ -92,6 +92,32 @@
                     <input id="pricePerDay" [(ngModel)]="newCar.pricePerDay" name="pricePerDay" type="number" class="form-control bg-secondary text-white" placeholder="Enter Price per Day" required />
                     <div *ngIf="carForm.submitted && !newCar.pricePerDay" class="text-danger">Price per Day is required.</div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="transmissionId" class="form-label">Transmission</label>
+                    <select id="transmissionId" [(ngModel)]="newCar.transmissionId" name="transmissionId" class="form-control bg-secondary text-white" required>
+                        <option *ngFor="let transmission of transmissions" [value]="transmission.id">{{ transmission.type }}</option>
+                    </select>
+                    <div *ngIf="carForm.submitted && !newCar.transmissionId" class="text-danger">Transmission is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fuelTypeId" class="form-label">Fuel Type</label>
+                    <select id="fuelTypeId" [(ngModel)]="newCar.fuelTypeId" name="fuelTypeId" class="form-control bg-secondary text-white" required>
+                        <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.id">{{ fuelType.type }}</option>
+                    </select>
+                    <div *ngIf="carForm.submitted && !newCar.fuelTypeId" class="text-danger">Fuel Type is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="featureIds" class="form-label">Features</label>
+                    <select id="featureIds" [(ngModel)]="newCar.featureIds" name="featureIds" class="form-control bg-secondary text-white" multiple required>
+                        <option *ngFor="let feature of features" [value]="feature.id">{{ feature.name }}</option>
+                    </select>
+                    <div *ngIf="carForm.submitted && newCar.featureIds.length === 0" class="text-danger">At least one feature is required.</div>
+                </div>
+
+
                 <div class="mb-3">
                     <label for="carImage" class="form-label">Car Image</label>
                     <input type="file" id="carImage" (change)="onFileChange($event)" accept="image/*" class="form-control" />
