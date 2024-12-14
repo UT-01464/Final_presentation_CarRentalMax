@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customer, CustomerService } from '../Services/Customer/customer.service';
-import { Rental, RentalService } from '../Services/Rental/rental.service';
+import { Rental, RentalResponse, RentalService } from '../Services/Rental/rental.service';
 import { CarDto, CarService } from '../Services/Cars/car.service';
 
 
@@ -18,7 +18,7 @@ export class ReportComponent implements OnInit {
   totalCars: number = 0;
   carHistories: CarDto[] = []; // Use CarDto directly
   customerHistories: Customer[] = []; // Use existing Customer interface
-  rentalHistories: Rental[] = []; // Use Rental interface directly
+  rentalHistories: RentalResponse[] = []; // Use Rental interface directly
 
   searchCarHistory: string = '';
   searchCustomerHistory: string = '';
@@ -97,7 +97,7 @@ export class ReportComponent implements OnInit {
     
     return this.rentalHistories.filter(rental => 
       rental.car.registrationNumber.includes(this.searchRentalHistory) || 
-      `${rental.customer.firstName} ${rental.customer.lastName}`.includes(this.searchRentalHistory)
+      `${rental.customerName}`.includes(this.searchRentalHistory)
     ).slice(
       (this.currentRentalPage - 1) * this.itemsPerPage,
       this.currentRentalPage * this.itemsPerPage

@@ -10,6 +10,7 @@ import { ReportComponent } from './AdminPage/report/report.component';
 import { UserpageComponent } from './CustomerPage/userpage/userpage.component';
 import { RentalDetailsComponent } from './CustomerPage/Rentals/rental-details/rental-details.component';
 import { CardetailsComponent } from './LandingPage/CarDetails/cardetails/cardetails.component';
+import { ReturnComponent } from './AdminPage/return/return.component';
 
 
 export const routes: Routes = [
@@ -30,6 +31,7 @@ export const routes: Routes = [
           { path: 'customers', component: CustomerDetailComponent },
           { path: 'cars', component: ManageCarComponent },
           { path: 'reports', component: ReportComponent },
+          { path: 'Return', component: ReturnComponent },
         ],
       },
       { path: '', redirectTo: 'admin', pathMatch: 'full' },

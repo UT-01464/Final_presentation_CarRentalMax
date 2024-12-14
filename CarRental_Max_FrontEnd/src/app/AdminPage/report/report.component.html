@@ -124,7 +124,7 @@
                         <tbody>
                             <tr *ngFor="let rental of rentalHistories">
                                 <td>{{ rental.id }}</td>
-                                <td>{{ rental.customer.firstName }} {{ rental.customer.lastName }}</td>
+                                <td>{{ rental.customerName }}</td>
                                 <td>{{ rental.car.registrationNumber }}</td>
                                 <td>{{ rental.rentalDate | date:'shortDate' }}</td>
                                 <td>{{ rental.status }}</td>
