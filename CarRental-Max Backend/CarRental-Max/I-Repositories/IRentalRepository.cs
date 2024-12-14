@@ -19,5 +19,6 @@ namespace CAR_RENTAL_MS_III.I_Repositories
 
         
         Task<bool> RentalExistsAsync(int rentalId);
+        Task<int> GetCountByStatusAsync(RentalStatus status);
     }
 }

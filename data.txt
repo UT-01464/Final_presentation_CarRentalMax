@@ -1,99 +1,175 @@
-
-
+create database Rental_MAX
 
 select * from Transmissions
+select * from FuelTypes
 
-INSERT INTO Transmissions (Type)
-VALUES 
-    ('Manual'),
-    ('Automatic'),
-    ('Semi-Automatic'),
-    ('CVT (Continuously Variable Transmission)'),
-    ('Dual-Clutch Transmission (DCT)'),
-    ('Tiptronic'),
-    ('AMT (Automated Manual Transmission)'),
-    ('Torque Converter Automatic'),
-    ('Direct Shift Gearbox (DSG)'),
-    ('Sequential Manual Transmission (SMT)');
+INSERT INTO Transmissions VALUES
+('Automatic'),
+('Manual'),
+('Semi-Automatic'),
+('Continuously Variable Transmission (CVT)'),
+('Dual-Clutch Transmission (DCT)'),
+('Tiptronic'),
+('Direct Shift Gearbox (DSG)'),
+('Torque Converter Automatic'),
+('AMT (Automated Manual Transmission)'),
+('Electric Vehicle Single Speed');
 
+INSERT INTO FuelTypes VALUES
+('Petrol'),
+('Diesel'),
+('Electric'),
+('Hybrid'),
+('CNG (Compressed Natural Gas)'),
+('LPG (Liquefied Petroleum Gas)'),
+('Hydrogen'),
+('Ethanol'),
+('Biodiesel'),
+('Flex Fuel');
 
-SELECT * FROM FuelTypes;
+INSERT INTO Features (name) VALUES
+('Air Conditioning'),
+('Sunroof'),
+('Bluetooth Connectivity'),
+('Rear Parking Sensors'),
+('Leather Seats'),
+('GPS Navigation System'),
+('Heated Seats'),
+('Keyless Entry'),
+('Cruise Control'),
+('Backup Camera');
 
-INSERT INTO FuelTypes (Type)
-VALUES 
-    ('Petrol'),
-    ('Diesel'),
-    ('Electric'),
-    ('Hybrid'),
-    ('CNG'),
-    ('LPG'),
-    ('Ethanol'),
-    ('Biodiesel'),
-    ('Hydrogen'),
-    ('Methanol');
+INSERT INTO CarCategories (name) VALUES
+('Sedan'),
+('SUV'),
+('Hatchback'),
+('Convertible'),
+('Coupe'),
+('Pickup Truck'),
+('Minivan'),
+('Luxury'),
+('Sports Car'),
+('Electric Vehicle');
 
-select * from Features
+INSERT INTO Models (name, categoryId, make) VALUES
+('Model S', 10, 'Tesla'),
+('Civic', 1, 'Honda'),
+('Camry', 1, 'Toyota'),
+('Wrangler', 2, 'Jeep'),
+('X5', 2, 'BMW'),
+('Mustang', 9, 'Ford'),
+('Charger', 9, 'Dodge'),
+('F-150', 6, 'Ford'),
+('E-Class', 8, 'Mercedes-Benz'),
+('Leaf', 10, 'Nissan');
 
-INSERT INTO Features (Name)
-VALUES 
-    ('Air Conditioning'),
-    ('Bluetooth'),
-    ('Cruise Control'),
-    ('Sunroof'),
-    ('Leather Seats'),
-    ('Backup Camera'),
-    ('GPS Navigation'),
-    ('Heated Seats'),
-    ('Alloy Wheels'),
-    ('Power Windows');
+INSERT INTO Cars (ModelId, PricePerDay, Year, RegistrationNumber, IsAvailable, ImageUrl, TransmissionId, FuelTypeId, CategoryId) 
+VALUES
+(1, 120.50, 2022, 'ABC1234', 1, 'https://cdn.motor1.com/images/mgl/BWoYb/s1/tesla-model-s.webp', 1, 3, 10),
+(2, 90.00, 2021, 'DEF5678', 1, 'https://cars.usnews.com/static/images/Auto/izmo/i159614628/2021_honda_civic_angularfront.jpg', 2, 1, 1),
+(3, 95.75, 2023, 'GHI9101', 1, 'https://toyota.scene7.com/is/image/toyota/Toyota-camry-xle-2023-012', 1, 2, 1),
+(4, 150.25, 2020, 'JKL2345', 1, 'https://media.ed.edmunds-media.com/jeep/wrangler/2020/oem/2020_jeep_wrangler_2dr-suv_sahara_fq_oem_1_1600.jpg', 2, 4, 2),
+(5, 160.00, 2019, 'MNO6789', 1, 'https://media.autoexpress.co.uk/image/private/s--F7Wpkd9V--/v1663673705/autoexpress/2022/09/bmw%20x5.jpg', 1, 1, 2),
+(6, 200.00, 2023, 'PQR1011', 1, 'https://media.ford.com/content/dam/fordmedia/North%20America/US/product/2024/mustang/2024Mustang_Gallery_07.jpg', 1, 2, 9),
+(7, 190.50, 2022, 'STU1213', 1, 'https://www.carscoops.com/wp-content/uploads/2021/08/2022-dodge-charger-srt-hellcat-redeye-widebody.jpg', 2, 1, 9),
+(8, 110.00, 2020, 'VWX1415', 1, 'https://media.ford.com/content/dam/fordmedia/North%20America/US/product/2021/f150/2021_F150.jpg', 1, 2, 6),
+(9, 250.00, 2023, 'YZA1617', 1, 'https://www.mbusa.com/content/dam/mb-nafta/us/myco/my23/e/class/overview/MY23-E-Class-Sedan-Overview-Background.jpg', 1, 4, 8),
+(10, 100.00, 2022, 'BCD1819', 1, 'https://cdn.motor1.com/images/mgl/VbW6q/s1/nissan-leaf.jpg', 1, 3, 10);
 
-
-select * from CarCategories
-INSERT INTO CarCategories (Name)
-VALUES 
-    ('Sedan'),
-    ('SUV'),
-    ('Hatchback'),
-    ('Convertible'),
-    ('Coupe'),
-    ('Wagon'),
-    ('Minivan'),
-    ('Truck'),
-    ('Sports Car'),
-    ('Luxury');
-
-select * from Models
-
-INSERT INTO Models (Name, CategoryId, Make)
-VALUES 
-    ('Model S', 10, 'Tesla'),
-    ('Civic', 1, 'Honda'),
-    ('Camry', 1, 'Toyota'),
-    ('Mustang', 9, 'Ford'),
-    ('X5', 2, 'BMW'),
-    ('A3', 5, 'Audi'),
-    ('RAV4', 2, 'Toyota'),
-    ('F-150', 8, 'Ford'),
-    ('Charger', 9, 'Dodge'),
-    ('Accord', 1, 'Honda');
-
-select *  from Cars
-ALTER TABLE cars ADD NumberOfSeats INT;
-
-
-INSERT INTO Cars (ModelId, Year, RegistrationNumber, CategoryId, PricePerDay, IsAvailable, ImageUrl, NumberOfSeats, TransmissionId, FuelTypeId)
-VALUES 
-    (1, 2023, 'ABC1234', 1, 70.00, 1, 'https://cdn.pixabay.com/photo/2017/12/28/12/02/chevrolet-3040155_960_720.jpg', 5, 1, 2),
-    (2, 2022, 'XYZ5678', 2, 90.00, 1, 'https://cdn.pixabay.com/photo/2020/01/21/13/58/audi-4785244_960_720.jpg', 5, 2, 1),
-    (3, 2021, 'LMN9101', 3, 50.00, 1, 'https://cdn.pixabay.com/photo/2020/02/21/14/02/mercedes-4862621_960_720.jpg', 4, 1, 3),
-    (4, 2023, 'DEF2345', 1, 100.00, 1, 'https://cdn.pixabay.com/photo/2019/01/17/20/18/luxury-car-3934485_960_720.jpg', 5, 2, 1),
-    (5, 2020, 'GHI3456', 4, 60.00, 1, 'https://cdn.pixabay.com/photo/2016/11/18/13/47/car-1835505_960_720.jpg', 7, 1, 2),
-    (6, 2019, 'JKL4567', 2, 120.00, 1, 'https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_960_720.jpg', 5, 2, 1),
-    (7, 2023, 'MNO5678', 3, 80.00, 1, 'https://cdn.pixabay.com/photo/2020/04/29/21/51/sports-car-5100221_960_720.jpg', 2, 1, 3),
-    (8, 2022, 'PQR6789', 1, 75.00, 1, 'https://cdn.pixabay.com/photo/2015/09/02/12/45/suv-918408_960_720.jpg', 5, 1, 2),
-    (9, 2021, 'STU7890', 4, 65.00, 1, 'https://cdn.pixabay.com/photo/2020/02/21/14/02/mercedes-4862621_960_720.jpg', 6, 2, 3),
-    (10, 2023, 'VWX8901', 3, 150.00, 1, 'https://cdn.pixabay.com/photo/2018/01/08/12/35/bmw-3065407_960_720.jpg', 4, 1, 1);
+select * from Cars
 
 
-select * from Customers
-select * from Rentals
+
+
+[
+  {
+    "firstName": "Alice",
+    "lastName": "Brown",
+    "email": "alice.brown@example.com",
+    "phoneNumber": "444-555-6666",
+    "driverLicenseNumber": "DL444555666",
+    "nic": "2233445566",
+    "password": "alicePass789"
+  },
+  {
+    "firstName": "Charlie",
+    "lastName": "Wilson",
+    "email": "charlie.wilson@example.com",
+    "phoneNumber": "222-333-4444",
+    "driverLicenseNumber": "DL222333444",
+    "nic": "4455667788",
+    "password": "charlieSecure123"
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Martinez",
+    "email": "sophia.martinez@example.com",
+    "phoneNumber": "666-777-8888",
+    "driverLicenseNumber": "DL666777888",
+    "nic": "8877665544",
+    "password": "sophiaPass321"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Anderson",
+    "email": "james.anderson@example.com",
+    "phoneNumber": "999-000-1111",
+    "driverLicenseNumber": "DL999000111",
+    "nic": "1122334455",
+    "password": "jamesPassword456"
+  },
+  {
+    "firstName": "Olivia",
+    "lastName": "Taylor",
+    "email": "olivia.taylor@example.com",
+    "phoneNumber": "888-999-0000",
+    "driverLicenseNumber": "DL888999000",
+    "nic": "5566778899",
+    "password": "oliviaPass987"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Thomas",
+    "email": "daniel.thomas@example.com",
+    "phoneNumber": "111-222-3333",
+    "driverLicenseNumber": "DL111222333",
+    "nic": "6677889900",
+    "password": "danielSecure654"
+  },
+  {
+    "firstName": "Lily",
+    "lastName": "Jackson",
+    "email": "lily.jackson@example.com",
+    "phoneNumber": "777-888-9999",
+    "driverLicenseNumber": "DL777888999",
+    "nic": "3344556677",
+    "password": "lilyPass567"
+  },
+  {
+    "firstName": "Lucas",
+    "lastName": "White",
+    "email": "lucas.white@example.com",
+    "phoneNumber": "555-111-2222",
+    "driverLicenseNumber": "DL555111222",
+    "nic": "9988776655",
+    "password": "lucasPassword234"
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Harris",
+    "email": "grace.harris@example.com",
+    "phoneNumber": "444-333-2222",
+    "driverLicenseNumber": "DL444333222",
+    "nic": "1122334455",
+    "password": "graceSecure876"
+  },
+  {
+    "firstName": "Ethan",
+    "lastName": "Clark",
+    "email": "ethan.clark@example.com",
+    "phoneNumber": "333-222-1111",
+    "driverLicenseNumber": "DL333222111",
+    "nic": "2233445566",
+    "password": "ethanPass654"
+  }
+]

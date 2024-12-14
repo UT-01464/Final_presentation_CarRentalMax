@@ -83,6 +83,11 @@ namespace CAR_RENTAL_MS_III.Repositories
             return await _context.Rentals.CountAsync(r => r.Status == RentalStatus.Rejected);
         }
 
+        public async Task<int> GetCountByStatusAsync(RentalStatus status)
+        {
+            return await _context.Rentals.CountAsync(r => r.Status == status);
+        }
+
 
 
 

@@ -55,34 +55,63 @@ namespace CAR_RENTAL_MS_III.Controllers
                 return StatusCode(500, "An unexpected error occurred.");
             }
         }
-        [HttpPost("rent")]
-       
-        public async Task<IActionResult> RentCar([FromBody] RentCarDto rentCarDto)
-        {
-            if (rentCarDto == null)
-            {
-                return BadRequest("Rental request cannot be null.");
-            }
 
-            if (rentCarDto.CustomerId <= 0 || rentCarDto.CarId <= 0)
+
+
+        //[HttpPost("rent")]
+
+        //public async Task<IActionResult> RentCar([FromBody] RentCarDto rentCarDto)
+        //{
+        //    if (rentCarDto == null)
+        //    {
+        //        return BadRequest("Rental request cannot be null.");
+        //    }
+
+        //    if (rentCarDto.CustomerId <= 0 || rentCarDto.CarId <= 0)
+        //    {
+        //        return BadRequest("Invalid customer or car ID.");
+        //    }
+
+        //    try
+        //    {
+        //        await _rentalService.RentCarAsync(rentCarDto.CustomerId, rentCarDto.CarId);
+
+        //        // Return a JSON object
+        //        return Ok(new { message = "Rental created successfully." });
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //    catch
+        //    {
+        //        return StatusCode(500, "An error occurred while processing your request.");
+        //    }
+        //}
+
+
+        [HttpPost("rent")]
+        public async Task<IActionResult> RentCar([FromBody] RentCarRequest request)
+        {
+            if (request == null || request.CustomerId <= 0 || request.CarId <= 0 || request.RentalDays <= 0)
             {
-                return BadRequest("Invalid customer or car ID.");
+                return BadRequest("Invalid rental request.");
             }
 
             try
             {
-                await _rentalService.RentCarAsync(rentCarDto.CustomerId, rentCarDto.CarId);
-
-                // Return a JSON object
-                return Ok(new { message = "Rental created successfully." });
+                var rentalDetailsDto = await _rentalService.RentCarAsync(request.CustomerId, request.CarId, request.RentalDays);
+                return CreatedAtAction(nameof(GetRental), new { rentalId = rentalDetailsDto.Id }, rentalDetailsDto);
             }
-            catch (ArgumentException ex)
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while processing your request.");
+                // Log unexpected exceptions
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+                return StatusCode(500, "An unexpected error occurred.");
             }
         }
 

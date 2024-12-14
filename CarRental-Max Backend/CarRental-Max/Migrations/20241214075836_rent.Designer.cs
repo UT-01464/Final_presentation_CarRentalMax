@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental_Max.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241213111535_cardetails")]
-    partial class cardetails
+    [Migration("20241214075836_rent")]
+    partial class rent
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -396,7 +396,7 @@ namespace CarRental_Max.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Seat");
+                    b.ToTable("Seats");
                 });
 
             modelBuilder.Entity("CarRental_Max.Entities.CarDetails.Transmission", b =>

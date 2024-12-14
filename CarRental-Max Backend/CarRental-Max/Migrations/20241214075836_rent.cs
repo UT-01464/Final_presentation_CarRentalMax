@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarRental_Max.Migrations
 {
     /// <inheritdoc />
-    public partial class cardetails : Migration
+    public partial class rent : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -250,7 +250,7 @@ namespace CarRental_Max.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Seat",
+                name: "Seats",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -260,9 +260,9 @@ namespace CarRental_Max.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seat", x => x.Id);
+                    table.PrimaryKey("PK_Seats", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Seat_Cars_CarId",
+                        name: "FK_Seats_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id");
@@ -346,8 +346,8 @@ namespace CarRental_Max.Migrations
                 column: "ManagerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seat_CarId",
-                table: "Seat",
+                name: "IX_Seats_CarId",
+                table: "Seats",
                 column: "CarId");
         }
 
@@ -364,7 +364,7 @@ namespace CarRental_Max.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
-                name: "Seat");
+                name: "Seats");
 
             migrationBuilder.DropTable(
                 name: "Users");

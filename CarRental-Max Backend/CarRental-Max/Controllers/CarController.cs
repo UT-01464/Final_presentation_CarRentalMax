@@ -152,6 +152,14 @@ namespace CAR_RENTAL_MS_III.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("registration/{registrationNumber}")]
+        public async Task<IActionResult> GetCarByRegistrationNumber(string registrationNumber)
+        {
+            var carDto = await _carService.GetCarByRegistrationNumberAsync(registrationNumber);
+            return carDto != null ? Ok(carDto) : NotFound("Car not found.");
+        }
+
     }
 
 

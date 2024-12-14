@@ -10,6 +10,9 @@ namespace CAR_RENTAL_MS_III.I_Repositories
         Task UpdateCarAsync(Car car);
         Task DeleteCarAsync(int id);
         Task<bool> CarExistsAsync(int carId);
+        Task<Car> GetCarByRegistrationNumberAsync(string registrationNumber);
+        Task<bool> HasActiveRentalsAsync(int carId);
+
 
 
 

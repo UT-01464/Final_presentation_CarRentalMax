@@ -122,5 +122,17 @@ namespace CAR_RENTAL_MS_III.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<Car> GetCarByRegistrationNumberAsync(string registrationNumber)
+        {
+            return await _context.Cars.FirstOrDefaultAsync(c => c.RegistrationNumber == registrationNumber);
+        }
+
+        public async Task<bool> HasActiveRentalsAsync(int carId)
+        {
+            // Assuming you have a Rentals DbSet
+            return await _context.Rentals.AnyAsync(r => r.CarId == carId && r.Status == RentalStatus.Accepted);
+        }
+
     }
 }

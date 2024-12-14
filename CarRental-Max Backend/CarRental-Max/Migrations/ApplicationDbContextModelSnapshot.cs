@@ -393,7 +393,7 @@ namespace CarRental_Max.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Seat");
+                    b.ToTable("Seats");
                 });
 
             modelBuilder.Entity("CarRental_Max.Entities.CarDetails.Transmission", b =>

@@ -54,6 +54,11 @@ cars: CarDto[] = [];
   selectedTransmission: number | null = null;
   selectedFuelType: number | null = null;
   selectedModel: number | null = null;
+  isRentalModalOpen: boolean = false;
+  rentalDays: number = 0;
+  selectedCarId: number | null = null;
+   
+
 
   constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService,
     private carService: CarService,private cardetailService:CarDetailsServiceService , private rentalService: RentalService
@@ -123,22 +128,25 @@ cars: CarDto[] = [];
     );
   }
 
-  
-  getCarModel(id: number): string {
+  getCarModel(id?: number): string {
+    if (id === undefined) return 'Unknown'; // Handle undefined case
     const carModel = this.carModels.find(m => m.id === id);
     return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
-  }
+}
 
-
-  getFuelType(id: number): string {
+getFuelType(id?: number): string {
+    if (id === undefined) return 'Unknown'; // Handle undefined case
     const fuelType = this.fuelTypes.find(f => f.id === id);
     return fuelType ? fuelType.type : 'Unknown';
-  }
+}
 
-  getTransmissionType(id: number): string {
+getTransmissionType(id?: number): string {
+    if (id === undefined) return 'Unknown'; // Handle undefined case
     const transmission = this.transmissions.find(t => t.id === id);
     return transmission ? transmission.type : 'Unknown';
-  }
+}
+
+  
 
 
 
@@ -298,4 +306,49 @@ logout(): void {
         }
     );
 }
+
+// Method to open the rental modal
+openRentalModal(carId: number): void {
+  this.selectedCarId = carId; // Set the selected car ID
+  this.rentalDays = 0; // Reset rental days
+  this.isRentalModalOpen = true; // Open modal
+}
+
+// Method to close the rental modal
+closeRentalModal(): void {
+  this.isRentalModalOpen = false; // Close modal
+}
+
+// Method to confirm rental
+confirmRental(): void {
+  if (this.selectedCarId === null) {
+      alert('No car selected.');
+      return; // Exit if no car is selected
+  }
+
+  if (this.rentalDays <= 0) {
+      alert('Please enter a valid number of rental days.');
+      return; // Exit if rental days are not valid
+  }
+
+  const rentalRequest = {
+      customerId: this.customer.id, // Ensure customer ID is available
+      carId: this.selectedCarId, // Use selected car ID
+      rentalDays: this.rentalDays // Use entered rental days
+  };
+
+  this.rentalService.rentCar(rentalRequest).subscribe(
+      response => {
+          console.log('Rental response:', response);
+          alert(response.message); // Notify user of success
+          this.closeRentalModal(); // Close modal after successful rental
+      },
+      error => {
+          console.error('Error submitting rental request', error);
+          alert('Failed to submit rental request. Please try again.');
+      }
+  );
+}
+
+
 }

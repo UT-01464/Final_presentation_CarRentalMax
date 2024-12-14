@@ -58,6 +58,7 @@ export class LandingpageComponent implements OnInit {
       (data: CarDto[]) => {
         this.cars = data;
         this.filteredCars = data; // Initialize filteredCars with fetched data
+        this.setVisibleCars(); // Set visible cars after loading
       },
       (error) => {
         console.error('Error fetching cars:', error);
@@ -136,7 +137,7 @@ export class LandingpageComponent implements OnInit {
   viewAllCars(): void {
     this.router.navigate(['/all-cars']);
   }
-  
+
   setVisibleCars(): void {
     this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
   }

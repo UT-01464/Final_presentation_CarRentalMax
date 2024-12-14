@@ -12,7 +12,7 @@
         public decimal PricePerDay { get; set; }
         public bool IsAvailable { get; set; }
         public string ImageUrl { get; set; }
-        public int NumberOfSeats { get; set; }
+      
 
 
         public int TransmissionId { get; set; }

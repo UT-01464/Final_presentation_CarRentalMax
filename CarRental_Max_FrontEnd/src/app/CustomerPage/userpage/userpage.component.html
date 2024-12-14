@@ -170,11 +170,34 @@
                   </div>
                   <div class="carbtn">
                       <button (click)="openCarDetails(car)">Detail</button>
-                      <button (click)="rentCar(car)">Rent</button>
+                      <button (click)="openRentalModal(car.id)">Rent</button>
                   </div>
               </section>
           </div>
       </div>
+
+
+<!-- Rental Days Modal -->
+<div *ngIf="isRentalModalOpen" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeRentalModal()">&times;</span>
+        
+        <h2>Enter Rental Days</h2>
+        
+        <label for="rentalDays">Select Rental Days:</label>
+        <input type="number" [(ngModel)]="rentalDays" id="rentalDays" min="1" placeholder="Enter days" required />
+        
+        <div class="modal-actions">
+            <button (click)="confirmRental()">Confirm Rental</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
     
       <!-- Modal for Car Details -->
       <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>

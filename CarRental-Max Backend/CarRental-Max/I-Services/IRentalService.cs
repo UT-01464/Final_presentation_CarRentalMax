@@ -9,7 +9,9 @@ namespace CAR_RENTAL_MS_III.Services
         Task<IEnumerable<RentalDto>> GetAllRentalsAsync();
         //Task<RentalDetailsDto> GetRentalDetailsByNicAsync(string nic);
         Task<RentalDetailsDto> GetRentalDetailsByNicAsync(string nic);
-        Task RentCarAsync(int customerId, int carId);
+        //Task RentCarAsync(int customerId, int carId);
+
+        Task<RentalDetailsDto> RentCarAsync(int customerId, int carId, int rentalDays);
         Task<string> ReturnCarByNicAndRegistrationAsync(string nic, string carRegistrationNumber);
         Task<string> AcceptRentalAsync(int rentalId);
         Task<string> RejectRentalAsync(int rentalId);

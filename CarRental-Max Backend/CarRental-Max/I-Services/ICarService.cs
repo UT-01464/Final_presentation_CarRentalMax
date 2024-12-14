@@ -14,6 +14,7 @@ namespace CAR_RENTAL_MS_III.I_Services
         Task AddCarAsync(CarDto carDto);
         Task UpdateCarAsync(CarDto carDto);
         Task DeleteCarAsync(int id);
+        Task<CarDto> GetCarByRegistrationNumberAsync(string registrationNumber);
 
         // Category-related methods
         Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync();

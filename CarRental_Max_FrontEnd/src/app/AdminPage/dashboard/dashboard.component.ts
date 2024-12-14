@@ -11,39 +11,33 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-
-
   cars: CarDto[] | undefined;
-  totalPendingRentals: number = 0; // Count of pending rentals
-  totalAcceptedRentals: number = 0; // Count of accepted rentals
-  totalRejectedRentals: number = 0; // Count of rejected rentals
-  totalCars: number = 0; // Total cars available
-  totalCustomers: number = 15; // Can be fetched if needed
+  totalPendingRentals: number = 0;
+  totalAcceptedRentals: number = 0;
+  totalRejectedRentals: number = 0;
+  totalCars: number = 0;
+  totalCustomers: number = 15;
   rentalRequests: Rental[] = [];
 
-  constructor(private carService: CarService, private rentalService:RentalService) {}
+  constructor(private carService: CarService, private rentalService: RentalService) {}
 
   ngOnInit(): void {
     this.loadCars();
-    this.loadRentalCounts(); // Load rental counts on initialization
-    this.loadRentalRequests(); 
+    this.loadRentalCounts();
+    this.loadRentalRequests();
   }
 
   loadCars(): void {
     this.carService.getCars().subscribe(
       (cars) => {
         this.cars = cars;
-        this.totalCars = cars.length; // Update total cars based on fetched data
+        this.totalCars = cars.length;
       },
       (error) => {
         console.error('Error loading cars:', error);
       }
     );
   }
-
-
-
-
 
   loadRentalCounts(): void {
     this.rentalService.getPendingCount().subscribe(
@@ -62,11 +56,10 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-
   loadRentalRequests(): void {
     this.rentalService.getPendingRentals().subscribe(
       (requests) => {
-        this.rentalRequests = requests; // Populate rental requests
+        this.rentalRequests = requests;
       },
       (error) => {
         console.error('Error loading rental requests:', error);
@@ -78,7 +71,8 @@ export class DashboardComponent implements OnInit {
     this.rentalService.acceptRental(id).subscribe(
       () => {
         console.log(`Approved rental with ID: ${id}`);
-        this.loadRentalCounts(); // Refresh counts after approval
+        this.loadRentalCounts();
+        this.loadRentalRequests(); // Refresh rental requests after approval
       },
       (error) => {
         console.error(`Error approving rental ID ${id}:`, error);
@@ -90,7 +84,8 @@ export class DashboardComponent implements OnInit {
     this.rentalService.rejectRental(id).subscribe(
       () => {
         console.log(`Rejected rental with ID: ${id}`);
-        this.loadRentalCounts(); // Refresh counts after rejection
+        this.loadRentalCounts();
+        this.loadRentalRequests(); // Refresh rental requests after rejection
       },
       (error) => {
         console.error(`Error rejecting rental ID ${id}:`, error);

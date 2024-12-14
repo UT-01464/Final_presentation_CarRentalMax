@@ -354,69 +354,68 @@
 <!---car--------->
 
 
-    <div class="container py-4" id="cars">
-      <div class="row mb-4">
-        <div class="col-12 text-center">
-          <input
-            type="text"
-            class="form-control w-50 mx-auto"
-            placeholder="Search cars..."
-            [(ngModel)]="filterText"
-            (input)="filterCars()"
-          />
-        </div>
-      </div>
-    
-      <div class="row">
-        <div
-          class="col-12 col-md-6 col-lg-4 mb-4"
-          *ngFor="let car of filteredCars"
-        >
-          <section class="car-section">
-            <div>
-              <img class="card-img" [src]="car.imageUrl" alt="Car image" />
-            </div>
-            <div class="carName">
-              <h3>{{ getCarModel(car.modelId) }}</h3>
-            </div>
-            <div class="carprice">
-              <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
-            </div>
-            <div>
-              <div class="row">
-                <div class="col-6">
-                  <p><i class="bi bi-car-front"></i> {{getTransmissionType(car.transmissionId)}} </p>
-                </div>
-                <div class="col-6">
-                  <p><i class="bi bi-person"></i>year: {{ car.year }}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
-                </div>
-                <div class="col-6">
-                  <p><i class="bi bi-snow2"></i>AC</p>
-                </div>
-              </div>
-            </div>
-            <div class="carbtn">
-              <button (click)="openCarDetails(car)">Detail</button>
-              <button (click)=" getstart()">Rent</button>
-            </div>
-          </section>
-        </div>
-      </div>
-    
-      <!-- Modal for Car Details -->
-      <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
-    
-      <!-- View All Button -->
-      <div class="text-center mt-4">
-        <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
-      </div>
+<div class="container py-4" id="cars">
+  <div class="row mb-4">
+    <div class="col-12 text-center">
+      <input
+        type="text"
+        class="form-control w-50 mx-auto"
+        placeholder="Search cars..."
+        [(ngModel)]="filterText"
+        (input)="filterCars()"
+      />
     </div>
   </div>
+
+  <div class="row">
+    <div
+      class="col-12 col-md-6 col-lg-4 mb-4"
+      *ngFor="let car of visibleCars"
+    >
+      <section class="car-section">
+        <div>
+          <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+        </div>
+        <div class="carName">
+          <h3>{{ getCarModel(car.modelId) }}</h3>
+        </div>
+        <div class="carprice">
+          <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-6">
+              <p><i class="bi bi-car-front"></i> {{ getTransmissionType(car.transmissionId) }}</p>
+            </div>
+            <div class="col-6">
+              <p><i class="bi bi-person"></i> Year: {{ car.year }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
+            </div>
+            <div class="col-6">
+              <p><i class="bi bi-snow2"></i> AC</p>
+            </div>
+          </div>
+        </div>
+        <div class="carbtn">
+          <button (click)="openCarDetails(car)">Detail</button>
+          <button (click)="getstart()">Rent</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Modal for Car Details -->
+  <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
+
+  <!-- View All Button -->
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
+  </div>
+</div>
   
   
   
