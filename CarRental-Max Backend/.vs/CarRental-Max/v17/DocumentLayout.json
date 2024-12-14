@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\controllers\\rentalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|solutionrelative:carrental-max\\controllers\\rentalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|solutionrelative:carrental-max\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\entities\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|solutionrelative:carrental-max\\entities\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|solutionrelative:carrental-max\\services\\rentalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\controllers\\rentalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|solutionrelative:carrental-max\\controllers\\rentalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D783DCFE-CCF4-473D-A505-586F0C2E4568}|CarRental-Max\\CarRental-Max.csproj|e:\\.mile stone 03\\ms-iii\\carrental-max backend\\carrental-max\\models\\car\\featuredto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,17 +82,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 307,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "RentalService.cs",
               "DocumentMoniker": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Services\\RentalService.cs",
               "RelativeDocumentMoniker": "CarRental-Max\\Services\\RentalService.cs",
-              "ToolTip": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Services\\RentalService.cs",
-              "RelativeToolTip": "CarRental-Max\\Services\\RentalService.cs",
-              "ViewState": "AQIAALcAAAAAAAAAAAAowMoAAAAlAAAA",
+              "ToolTip": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Services\\RentalService.cs*",
+              "RelativeToolTip": "CarRental-Max\\Services\\RentalService.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEQBAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-13T22:37:59.266Z",
               "EditorCaption": ""
@@ -131,8 +131,7 @@
               "RelativeToolTip": "CarRental-Max\\I-Repositories\\IRentalRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T22:43:43.093Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T22:43:43.093Z"
             },
             {
               "$type": "Document",
@@ -144,18 +143,17 @@
               "RelativeToolTip": "CarRental-Max\\Models\\Car\\FeatureDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T05:14:11.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T05:14:11.406Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "RentalsController.cs",
               "DocumentMoniker": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Controllers\\RentalsController.cs",
               "RelativeDocumentMoniker": "CarRental-Max\\Controllers\\RentalsController.cs",
               "ToolTip": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Controllers\\RentalsController.cs",
               "RelativeToolTip": "CarRental-Max\\Controllers\\RentalsController.cs",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAUwHYAAAA6AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHYAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-14T04:47:54.685Z",
               "EditorCaption": ""
@@ -170,8 +168,7 @@
               "RelativeToolTip": "CarRental-Max\\Controllers\\CarController.cs",
               "ViewState": "AQIAAHUAAAAAAAAAAAAiwJgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T22:47:02.817Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T22:47:02.817Z"
             },
             {
               "$type": "Document",
@@ -181,7 +178,7 @@
               "RelativeDocumentMoniker": "CarRental-Max\\Entities\\Rental.cs",
               "ToolTip": "E:\\.MILE STONE 03\\MS-III\\CarRental-Max Backend\\CarRental-Max\\Entities\\Rental.cs",
               "RelativeToolTip": "CarRental-Max\\Entities\\Rental.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAADgvx0AAAALAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAIA3wB0AAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-14T07:32:54.116Z",
               "EditorCaption": ""
@@ -196,8 +193,7 @@
               "RelativeToolTip": "CarRental-Max\\Controllers\\CustomerController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:25:51.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T11:25:51.216Z"
             },
             {
               "$type": "Document",
@@ -221,8 +217,7 @@
               "RelativeToolTip": "CarRental-Max\\I-Services\\IRentalService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T04:45:51.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T04:45:51.244Z"
             },
             {
               "$type": "Document",
@@ -234,8 +229,7 @@
               "RelativeToolTip": "CarRental-Max\\Repositories\\RentalRepository.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAAAADoAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T07:40:47.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T07:40:47.278Z"
             },
             {
               "$type": "Document",

@@ -34,7 +34,8 @@ namespace CAR_RENTAL_MS_III.Services
                 {
                     Id = car.Id,
                     ModelId = car.ModelId,
-                    Year = car.Year
+                    Year = car.Year,
+                    RegistrationNumber= car.RegistrationNumber,
                 },
                 CustomerName = $"{customer.FirstName} {customer.LastName}",
                 RentalDate = rental.RentalDate,
@@ -140,7 +141,8 @@ namespace CAR_RENTAL_MS_III.Services
                 {
                     Id = car.Id,
                     ModelId = car.ModelId,
-                    Year = car.Year
+                    Year = car.Year,
+                    RegistrationNumber=car.RegistrationNumber
                 },
                 CustomerName = $"{customer.FirstName} {customer.LastName}",
                 CustomerNIC = customer.Nic,
@@ -198,6 +200,7 @@ namespace CAR_RENTAL_MS_III.Services
             {
                 CustomerId = customerId,
                 CarId = carId,
+               
                 RentalDate = DateTime.UtcNow,
                 ReturnDate = DateTime.UtcNow.AddDays(rentalDays),
                 Status = RentalStatus.Pending // Set status to Pending
@@ -320,7 +323,8 @@ namespace CAR_RENTAL_MS_III.Services
                     {
                         Id = car.Id,
                         ModelId = car.ModelId,
-                        Year = car.Year
+                        Year = car.Year,
+                        RegistrationNumber= car.RegistrationNumber
                     },
                     CustomerName = $"{customer.FirstName} {customer.LastName}",
                     RentalDate = rental.RentalDate,
