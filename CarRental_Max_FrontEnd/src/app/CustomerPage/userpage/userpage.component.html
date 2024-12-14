@@ -138,44 +138,74 @@
         <button (click)="clearFilters()">Clear Filters</button>
     </div>
 
-      
+<!------------Cars----------------------->
     
-      <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 6)">
-              <section class="car-section">
-                  <img class="card-img" [src]="car.imageUrl" alt="Car image" />
-                  <div class="carName">
-                    <h3>{{ getCarModel(car.modelId) }}</h3>
-                  </div>
-                  <div class="carprice">
-                    <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
-                  </div>
-                  <div>
-                    <div class="row">
-                      <div class="col-6">
-                        <p><i class="bi bi-car-front"></i> {{getTransmissionType(car.transmissionId)}} </p>
-                      </div>
-                      <div class="col-6">
-                        <p><i class="bi bi-person"></i>year: {{ car.year }}</p>
-                      </div>
+<div class="container py-4">
+    <h2 class="text-center">Available Cars</h2>
+    
+    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 3)">
+                        <section class="car-section">
+                            <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+                            <div class="carName">
+                                <h3>{{ getCarModel(car.modelId) }}</h3>
+                            </div>
+                            <div class="carprice">
+                                <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
+                            </div>
+                            <div>
+                                <p><i class="bi bi-car-front"></i> {{ getTransmissionType(car.transmissionId) }}</p>
+                                <p><i class="bi bi-person"></i> Year: {{ car.year }}</p>
+                                <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
+                            </div>
+                            <div class="carbtn">
+                                <button (click)="openCarDetails(car)">Detail</button>
+                                <button (click)="openRentalModal(car.id)">Rent</button>
+                            </div>
+                        </section>
                     </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
-                      </div>
-                      <div class="col-6">
-                        <p><i class="bi bi-snow2"></i>AC</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="carbtn">
-                      <button (click)="openCarDetails(car)">Detail</button>
-                      <button (click)="openRentalModal(car.id)">Rent</button>
-                  </div>
-              </section>
-          </div>
-      </div>
+                </div>
+            </div>
 
+            <div class="carousel-item" *ngFor="let car of filteredCars.slice(3, 6)">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(3, 6)">
+                        <section class="car-section">
+                            <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+                            <div class="carName">
+                                <h3>{{ getCarModel(car.modelId) }}</h3>
+                            </div>
+                            <div class="carprice">
+                                <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
+                            </div>
+                            <div>
+                                <p><i class="bi bi-car-front"></i> {{ getTransmissionType(car.transmissionId) }}</p>
+                                <p><i class="bi bi-person"></i> Year: {{ car.year }}</p>
+                                <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
+                            </div>
+                            <div class="carbtn">
+                                <button (click)="openCarDetails(car)">Detail</button>
+                                <button (click)="openRentalModal(car.id)">Rent</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
 
 <!-- Rental Days Modal -->
 <div *ngIf="isRentalModalOpen" class="rental-days-modal fade show" tabindex="-1" role="dialog" style="display: block;">
@@ -205,8 +235,22 @@
       <!-- Modal for Car Details -->
       <app-cardetails [car]="selectedCar" (close)="closeCarDetails()"></app-cardetails>
     
-      <!-- View All Button -->
-      <div class="text-center mt-4">
-          <button class="btn btn-primary" (click)="viewAllCars()">View All</button>
-      </div>
+      
   </div>
+
+
+  <section class="bg-dark p-2">
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <p class="text-light">&copy; 2024 Car Rental Max. All rights reserved.</p>
+            <p>
+              <a href="#">Privacy Policy</a> | 
+              <a href="#">Terms of Service</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>

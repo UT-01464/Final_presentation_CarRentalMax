@@ -348,5 +348,37 @@
   color: #ffffff; /* Text color */
 }
 
+.car-section {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  transition: transform 0.2s;
+}
 
+.car-section:hover {
+  transform: scale(1.05);
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+}
+
+.car-section {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  transition: transform 0.2s;
+}
+
+.car-section:hover {
+  transform: scale(1.05);
+}
+
+.card-img {
+  width: 100%; /* Full width of the parent */
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+  border-radius: 8px; /* Optional: to match the section's border radius */
+}
 

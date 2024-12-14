@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarRental-Max")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b048cb986d235d642f75181314dc7366b271f524")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e38eaf153e10070e4dae17c34ea7eaa035689098")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarRental-Max")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarRental-Max")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
