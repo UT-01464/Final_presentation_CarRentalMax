@@ -12,7 +12,7 @@ namespace CAR_RENTAL_MS_III.Services
         //Task RentCarAsync(int customerId, int carId);
 
         Task<RentalDetailsDto> RentCarAsync(int customerId, int carId, int rentalDays);
-        Task<string> ReturnCarByNicAndRegistrationAsync(string nic, string carRegistrationNumber);
+        Task<string> ReturnCarByNicAndRegistrationAsync(int Nic);
         Task<string> AcceptRentalAsync(int rentalId);
         Task<string> RejectRentalAsync(int rentalId);
         Task<IEnumerable<RentalDto>> GetRentalHistoryByCustomerIdAsync(int customerId);

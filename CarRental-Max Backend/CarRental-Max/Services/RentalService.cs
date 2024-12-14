@@ -234,9 +234,9 @@ namespace CAR_RENTAL_MS_III.Services
 
 
 
-        public async Task<string> ReturnCarByNicAndRegistrationAsync(string nic, string carRegistrationNumber)
+        public async Task<string> ReturnCarByNicAndRegistrationAsync(int id)
         {
-            var rental = await _rentalRepository.GetRentalByNicAndCarRegistrationAsync(nic, carRegistrationNumber);
+            var rental = await _rentalRepository.GetRentalByIdAsync(id);
             if (rental == null)
             {
                 return "No active rental found for this customer and specified car.";

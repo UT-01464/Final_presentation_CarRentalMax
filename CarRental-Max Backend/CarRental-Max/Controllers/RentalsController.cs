@@ -115,20 +115,12 @@ namespace CAR_RENTAL_MS_III.Controllers
             }
         }
 
-        [HttpPost("return")]
-        public async Task<IActionResult> ReturnCar([FromQuery] string nic, [FromQuery] string carRegistrationNumber)
+        [HttpPut("return")]
+        public async Task<IActionResult> ReturnCar(int id)
         {
-            if (string.IsNullOrWhiteSpace(nic))
-            {
-                return BadRequest("Customer NIC is required.");
-            }
+       
 
-            if (string.IsNullOrWhiteSpace(carRegistrationNumber))
-            {
-                return BadRequest("Car registration number is required.");
-            }
-
-            var result = await _rentalService.ReturnCarByNicAndRegistrationAsync(nic, carRegistrationNumber);
+            var result = await _rentalService.ReturnCarByNicAndRegistrationAsync(id);
             return result.StartsWith("Car returned successfully") ? Ok(result) : NotFound(result);
         }
 
