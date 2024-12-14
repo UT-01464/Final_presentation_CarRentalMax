@@ -44,35 +44,7 @@ namespace CAR_RENTAL_MS_III.Services
             };
         }
 
-        //public async Task<IEnumerable<RentalDto>> GetAllRentalsAsync()
-        //{
-        //    var rentals = await _rentalRepository.GetAllRentalsAsync();
-        //    var rentalDtos = new List<RentalDto>();
-
-        //    foreach (var rental in rentals)
-        //    {
-        //        var car = await _carRepository.GetCarByIdAsync(rental.CarId);
-        //        var customer = await _customerRepository.GetCustomerByIdAsync(rental.CustomerId);
-
-        //        rentalDtos.Add(new RentalDto
-        //        {
-        //            Id = rental.Id,
-        //            Car = new CarDto
-        //            {
-        //                Id = car.Id,
-        //                ModelId = car.ModelId,
-        //                Year = car.Year
-        //            },
-        //            CustomerName = $"{customer.FirstName} {customer.LastName}",
-        //            RentalDate = rental.RentalDate,
-        //            Status = rental.Status,
-        //            ReturnDate = rental.ReturnDate
-        //        });
-        //    }
-
-        //    return rentalDtos;
-        //}
-
+      
 
 
         public async Task<IEnumerable<RentalDto>> GetAllRentalsAsync()
