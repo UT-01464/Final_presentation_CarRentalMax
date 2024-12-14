@@ -48,10 +48,11 @@ cars: CarDto[] = [];
   transmissions: Transmission[] = [];
   fuelTypes: FuelType[] = [];
   carModels: CarModel[] = [];
+
+
   
   selectedTransmission: number | null = null;
   selectedFuelType: number | null = null;
-  selectedSeats: number | null = null;
   selectedModel: number | null = null;
 
   constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService,
@@ -64,10 +65,14 @@ cars: CarDto[] = [];
   ngOnInit(): void {
     this.filteredCars = this.cars; // Initialize filteredCars with all cars
     this.loadUserData();
-    this.filterCars();
+   
     this.loadCars();
    
     this.loadFilters();
+
+    this.loadFuelTypes();
+    this.loadTransmissions();
+    this.loadCarModels();
   }
 
 
@@ -84,6 +89,62 @@ cars: CarDto[] = [];
       });
     }
   }
+
+  loadFuelTypes(): void {
+    this.cardetailService.getFuelTypes().subscribe(
+      (data: FuelType[]) => {
+        this.fuelTypes = data;
+      },
+      (error) => {
+        console.error('Error fetching fuel types:', error);
+      }
+    );
+  }
+
+  loadTransmissions(): void {
+    this.cardetailService.getTransmissions().subscribe(
+      (data: Transmission[]) => {
+        this.transmissions = data;
+      },
+      (error) => {
+        console.error('Error fetching transmissions:', error);
+      }
+    );
+  }
+
+  loadCarModels(): void {
+    this.carService.getCarModels().subscribe(
+      (data: CarModel[]) => {
+        this.carModels = data;
+      },
+      (error) => {
+        console.error('Error fetching car models:', error);
+      }
+    );
+  }
+
+  
+  getCarModel(id: number): string {
+    const carModel = this.carModels.find(m => m.id === id);
+    return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
+  }
+
+
+  getFuelType(id: number): string {
+    const fuelType = this.fuelTypes.find(f => f.id === id);
+    return fuelType ? fuelType.type : 'Unknown';
+  }
+
+  getTransmissionType(id: number): string {
+    const transmission = this.transmissions.find(t => t.id === id);
+    return transmission ? transmission.type : 'Unknown';
+  }
+
+
+
+
+
+
 
 
   saveProfile(): void {
@@ -115,13 +176,14 @@ cars: CarDto[] = [];
     this.carService.getCars().subscribe(
       (data: CarDto[]) => {
         this.cars = data;
+        console.log('Loaded Cars:', this.cars); // Log the loaded cars for verification
         this.filteredCars = data; // Initialize filteredCars with fetched data
       },
       (error) => {
         console.error('Error fetching cars:', error);
       }
     );
-  }
+}
 
   openCarDetails(car: CarDto): void {
     this.selectedCar = car; // Set the selected car
@@ -140,7 +202,6 @@ cars: CarDto[] = [];
   }
 
 
-
   loadFilters(): void {
     this.cardetailService.getTransmissions().subscribe(transmissions => this.transmissions = transmissions);
     this.cardetailService.getFuelTypes().subscribe(fuelTypes => this.fuelTypes = fuelTypes);
@@ -148,26 +209,36 @@ cars: CarDto[] = [];
   }
 
   filterCars(): void {
-    this.filteredCars = this.cars.filter(car => {
-      const matchesTransmission = this.selectedTransmission ? car.transmissionId === this.selectedTransmission : true;
-      const matchesFuelType = this.selectedFuelType ? car.fuelTypeId === this.selectedFuelType : true;
-      const matchesSeats = this.selectedSeats ? car.numberOfSeats === this.selectedSeats : true;
-      const matchesModel = this.selectedModel ? car.modelId === this.selectedModel : true;
-
-      return matchesTransmission && matchesFuelType && matchesSeats && matchesModel;
+    console.log('Selected Filters:', {
+        selectedTransmission: this.selectedTransmission,
+        selectedFuelType: this.selectedFuelType,
+        selectedModel: this.selectedModel
     });
-  }
 
-  clearFilters(): void {
-    this.selectedTransmission = null;
-    this.selectedFuelType = null;
-    this.selectedSeats = null;
-    this.selectedModel = null;
-    this.filterCars(); // Reset to show all cars
-  }
+    this.filteredCars = this.cars.filter(car => {
+        const matchesTransmission = this.selectedTransmission ? car.transmissionId === this.selectedTransmission : true;
+        const matchesFuelType = this.selectedFuelType ? car.fuelTypeId === this.selectedFuelType : true;
+        const matchesModel = this.selectedModel ? car.modelId === this.selectedModel : true;
 
+        console.log(`Car ID: ${car.id}, Matches:`, {
+            matchesTransmission,
+            matchesFuelType,
+            matchesModel
+        });
 
-  
+        return matchesTransmission && matchesFuelType && matchesModel;
+    });
+
+    console.log('Filtered Cars:', this.filteredCars); // Log filtered results
+}
+
+clearFilters(): void {
+  this.selectedTransmission = null;
+  this.selectedFuelType = null;
+  this.selectedModel = null;
+  this.filteredCars = this.cars; // Reset to show all cars
+  console.log('Filters cleared. Showing all cars:', this.filteredCars);
+}
 
 
 

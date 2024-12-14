@@ -66,7 +66,7 @@
               <img class="card-img" [src]="car.imageUrl" alt="Car image" />
             </div>
             <div class="carName">
-              <h3>{{ car.registrationNumber }}</h3>
+              <h3>{{ getCarModel(car.modelId) }}</h3>
             </div>
             <div class="carprice">
               <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
@@ -74,18 +74,18 @@
             <div>
               <div class="row">
                 <div class="col-6">
-                  <p><i class="bi bi-car-front"></i> {{ car.transmissionId }}</p>
+                  <p><i class="bi bi-car-front"></i> {{getTransmissionType(car.transmissionId)}} </p>
                 </div>
                 <div class="col-6">
-                  <p><i class="bi bi-person"></i> {{ car.numberOfSeats }} Seats</p>
+                  <p><i class="bi bi-person"></i>year: {{ car.year }}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6">
-                  <p><i class="bi bi-door-open"></i> {{ car.featureIds}} Doors</p>
+                  <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
                 </div>
                 <div class="col-6">
-                  <p><i class="bi bi-snow2"></i> {{ car.featureIds ? 'Yes' : 'No' }}</p>
+                  <p><i class="bi bi-snow2"></i>AC</p>
                 </div>
               </div>
             </div>

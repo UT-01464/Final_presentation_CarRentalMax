@@ -1,34 +1,54 @@
 .modal {
-    display: block; /* Show the modal */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    border-radius: 8px;
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  display: block; /* Show modal */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+}
+
+.modal-content {
+  background-color: #222; /* Dark background for the content */
+  margin: 5% auto; /* Center the modal */
+  padding: 20px;
+  border: 1px solid #444; /* Darker border */
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 8px; /* Rounded corners */
+  color: #fff; /* White text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  position: relative; /* Position for the close button */
+}
+
+.close {
+  color: #fff; /* White close button */
+  position: absolute; /* Position it absolutely */
+  top: 10px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+  font-size: 28px; /* Size of the close button */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.close:hover,
+.close:focus {
+  color: #f00; /* Change color on hover */
+  text-decoration: none; /* No underline */
+}
+
+.row {
+  display: flex; /* Flexbox for the row */
+  flex-direction: row; /* Align items in a row */
+}
+
+.col-md-6 {
+  flex: 1; /* Equal width for columns */
+  padding: 10px; /* Padding for the columns */
+}
+
+.rating {
+  margin-top: 10px; /* Margin above rating */
+}

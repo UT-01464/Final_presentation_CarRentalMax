@@ -1,16 +1,15 @@
 <div *ngIf="car" class="modal">
   <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
+    <span class="close" (click)="closeModal()">&times;</span> <!-- Close button -->
     <div class="row">
       <div class="col-md-6">
         <img [src]="car.imageUrl" class="d-block w-100" alt="Car Image" />
       </div>
       <div class="col-md-6">
-        <h2>{{ car.registrationNumber }}</h2>
-        <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
-        
-        <div *ngIf="car.pricePerDay">
-          <p><strong>Type:</strong> {{ car.pricePerDay }}</p>
+        <h2>Car Registration Number: {{ car.registrationNumber }}</h2>
+        <h4>{{ car.pricePerDay | currency:'USD' }} /day</h4>
+        <div *ngIf="car.modelId">
+          <p><strong>Model:</strong> {{ getModelName(car.modelId) }}</p>
         </div>
         <div *ngIf="car.numberOfSeats">
           <p><strong>Seats:</strong> {{ car.numberOfSeats }}</p>

@@ -368,29 +368,41 @@
       </div>
     
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let car of filteredCars.slice(0, 6)">
+        <div
+          class="col-12 col-md-6 col-lg-4 mb-4"
+          *ngFor="let car of filteredCars"
+        >
           <section class="car-section">
-            <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+            <div>
+              <img class="card-img" [src]="car.imageUrl" alt="Car image" />
+            </div>
             <div class="carName">
-              <h3>{{ car.registrationNumber }}</h3>
+              <h3>{{ getCarModel(car.modelId) }}</h3>
             </div>
             <div class="carprice">
               <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
             </div>
-            <div class="carFeatures">
-              <div *ngIf="car.transmissionId">
-                <i class="fas fa-snowflake"></i> AC
+            <div>
+              <div class="row">
+                <div class="col-6">
+                  <p><i class="bi bi-car-front"></i> {{getTransmissionType(car.transmissionId)}} </p>
+                </div>
+                <div class="col-6">
+                  <p><i class="bi bi-person"></i>year: {{ car.year }}</p>
+                </div>
               </div>
-              <div>
-                <i class="fas fa-door-open"></i> {{ car.fuelTypeId}} Doors
-              </div>
-              <div>
-                <i class="fas fa-users"></i> {{ car.numberOfSeats }} Seats
+              <div class="row">
+                <div class="col-6">
+                  <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
+                </div>
+                <div class="col-6">
+                  <p><i class="bi bi-snow2"></i>AC</p>
+                </div>
               </div>
             </div>
             <div class="carbtn">
               <button (click)="openCarDetails(car)">Detail</button>
-              <button (click)="getstart()">Rent</button>
+              <button (click)=" getstart()">Rent</button>
             </div>
           </section>
         </div>

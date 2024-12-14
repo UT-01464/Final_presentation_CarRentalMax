@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Feature, FuelType, Transmission, CarDetailsServiceService } from '../../../AdminPage/Services/CarDetaile/car-details-service.service';
-import { CarDto } from '../../../AdminPage/Services/Cars/car.service';
+import { CarDto, CarModel, CarService } from '../../../AdminPage/Services/Cars/car.service';
 
 @Component({
   selector: 'app-cardetails',
@@ -18,11 +18,13 @@ export class CardetailsComponent {
   features: Feature[] = [];
   fuelTypes: FuelType[] = [];
   transmissions: Transmission[] = [];
+  carModels: CarModel[] = []; 
 
-  constructor(private carDetailsService: CarDetailsServiceService) {}
+  constructor(private carDetailsService: CarDetailsServiceService, private carService: CarService) {}
 
   ngOnInit(): void {
     this.loadAdditionalInfo();
+    this.loadCarModels(); // Ensure this method is called
   }
 
   loadAdditionalInfo(): void {
@@ -36,6 +38,15 @@ export class CardetailsComponent {
 
     this.carDetailsService.getTransmissions().subscribe(transmissions => {
       this.transmissions = transmissions;
+    });
+  }
+
+  loadCarModels(): void {
+    this.carService.getCarModels().subscribe(carModels => {
+      this.carModels = carModels;
+      console.log('Loaded car models:', this.carModels); // Log loaded models
+    }, error => {
+      console.error('Error loading car models:', error);
     });
   }
 
@@ -53,5 +64,9 @@ export class CardetailsComponent {
 
   getTransmissionName(transmissionId: number): string {
     return this.transmissions.find(transmission => transmission.id === transmissionId)?.type || 'Unknown';
+  }
+
+  getModelName(modelId: number): string {
+    return this.carModels.find(model => model.id === modelId)?.name || 'Unknown'; // Return model name or 'Unknown'
   }
 }

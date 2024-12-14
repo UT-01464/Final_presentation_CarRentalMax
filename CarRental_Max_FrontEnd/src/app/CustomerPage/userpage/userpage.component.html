@@ -110,42 +110,34 @@
   </section>
   
   <div class="container py-4 search-container">
-      <div class="filter-section">
-          <div class="filter-item">
-              <label for="transmission">Transmission:</label>
-              <select id="transmission" [(ngModel)]="selectedTransmission" (change)="filterCars()">
-                  <option value="">Select Transmission</option>
-                  <option *ngFor="let transmission of transmissions" [value]="transmission.id">{{ transmission.type }}</option>
-              </select>
-          </div>
-  
-          <div class="filter-item">
-              <label for="fuelType">Fuel Type:</label>
-              <select id="fuelType" [(ngModel)]="selectedFuelType" (change)="filterCars()">
-                  <option value="">Select Fuel Type</option>
-                  <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.id">{{ fuelType.type }}</option>
-              </select>
-          </div>
-  
-          <div class="filter-item">
-              <label for="seats">Number of Seats:</label>
-              <select id="seats" [(ngModel)]="selectedSeats" (change)="filterCars()">
-                  <option value="">Select Seats</option>
-                  <option *ngFor="let seat of [2, 4, 5, 7, 8]" [value]="seat">{{ seat }}</option>
-              </select>
-          </div>
-  
-          <div class="filter-item">
-              <label for="model">Model:</label>
-              <select id="model" [(ngModel)]="selectedModel" (change)="filterCars()">
-                  <option value="">Select Model</option>
-                  <option *ngFor="let model of carModels" [value]="model.id">{{ model.name }}</option>
-              </select>
-          </div>
-  
-          <button (click)="clearFilters()">Clear Filters</button>
-      </div>
-  
+    <div class="filter-section">
+        <div class="filter-item">
+            <label for="transmission">Transmission:</label>
+            <select id="transmission" [(ngModel)]="selectedTransmission" (change)="filterCars()">
+                <option value="">Select Transmission</option>
+                <option *ngFor="let transmission of transmissions" [value]="transmission.id">{{ transmission.type }}</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label for="fuelType">Fuel Type:</label>
+            <select id="fuelType" [(ngModel)]="selectedFuelType" (change)="filterCars()">
+                <option value="">Select Fuel Type</option>
+                <option *ngFor="let fuelType of fuelTypes" [value]="fuelType.id">{{ fuelType.type }}</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label for="model">Model:</label>
+            <select id="model" [(ngModel)]="selectedModel" (change)="filterCars()">
+                <option value="">Select Model</option>
+                <option *ngFor="let model of carModels" [value]="model.id">{{ model.name }}</option>
+            </select>
+        </div>
+
+        <button (click)="clearFilters()">Clear Filters</button>
+    </div>
+
       
     
       <div class="row">
@@ -153,21 +145,28 @@
               <section class="car-section">
                   <img class="card-img" [src]="car.imageUrl" alt="Car image" />
                   <div class="carName">
-                      <h3>{{ car.registrationNumber }}</h3>
+                    <h3>{{ getCarModel(car.modelId) }}</h3>
                   </div>
                   <div class="carprice">
-                      <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
+                    <h4>{{ car.pricePerDay | currency:'USD' }}</h4>
                   </div>
-                  <div class="carFeatures">
-                      <div *ngIf="car.transmissionId">
-                          <i class="fas fa-snowflake"></i> AC
+                  <div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p><i class="bi bi-car-front"></i> {{getTransmissionType(car.transmissionId)}} </p>
                       </div>
-                      <div>
-                          <i class="fas fa-door-open"></i> {{ car.fuelTypeId }} Doors
+                      <div class="col-6">
+                        <p><i class="bi bi-person"></i>year: {{ car.year }}</p>
                       </div>
-                      <div>
-                          <i class="fas fa-users"></i> {{ car.numberOfSeats }} Seats
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <p><i class="bi bi-door-open"></i> {{ getFuelType(car.fuelTypeId) }}</p>
                       </div>
+                      <div class="col-6">
+                        <p><i class="bi bi-snow2"></i>AC</p>
+                      </div>
+                    </div>
                   </div>
                   <div class="carbtn">
                       <button (click)="openCarDetails(car)">Detail</button>
