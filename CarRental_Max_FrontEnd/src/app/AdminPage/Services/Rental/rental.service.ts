@@ -31,8 +31,16 @@ export class RentalService {
     return this.http.get<Rental[]>(`${this.apiUrl}/details/${nic}`);
   }
 
-  rentCar(rentalRequest: { customerId: number; carId: number }): Observable<RentalResponse> {
-    return this.http.post<RentalResponse>(`${this.apiUrl}/rent`, rentalRequest);
+  //rentCar(rentalRequest: { customerId: number; carId: number }): Observable<RentalResponse> {
+    //return this.http.post<RentalResponse>(`${this.apiUrl}/rent`, rentalRequest,{
+      //responseType:'text'
+   // });
+//}
+
+
+
+rentCar(rentalRequest:rentalRequest) {
+  return this.http.post<RentalResponse>(this.apiUrl + "/rent", rentalRequest)
 }
 
   // Return a rented car
@@ -72,8 +80,8 @@ export class RentalService {
 
 
   // Get pending rentals
-  getPendingRentals(): Observable<Rental[]> {
-    return this.http.get<Rental[]>(`${this.apiUrl}/pending`); // Call the pending rentals API
+  getPendingRentals(): Observable<RentalResponse[]> {
+    return this.http.get<RentalResponse[]>(`${this.apiUrl}/pending`); // Call the pending rentals API
   }
 
 
@@ -113,13 +121,27 @@ export interface Rental {
 
 
 export enum RentalStatus {
-  Pending = 'Pending',
-  Accepted = 'Accepted',
-  Rejected = 'Rejected',
-  Rented = 'Rented',
-  Returned = 'Returned'
+  Pending = 0,
+  Accepted = 1,
+  Rejected = 2,
+  Rented = 3,
+  Returned = 4
 }
 
 export interface RentalResponse {
-  message: string;
+  id:number,
+  car:CarDto,
+  customerName:string,
+  customerNIC:string,
+  status:RentalStatus,
+  rentalDate:string,
+  returnDate:string
+}
+
+
+export interface rentalRequest{
+  customerId:number;
+  carId:number;
+  rentalDays:number
+
 }

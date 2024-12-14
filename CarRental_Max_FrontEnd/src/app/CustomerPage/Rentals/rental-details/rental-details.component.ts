@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RentalService, RentalStatus } from '../../../AdminPage/Services/Rental/rental.service';
+import { RentalResponse, RentalService, RentalStatus } from '../../../AdminPage/Services/Rental/rental.service';
 import { Rental } from '../../../AdminPage/Services/Rental/rental.service'; 
 import { AuthServiceService } from '../../../Services/auth-service.service';
 
@@ -14,7 +14,7 @@ import { AuthServiceService } from '../../../Services/auth-service.service';
 })
 export class RentalDetailsComponent {
 
-  pendingRequests: Rental[] = [];
+  pendingRequests: RentalResponse[] = [];
   rentedCars: Rental[] = [];
   returnHistory: Rental[] = [];
 

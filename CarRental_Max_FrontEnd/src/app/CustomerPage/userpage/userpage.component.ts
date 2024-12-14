@@ -285,27 +285,7 @@ logout(): void {
 
 
 
-  rentCar(car: CarDto): void {
-    const customerId = this.customer.id; // Get the logged-in customer ID
-    const carId = car.id;
 
-    const rentalRequest = {
-        customerId: customerId,
-        carId: carId
-    };
-
-    this.rentalService.rentCar(rentalRequest).subscribe(
-        response => {
-            console.log('Rental response:', response); // Log the response
-            alert(response.message); // Now this should work without error
-        },
-        error => {
-            console.error('Error submitting rental request', error);
-            let errorMessage = error.error?.message || 'Failed to submit rental request. Please try again.';
-            alert(errorMessage);
-        }
-    );
-}
 
 // Method to open the rental modal
 openRentalModal(carId: number): void {
@@ -340,7 +320,6 @@ confirmRental(): void {
   this.rentalService.rentCar(rentalRequest).subscribe(
       response => {
           console.log('Rental response:', response);
-          alert(response.message); // Notify user of success
           this.closeRentalModal(); // Close modal after successful rental
       },
       error => {

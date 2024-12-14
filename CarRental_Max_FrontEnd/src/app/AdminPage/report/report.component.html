@@ -32,11 +32,13 @@
         <!-- Car History Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCarHistory">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarHistory" aria-expanded="true" aria-controls="collapseCarHistory">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseCarHistory" aria-expanded="true" aria-controls="collapseCarHistory">
                     Car History
                 </button>
             </h2>
-            <div id="collapseCarHistory" class="accordion-collapse collapse show" aria-labelledby="headingCarHistory" data-bs-parent="#reportAccordion">
+            <div id="collapseCarHistory" class="accordion-collapse collapse show" aria-labelledby="headingCarHistory"
+                data-bs-parent="#reportAccordion">
                 <div class="accordion-body">
                     <table class="table table-striped">
                         <thead>
@@ -65,11 +67,14 @@
         <!-- Customer History Section -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCustomerHistory">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomerHistory" aria-expanded="false" aria-controls="collapseCustomerHistory">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseCustomerHistory" aria-expanded="false"
+                    aria-controls="collapseCustomerHistory">
                     Customer History
                 </button>
             </h2>
-            <div id="collapseCustomerHistory" class="accordion-collapse collapse" aria-labelledby="headingCustomerHistory" data-bs-parent="#reportAccordion">
+            <div id="collapseCustomerHistory" class="accordion-collapse collapse"
+                aria-labelledby="headingCustomerHistory" data-bs-parent="#reportAccordion">
                 <div class="accordion-body">
                     <table class="table table-striped">
                         <thead>
@@ -95,39 +100,42 @@
 
         <!-- Rental History Section -->
         <!-- Rental History Section -->
-<div class="accordion-item">
-    <h2 class="accordion-header" id="headingRentalHistory">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRentalHistory" aria-expanded="false" aria-controls="collapseRentalHistory">
-            Rental History
-        </button>
-    </h2>
-    <div id="collapseRentalHistory" class="accordion-collapse collapse" aria-labelledby="headingRentalHistory" data-bs-parent="#reportAccordion">
-        <div class="accordion-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer Name</th>
-                        <th>Car Registration Number</th>
-                        <th>Rental Date</th>
-                        <th>Status</th>
-                        <th>Return Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rental of paginatedRentalHistories">
-                        <td>{{ rental.id }}</td>
-                        <td>{{ rental.customer.firstName }} {{ rental.customer.lastName }}</td>
-                        <td>{{ rental.car.registrationNumber }}</td>
-                        <td>{{ rental.rentalDate | date:'shortDate' }}</td>
-                        <td>{{ rental.status }}</td>
-                        <td>{{ rental.returnDate | date:'shortDate' }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingRentalHistory">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseRentalHistory" aria-expanded="false" aria-controls="collapseRentalHistory">
+                    Rental History
+                </button>
+            </h2>
+            <div id="collapseRentalHistory" class="accordion-collapse collapse" aria-labelledby="headingRentalHistory"
+                data-bs-parent="#reportAccordion">
+                <div class="accordion-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Name</th>
+                                <th>Car Registration Number</th>
+                                <th>Rental Date</th>
+                                <th>Status</th>
+                                <th>Return Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rental of rentalHistories">
+                                <td>{{ rental.id }}</td>
+                                <td>{{ rental.customer.firstName }} {{ rental.customer.lastName }}</td>
+                                <td>{{ rental.car.registrationNumber }}</td>
+                                <td>{{ rental.rentalDate | date:'shortDate' }}</td>
+                                <td>{{ rental.status }}</td>
+                                <td>{{ rental.returnDate | date:'shortDate' }}</td>
+                              </tr>
+                              
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 
 

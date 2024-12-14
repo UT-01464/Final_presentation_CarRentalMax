@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarDto, CarService } from '../Services/Cars/car.service';
-import { Rental, RentalService } from '../Services/Rental/rental.service';
+import { Rental, RentalResponse, RentalService } from '../Services/Rental/rental.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   totalRejectedRentals: number = 0;
   totalCars: number = 0;
   totalCustomers: number = 15;
-  rentalRequests: Rental[] = [];
+  rentalRequests: RentalResponse[] = [];
 
   constructor(private carService: CarService, private rentalService: RentalService) {}
 

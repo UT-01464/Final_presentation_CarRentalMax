@@ -49,7 +49,7 @@
     <tbody>
       <tr *ngFor="let rental of rentedCars">
         <td><img [src]="rental.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
-        <td>{{ rental.car.registrationNumber }}</td>
+        <td>{{ rental.car.id }}</td>
         <td>{{ rental.car.modelId}}</td>
         <td>{{ rental.rentalDate | date }}</td>
         <td>{{ rental.returnDate | date }}</td>

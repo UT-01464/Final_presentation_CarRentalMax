@@ -70,6 +70,7 @@ export class ReportComponent implements OnInit {
         console.log('Rentals fetched:', rentals); // Log the fetched rental data
         this.totalRentals = rentals.length;
         this.rentalHistories = rentals || []; // Ensure it's an array
+        
     }, error => {
         console.error('Error fetching rentals:', error); // Log any errors
     });
@@ -87,12 +88,22 @@ export class ReportComponent implements OnInit {
   }
 
   get paginatedRentalHistories() {
+    console.log('Search term:', this.searchRentalHistory);
+    console.log('Rental histories:', this.rentalHistories);
+    console.log('Current Page:', this.currentRentalPage);
+    console.log('Items per page:', this.itemsPerPage);
+    console.log();
+
+    
     return this.rentalHistories.filter(rental => 
       rental.car.registrationNumber.includes(this.searchRentalHistory) || 
-      `${rental.customer.firstName} ${rental.customer.lastName}`.includes(this.searchRentalHistory))
-      .slice((this.currentRentalPage - 1) * this.itemsPerPage, this.currentRentalPage * this.itemsPerPage);
+      `${rental.customer.firstName} ${rental.customer.lastName}`.includes(this.searchRentalHistory)
+    ).slice(
+      (this.currentRentalPage - 1) * this.itemsPerPage,
+      this.currentRentalPage * this.itemsPerPage
+    );
   }
-
+  
   nextCarPage() {
     if (this.currentCarPage * this.itemsPerPage < this.carHistories.length) {
       this.currentCarPage++;

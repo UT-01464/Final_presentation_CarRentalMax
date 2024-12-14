@@ -38,7 +38,7 @@
                     <th>Car Registration Number</th>
                     <th>Customer Name</th>
                     <th>Customer NIC</th>
-                    <th>Phone Number</th>
+                    <th>Number Of Seats</th>
                     <th>Rental Date</th>
                     <th>Return Date</th>
                     <th>Actions</th>
@@ -47,9 +47,9 @@
             <tbody>
                 <tr *ngFor="let rental of rentalRequests">
                     <td>{{ rental.car.registrationNumber }}</td>
-                    <td>{{ rental.customer.firstName}}</td>
-                    <td>{{ rental.customer.nic }}</td>
-                    <td>{{ rental.customer.phoneNumber }}</td>
+                    <td>{{ rental.customerName}}</td>
+                    <td>{{ rental.customerNIC }}</td>
+                    <td>{{ rental.car.numberOfSeats }}</td>
                     <td>{{ rental.rentalDate | date }}</td>
                     <td>{{ rental.returnDate | date }}</td>
                     <td>
