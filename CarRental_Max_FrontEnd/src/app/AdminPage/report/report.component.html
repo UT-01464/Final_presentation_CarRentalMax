@@ -54,7 +54,7 @@
                             <tr *ngFor="let car of carHistories">
                                 <td>{{ car.id }}</td>
                                 <td>{{ car.registrationNumber }}</td>
-                                <td>{{ car.modelId }}</td>
+                                <td>{{ getCarModel(car.modelId) }}</td>
                                 <td>{{ car.year }}</td>
                                 <td>{{ car.pricePerDay | currency }}</td>
                             </tr>

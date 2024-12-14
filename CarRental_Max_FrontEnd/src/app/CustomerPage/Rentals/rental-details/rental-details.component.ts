@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RentalResponse, RentalService, RentalStatus } from '../../../AdminPage/Services/Rental/rental.service';
 import { Rental } from '../../../AdminPage/Services/Rental/rental.service'; 
 import { AuthServiceService } from '../../../Services/auth-service.service';
+import { CarModel, CarService } from '../../../AdminPage/Services/Cars/car.service';
 
 @Component({
   selector: 'app-rental-details',
@@ -17,11 +18,13 @@ export class RentalDetailsComponent {
   pendingRequests: RentalResponse[] = [];
   rentedCars: Rental[] = [];
   returnHistory: Rental[] = [];
+   carModels: CarModel[] = []; 
 
-  constructor(private router: Router, private rentalService: RentalService,private authService: AuthServiceService) {}
+  constructor(private router: Router, private rentalService: RentalService,private authService: AuthServiceService,private carService:CarService) {}
 
   ngOnInit() {
     this.loadRentalData();
+    this.loadCarModels();
   }
 
   
@@ -66,6 +69,34 @@ export class RentalDetailsComponent {
 
   goBack(): void {
     this.router.navigate(['/userpage']);
+  }
+
+  loadCarModels(): void {
+    this.carService.getCarModels().subscribe(
+      (data: CarModel[]) => {
+        this.carModels = data;
+      },
+      (error) => {
+        console.error('Error fetching car models:', error);
+      }
+    );
+  }
+
+  
+  getCarModel(id: number): string {
+    const carModel = this.carModels.find(m => m.id === id);
+    return carModel ? carModel.name : 'Unknown'; 
+  }
+
+  getStatus(status: RentalStatus): string {
+    switch (status) {
+      case RentalStatus.Pending: return 'Pending';
+      case RentalStatus.Accepted: return 'Accepted';
+      case RentalStatus.Rejected: return 'Rejected';
+      case RentalStatus.Rented: return 'Rented';
+      case RentalStatus.Returned: return 'Returned';
+      default: return 'Unknown';
+    }
   }
 
 }

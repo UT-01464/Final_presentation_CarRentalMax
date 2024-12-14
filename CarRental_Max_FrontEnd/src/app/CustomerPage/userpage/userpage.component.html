@@ -178,23 +178,26 @@
 
 
 <!-- Rental Days Modal -->
-<div *ngIf="isRentalModalOpen" class="modal">
-    <div class="modal-content">
-        <span class="close" (click)="closeRentalModal()">&times;</span>
-        
-        <h2>Enter Rental Days</h2>
-        
-        <label for="rentalDays">Select Rental Days:</label>
-        <input type="number" [(ngModel)]="rentalDays" id="rentalDays" min="1" placeholder="Enter days" required />
-        
-        <div class="modal-actions">
-            <button (click)="confirmRental()">Confirm Rental</button>
+<div *ngIf="isRentalModalOpen" class="rental-days-modal fade show" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Enter Rental Days</h5>
+                <button type="button" class="close" (click)="closeRentalModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="rentalDays">Select Rental Days:</label>
+                <input type="number" [(ngModel)]="rentalDays" id="rentalDays" min="1" placeholder="Enter days" required class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="confirmRental()">Confirm Rental</button>
+                <button type="button" class="btn btn-secondary" (click)="closeRentalModal()">Close</button>
+            </div>
         </div>
     </div>
 </div>
-
-
-
 
 
 

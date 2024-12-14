@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customer, CustomerService } from '../Services/Customer/customer.service';
 import { Rental, RentalResponse, RentalService } from '../Services/Rental/rental.service';
-import { CarDto, CarService } from '../Services/Cars/car.service';
+import { CarDto, CarModel, CarService } from '../Services/Cars/car.service';
 
 
 @Component({
@@ -28,6 +28,7 @@ export class ReportComponent implements OnInit {
   currentCustomerPage: number = 1;
   currentRentalPage: number = 1; // Current page for rental history
   itemsPerPage: number = 5;
+  carModels: CarModel[] = []; 
 
   constructor(
     private carService: CarService,
@@ -42,6 +43,7 @@ export class ReportComponent implements OnInit {
         customerHistories: this.customerHistories,
         rentalHistories: this.rentalHistories
     });
+    this.loadCarModels();
 }
 
   loadData() {
@@ -142,5 +144,22 @@ export class ReportComponent implements OnInit {
 
   printHistory(filterBy: 'month' | 'week') {
     console.log(`Printing history filtered by: ${filterBy}`);
+  }
+
+  loadCarModels(): void {
+    this.carService.getCarModels().subscribe(
+      (data: CarModel[]) => {
+        this.carModels = data;
+      },
+      (error) => {
+        console.error('Error fetching car models:', error);
+      }
+    );
+  }
+
+  
+  getCarModel(id: number): string {
+    const carModel = this.carModels.find(m => m.id === id);
+    return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
   }
 }

@@ -217,28 +217,14 @@ getTransmissionType(id?: number): string {
   }
 
   filterCars(): void {
-    console.log('Selected Filters:', {
-        selectedTransmission: this.selectedTransmission,
-        selectedFuelType: this.selectedFuelType,
-        selectedModel: this.selectedModel
-    });
-
     this.filteredCars = this.cars.filter(car => {
-        const matchesTransmission = this.selectedTransmission ? car.transmissionId === this.selectedTransmission : true;
-        const matchesFuelType = this.selectedFuelType ? car.fuelTypeId === this.selectedFuelType : true;
-        const matchesModel = this.selectedModel ? car.modelId === this.selectedModel : true;
+      const matchesTransmission = this.selectedTransmission ? car.transmissionId == this.selectedTransmission : true;
+      const matchesFuelType = this.selectedFuelType ? car.fuelTypeId == this.selectedFuelType : true;
+      const matchesModel = this.selectedModel ? car.modelId == this.selectedModel : true;
 
-        console.log(`Car ID: ${car.id}, Matches:`, {
-            matchesTransmission,
-            matchesFuelType,
-            matchesModel
-        });
-
-        return matchesTransmission && matchesFuelType && matchesModel;
+      return matchesTransmission && matchesFuelType && matchesModel;
     });
-
-    console.log('Filtered Cars:', this.filteredCars); // Log filtered results
-}
+  }
 
 clearFilters(): void {
   this.selectedTransmission = null;

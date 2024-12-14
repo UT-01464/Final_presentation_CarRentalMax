@@ -31,7 +31,7 @@ export const routes: Routes = [
           { path: 'customers', component: CustomerDetailComponent },
           { path: 'cars', component: ManageCarComponent },
           { path: 'reports', component: ReportComponent },
-          { path: 'Return', component: ReturnComponent },
+          { path: 'return', component: ReturnComponent },
         ],
       },
       { path: '', redirectTo: 'admin', pathMatch: 'full' },

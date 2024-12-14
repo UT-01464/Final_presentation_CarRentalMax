@@ -1,41 +1,121 @@
-.container-fluid {
-    padding: 20px;
+.container {
+    max-width: 100%; /* Keep full width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding */
+}
+
+h2, h3 {
+    color: #333; /* Darker color for headings */
+}
+
+input {
+    width: 100%; /* Full width for input fields */
+    padding: 10px; /* Add padding for comfort */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove outline */
 }
 
 .table {
-    margin-top: 20px;
+    width: 100%; /* Full width for tables */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+.table th, .table td {
+    padding: 10px; /* Padding for table cells */
+    text-align: left; /* Left-align text */
+    border-bottom: 1px solid #ddd; /* Light border at the bottom */
+}
+
+.table th {
+    background-color: #f8f9fa; /* Light background for headers */
+}
+
+.btn {
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background change */
+}
+
+.btn-success {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red background */
+    color: white; /* White text */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .modal {
-    display: block; /* Show modal */
-    position: fixed;
-    z-index: 1000;
+    position: fixed; /* Fixed position for modal */
+    z-index: 1000; /* High z-index to overlay other elements */
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    background-color: white; /* White background for modal content */
+    margin: 15% auto; /* Center the modal */
+    padding: 20px; /* Padding for modal content */
+    border-radius: 5px; /* Rounded corners */
+    max-width: 600px; /* Max width for modal */
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    color: #aaa; /* Close button color */
+    float: right; /* Align to the right */
+    font-size: 28px; /* Size of close button */
+    font-weight: bold; /* Bold close button */
 }
 
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    color: black; /* Darker color on hover */
+    text-decoration: none; /* No underline */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px; /* Less padding on smaller screens */
+    }
+
+    input {
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    .btn {
+        width: 100%; /* Full width for buttons on small screens */
+        margin-bottom: 10px; /* Space between buttons */
+    }
 }

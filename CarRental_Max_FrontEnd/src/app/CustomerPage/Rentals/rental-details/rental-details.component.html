@@ -24,10 +24,10 @@
       <tr *ngFor="let request of pendingRequests">
         <td><img [src]="request.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
         <td>{{ request.car.registrationNumber }}</td>
-        <td>{{ request.car.modelId}}</td>
+        <td>{{ getCarModel(request.car.modelId) }}</td>
         <td>{{ request.rentalDate | date }}</td>
         <td>{{ request.returnDate | date }}</td>
-        <td>{{ request.status }}</td>
+        <td>{{ getStatus(request.status) }}</td>
       </tr>
     </tbody>
   </table>
@@ -49,12 +49,12 @@
     <tbody>
       <tr *ngFor="let rental of rentedCars">
         <td><img [src]="rental.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
-        <td>{{ rental.car.id }}</td>
-        <td>{{ rental.car.modelId}}</td>
+        <td>{{ rental.car.registrationNumber}}</td>
+        <td>{{ getCarModel(rental.car.modelId) }}</td>
         <td>{{ rental.rentalDate | date }}</td>
         <td>{{ rental.returnDate | date }}</td>
         <td>{{ rental.isOverdue ? 'Yes' : 'No' }}</td>
-        <td>{{ rental.status }}</td>
+        <td>{{ getStatus(rental.status) }}</td>
       </tr>
     </tbody>
   </table>
@@ -76,10 +76,10 @@
       <tr *ngFor="let history of returnHistory">
         <td><img [src]="history.car.imageUrl" alt="Car Image" style="width: 100px; height: auto;"></td>
         <td>{{ history.car.registrationNumber }}</td>
-        <td>{{ history.car.modelId}}</td>
+        <td>{{ getCarModel(history.car.modelId) }}</td>
         <td>{{ history.rentalDate | date }}</td>
         <td>{{ history.returnDate | date }}</td>
-        <td>{{ history.status }}</td>
+        <td>{{ getStatus(history.status) }}</td>
       </tr>
     </tbody>
   </table>
