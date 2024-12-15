@@ -18,3 +18,40 @@
     width: 250px; /* Fixed sidebar width on larger screens */
   }
   
+
+  /* Remove margin and padding from header */
+  header {
+    margin: 0; /* Remove margin */
+    padding: 1rem; /* Maintain vertical padding */
+    width: 100%; /* Full width */
+}
+
+/* Center text in the navbar */
+header h1 {
+    text-align: center;
+}
+
+/* Remove space on the left side of the sidebar */
+.offcanvas-lg {
+    margin-left: 0; /* No margin on left */
+}
+
+/* Hover effect for sidebar menu items */
+.nav-link {
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.nav-link:hover {
+    background-color: #495057; /* Darker background on hover */
+    color: #ffffff; /* Change text color on hover */
+}
+
+/* Optional: Active link styles */
+.nav-link.active {
+    background-color: #007bff; /* Highlight active link */
+    color: #ffffff; /* White text for active link */
+}
+
+header h1 {
+  text-align: center;
+}

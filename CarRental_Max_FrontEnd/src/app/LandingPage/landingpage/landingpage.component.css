@@ -638,75 +638,23 @@
   
     /* -----------------------------------------cars */
   
-    /* .car h2
-    {
-      color: white;
-      text-align: center;
-      padding-top: 2%;
-    }
-  
-    .car-section
-  {
-      border: 1px solid black;
-      width: 400px;
-      height: 100vh;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.842);
-      border-radius: 20px;
-      box-shadow: 0px 0px 20px rgba(0,0,0,0.75);
-      overflow: hidden;
-      text-align: center;
-  
-      
+    .car-section {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      transition: transform 0.2s;
   }
   
-  .card-img
-  {
-      border-top: 20px;
-      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.514);
+  .car-section:hover {
+      transform: scale(1.05);
   }
   
-  
-  .carprice
-  {
-      background-color: black;
-      padding: 1%;
-      box-shadow: 1px white;
-      box-shadow: 0px 0px 1px rgba(250, 250, 250, 0.75);
-      
-      
+  .card-img {
+      width: 100%; /* Full width of the parent */
+      height: 200px; /* Fixed height */
+      object-fit: cover; /* Maintain aspect ratio and cover the area */
+      border-radius: 8px; /* Optional: to match the section's border radius */
   }
-  
-  .row
-  {
-      display: flex;
-      justify-content:space-evenly;
-      
-  }
-  
-  .carbtn {
-      display: flex;
-      width: 100%;
-     
-    }
-    
-    .carbtn button {
-      flex: 1;
-      padding: 20px;
-      background-color: #000000;
-      color: white;
-      border: px solid white;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-    
-    .carbtn button:hover {
-      background-color: #005bb5;
-    }
-     */
-  
   
      .car h2 {
       color: white;
