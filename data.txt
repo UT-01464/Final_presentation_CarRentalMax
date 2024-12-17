@@ -82,7 +82,8 @@ ALTER TABLE cars ADD NumberOfSeats INT;
 
 
 
-INSERT INTO Cars (
+
+	INSERT INTO Cars (
     PricePerDay, 
     Year, 
     RegistrationNumber, 
@@ -97,27 +98,19 @@ INSERT INTO Cars (
 (90.00, 2021, 'LMN5678', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734215873/zepfjhhsli9vclcwwwhs.webp', 2, 1, 2, 1),
 (110.00, 2020, 'PQR9012', 1, 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400', 1, 2, 3, 5),
 (150.75, 2023, 'STU3456', 0, 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_960_720.jpg', 2, 3, 4, 3),
-(95.00, 2021, 'VWX7890', 1, 'https://res.cloudinary.com/dttt1g4se/image/upload/v1734238658/ggaqjrcy7zuvaa0kop4q.jpg', 1, 1, 5, 2),
+(95.00, 2021, 'VWX7890', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238747/rmhgykmi8mdnijpwsqha.jpg', 1, 1, 5, 2),
 (135.50, 2021, 'ABX2345', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238617/nsoxutzgvm55hqclggve.jpg', 2, 1, 6, 7),
 (125.00, 2020, 'YZA6789', 0, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238690/cpit7c48dt7po16q20wh.jpg', 1, 2, 7, 4),
 (140.00, 2023, 'BCD1234', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238702/qk7bqekupd69rn6eohey.jpg', 2, 3, 8, 6),
 (115.00, 2022, 'DEF4567', 0, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238747/rmhgykmi8mdnijpwsqha.jpg', 1, 1, 9, 5),
-(105.00, 2021, 'GHI8901', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238732/vsu8rlnq4xkjw4kolisp.jpg', 2, 3, 10, 8);
+(105.00, 2021, 'GHI8901', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238732/vsu8rlnq4xkjw4kolisp.jpg', 2, 3, 10, 8),
+(128, 2022, 'XYh785', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734215611/tukxdw0g9wwbo3uwgfkv.webp', 1, 3, 1, 10),
+(100, 2023, 'SJR556', 1, 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_960_720.jpg', 2, 3, 4, 3),
+(200.00, 2020, 'YEM8489', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238690/cpit7c48dt7po16q20wh.jpg', 1, 2, 7, 4),
+(168, 2022, 'DWUJ667', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238747/rmhgykmi8mdnijpwsqha.jpg', 1, 1, 9, 5),
+(186, 2022, 'DSI257', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238747/rmhgykmi8mdnijpwsqha.jpg', 2, 2, 9, 5),
+(120, 2021, 'GHPS601', 1, 'https://res.cloudinary.com/dtttlg4se/image/upload/v1734238732/vsu8rlnq4xkjw4kolisp.jpg', 1, 5, 10, 8);
 
-
-
-INSERT INTO Cars (ModelId, Year, RegistrationNumber, CategoryId, PricePerDay, IsAvailable, ImageUrl, NumberOfSeats, TransmissionId, FuelTypeId)
-VALUES 
-    (1, 2023, 'ABC1234', 1, 70.00, 1, 'https://cdn.pixabay.com/photo/2017/12/28/12/02/chevrolet-3040155_960_720.jpg', 5, 1, 2),
-    (2, 2022, 'XYZ5678', 2, 90.00, 1, 'https://cdn.pixabay.com/photo/2020/01/21/13/58/audi-4785244_960_720.jpg', 5, 2, 1),
-    (3, 2021, 'LMN9101', 3, 50.00, 1, 'https://cdn.pixabay.com/photo/2020/02/21/14/02/mercedes-4862621_960_720.jpg', 4, 1, 3),
-    (4, 2023, 'DEF2345', 1, 100.00, 1, 'https://cdn.pixabay.com/photo/2019/01/17/20/18/luxury-car-3934485_960_720.jpg', 5, 2, 1),
-    (5, 2020, 'GHI3456', 4, 60.00, 1, 'https://cdn.pixabay.com/photo/2016/11/18/13/47/car-1835505_960_720.jpg', 7, 1, 2),
-    (6, 2019, 'JKL4567', 2, 120.00, 1, 'https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_960_720.jpg', 5, 2, 1),
-    (7, 2023, 'MNO5678', 3, 80.00, 1, 'https://cdn.pixabay.com/photo/2020/04/29/21/51/sports-car-5100221_960_720.jpg', 2, 1, 3),
-    (8, 2022, 'PQR6789', 1, 75.00, 1, 'https://cdn.pixabay.com/photo/2015/09/02/12/45/suv-918408_960_720.jpg', 5, 1, 2),
-    (9, 2021, 'STU7890', 4, 65.00, 1, 'https://cdn.pixabay.com/photo/2020/02/21/14/02/mercedes-4862621_960_720.jpg', 6, 2, 3),
-    (10, 2023, 'VWX8901', 3, 150.00, 1, 'https://cdn.pixabay.com/photo/2018/01/08/12/35/bmw-3065407_960_720.jpg', 4, 1, 1);
 
 
 
