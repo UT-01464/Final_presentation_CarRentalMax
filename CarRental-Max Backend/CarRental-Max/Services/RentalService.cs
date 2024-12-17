@@ -1,5 +1,6 @@
 ﻿using CAR_RENTAL_MS_III.Entities;
 using CAR_RENTAL_MS_III.I_Repositories;
+using CarRental_Max.I_Services;
 using CarRental_Max.Models.Car;
 using CarRental_Max.Models.Rentals;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +12,14 @@ namespace CAR_RENTAL_MS_III.Services
         private readonly IRentalRepository _rentalRepository;
         private readonly ICarRepository _carRepository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly INotificationService _notificationService;
 
-        public RentalService(IRentalRepository rentalRepository, ICarRepository carRepository, ICustomerRepository customerRepository)
+        public RentalService(IRentalRepository rentalRepository, ICarRepository carRepository, ICustomerRepository customerRepository, INotificationService notificationService)
         {
             _rentalRepository = rentalRepository;
             _carRepository = carRepository;
             _customerRepository = customerRepository;
+            _notificationService = notificationService;
         }
 
         public async Task<RentalDto> GetRentalByIdAsync(int rentalId)
@@ -124,35 +127,7 @@ namespace CAR_RENTAL_MS_III.Services
             };
         }
 
-        //public async Task RentCarAsync(int customerId, int carId)
-        //{
-        //    // Check if the customer exists
-        //    var customerExists = await _customerRepository.CustomerExistsAsync(customerId);
-        //    if (!customerExists)
-        //    {
-        //        throw new ArgumentException("Customer does not exist.");
-        //    }
-
-        //    // Check if the car exists
-        //    var carExists = await _carRepository.CarExistsAsync(carId);
-        //    if (!carExists)
-        //    {
-        //        throw new ArgumentException("Car does not exist.");
-        //    }
-
-        //    // Create the rental object
-        //    var rental = new Rental
-        //    {
-        //        CustomerId = customerId,
-        //        CarId = carId,
-        //        RentalDate = DateTime.UtcNow,
-        //        Status = RentalStatus.Pending,
-        //    };
-
-        //    // Add the rental to the repository
-        //    await _rentalRepository.AddRentalAsync(rental);
-        //}
-
+        
 
         public async Task<RentalDetailsDto> RentCarAsync(int customerId, int carId, int rentalDays)
         {
@@ -241,42 +216,56 @@ namespace CAR_RENTAL_MS_III.Services
                 : $"Car returned successfully. Total cost: {totalCost:C}.";
         }
 
-        //public async Task<string> AcceptRentalAsync(int rentalId)
-        //{
-        //    var rental = await _rentalRepository.GetRentalByIdAsync(rentalId);
-        //    if (rental == null) return "Rental not found.";
-        //    rental.Status = RentalStatus.Accepted;
-        //    await _rentalRepository.UpdateRentalAsync(rental);
-        //    return "Rental accepted.";
-        //}
+
 
         public async Task<string> AcceptRentalAsync(int rentalId)
         {
+            // Step 1: Retrieve the rental record
             var rental = await _rentalRepository.GetRentalByIdAsync(rentalId);
-            if (rental == null) return "Rental not found.";
+            if (rental == null) return "Rental not found."; // Ensure rental exists
 
-            rental.Status = RentalStatus.Accepted; // Set status to Accepted
-            await _rentalRepository.UpdateRentalAsync(rental);
+            // Step 2: Update the rental status
+            rental.Status = RentalStatus.Accepted;
+            await _rentalRepository.UpdateRentalAsync(rental); // Save changes to the database
 
-            // Update car availability only after acceptance
-            var car = await _carRepository.GetCarByIdAsync(rental.CarId);
-            if (car != null)
+            // Step 3: Retrieve the customer based on CustomerId from the rental
+            var customer = await _customerRepository.GetCustomerByIdAsync(rental.CustomerId);
+            if (customer != null)
             {
-                car.IsAvailable = false; // Mark car as not available
-                await _carRepository.UpdateCarAsync(car);
+                // Step 4: Create and send the notification
+                string message = $"Your rental request for car ID {rental.CarId} has been accepted.";
+                await _notificationService.NotifyCustomerAsync(customer.Id, message, rental.Id);
             }
 
             return "Rental accepted.";
         }
 
+
         public async Task<string> RejectRentalAsync(int rentalId)
         {
+            // Step 1: Retrieve the rental record
             var rental = await _rentalRepository.GetRentalByIdAsync(rentalId);
-            if (rental == null) return "Rental not found.";
+            if (rental == null) return "Rental not found."; // Ensure rental exists
+
+            // Step 2: Update the rental status
             rental.Status = RentalStatus.Rejected;
-            await _rentalRepository.UpdateRentalAsync(rental);
+            await _rentalRepository.UpdateRentalAsync(rental); // Save changes to the database
+
+            // Step 3: Retrieve the customer based on CustomerId from the rental
+            var customer = await _customerRepository.GetCustomerByIdAsync(rental.CustomerId);
+            if (customer != null)
+            {
+                // Step 4: Create and send the notification
+                string message = $"Your rental request for car ID {rental.CarId} has been rejected.";
+                await _notificationService.NotifyCustomerAsync(customer.Id, message, rental.Id);
+            }
+
             return "Rental rejected.";
         }
+
+
+
+
 
         public async Task<IEnumerable<RentalDto>> GetRentalHistoryByCustomerIdAsync(int customerId)
         {
@@ -359,36 +348,7 @@ namespace CAR_RENTAL_MS_III.Services
 
 
 
-        //public async Task<IEnumerable<RentalDto>> GetPendingRentalsAsync()
-        //{
-        //    var rentals = await _rentalRepository.GetAllRentalsAsync();
-        //    var pendingRentals = rentals.Where(r => r.Status == RentalStatus.Pending);
-        //    var rentalDtos = new List<RentalDto>();
-
-        //    foreach (var rental in pendingRentals)
-        //    {
-        //        var car = await _carRepository.GetCarByIdAsync(rental.CarId);
-        //        var customer = await _customerRepository.GetCustomerByIdAsync(rental.CustomerId);
-
-        //        rentalDtos.Add(new RentalDto
-        //        {
-        //            Id = rental.Id,
-        //            Car = new CarDto
-        //            {
-        //                Id = car.Id,
-        //                ModelId = car.ModelId,
-        //                Year = car.Year
-        //            },
-        //            CustomerName = $"{customer.FirstName} {customer.LastName}",
-        //            RentalDate = rental.RentalDate,
-        //            Status = rental.Status,
-        //            ReturnDate = rental.ReturnDate
-        //        });
-        //    }
-
-        //    return rentalDtos;
-        //}
-
+       
 
         public async Task<IEnumerable<RentalDto>> GetPendingRentalsAsync()
         {

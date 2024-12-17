@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarRental_Max.Migrations
 {
     /// <inheritdoc />
-    public partial class rent : Migration
+    public partial class rental : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -274,19 +274,33 @@ namespace CarRental_Max.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RentalId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    RentalId = table.Column<int>(type: "int", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    RentalId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notifications", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Notifications_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Notifications_Rentals_RentalId",
                         column: x => x.RentalId,
                         principalTable: "Rentals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Rentals_RentalId1",
+                        column: x => x.RentalId1,
+                        principalTable: "Rentals",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -326,9 +340,19 @@ namespace CarRental_Max.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifications_CustomerId",
+                table: "Notifications",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Notifications_RentalId",
                 table: "Notifications",
                 column: "RentalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_RentalId1",
+                table: "Notifications",
+                column: "RentalId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_CarId",

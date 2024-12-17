@@ -14,13 +14,13 @@ namespace CAR_RENTAL_MS_III.Entities
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string DriverLicenseNumber { get; set; }
-        public string Nic { get; set; } // National Identity Card
+        public string Nic { get; set; } 
         public string PasswordHash { get; set; }
 
         public int RoleId { get; set; }
         public Role Role { get; set; }
         public Address Address { get; set; }
-        
+        public virtual ICollection<Notification> Notifications { get; set; }
 
     }
 

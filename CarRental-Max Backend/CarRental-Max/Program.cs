@@ -4,9 +4,13 @@ using CAR_RENTAL_MS_III.I_Services;
 using CAR_RENTAL_MS_III.Repositories;
 using CAR_RENTAL_MS_III.Services;
 using CarRental_Max.Entities;
+using CarRental_Max.I_Repositories;
 using CarRental_Max.I_Repositories.CarDetails;
+using CarRental_Max.I_Services;
 using CarRental_Max.I_Services.CarDetails;
+using CarRental_Max.Repositories;
 using CarRental_Max.Repositories.CarDetails;
+using CarRental_Max.Services;
 using CarRental_Max.Services.CarDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +64,8 @@ namespace CarRental_Max
             builder.Services.AddScoped<IFuelTypeService, FuelTypeService>();
             builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
             builder.Services.AddScoped<IFeatureService, FeatureService>();
+            builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
 
             // JWT Authentication configuration
             var jwtSection = builder.Configuration.GetSection("Jwt");

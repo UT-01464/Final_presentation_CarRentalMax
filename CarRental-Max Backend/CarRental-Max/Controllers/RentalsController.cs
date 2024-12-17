@@ -58,37 +58,6 @@ namespace CAR_RENTAL_MS_III.Controllers
 
 
 
-        //[HttpPost("rent")]
-
-        //public async Task<IActionResult> RentCar([FromBody] RentCarDto rentCarDto)
-        //{
-        //    if (rentCarDto == null)
-        //    {
-        //        return BadRequest("Rental request cannot be null.");
-        //    }
-
-        //    if (rentCarDto.CustomerId <= 0 || rentCarDto.CarId <= 0)
-        //    {
-        //        return BadRequest("Invalid customer or car ID.");
-        //    }
-
-        //    try
-        //    {
-        //        await _rentalService.RentCarAsync(rentCarDto.CustomerId, rentCarDto.CarId);
-
-        //        // Return a JSON object
-        //        return Ok(new { message = "Rental created successfully." });
-        //    }
-        //    catch (ArgumentException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //    catch
-        //    {
-        //        return StatusCode(500, "An error occurred while processing your request.");
-        //    }
-        //}
-
 
         [HttpPost("rent")]
         public async Task<IActionResult> RentCar([FromBody] RentCarRequest request)

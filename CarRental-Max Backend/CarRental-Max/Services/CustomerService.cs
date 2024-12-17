@@ -58,17 +58,7 @@ namespace CAR_RENTAL_MS_III.Services
             await _customerRepository.AddCustomerAsync(customer);
         }
 
-        //public async Task<string> LoginAsync(LoginDto loginDto)
-        //{
-        //    var customer = await _customerRepository.GetCustomerByNicAsync(loginDto.Nic);
-        //    if (customer == null || !BCrypt.Net.BCrypt.Verify(loginDto.Password, customer.PasswordHash))
-        //    {
-        //        throw new UnauthorizedAccessException("Invalid credentials");
-        //    }
-
-        //    return GenerateToken(customer);
-        //}
-
+      
 
         public async Task<string> LoginAsync(LoginDto loginDto)
         {
@@ -162,27 +152,7 @@ namespace CAR_RENTAL_MS_III.Services
             };
         }
 
-        //public async Task UpdateCustomerAsync(CustomerDto customerDto)
-        //{
-        //    var customer = await _customerRepository.GetCustomerByIdAsync(customerDto.Id);
-        //    if (customer == null) throw new Exception("Customer not found");
-
-        //    customer.FirstName = customerDto.FirstName;
-        //    customer.LastName = customerDto.LastName;
-        //    customer.Email = customerDto.Email;
-        //    customer.PhoneNumber = customerDto.PhoneNumber;
-        //    customer.DriverLicenseNumber = customerDto.DriverLicenseNumber;
-        //    customer.Nic = customerDto.Nic;
-
-        //    // Update address
-        //    customer.Address.Street = customerDto.Address.Street;
-        //    customer.Address.City = customerDto.Address.City;
-        //    customer.Address.State = customerDto.Address.State;
-        //    customer.Address.ZipCode = customerDto.Address.ZipCode;
-        //    customer.Address.Country = customerDto.Address.Country;
-
-        //    await _customerRepository.UpdateCustomerAsync(customer);
-        //}
+       
 
         public async Task UpdateCustomerAsync(CustomerDto customerDto)
         {

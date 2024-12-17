@@ -5,16 +5,15 @@ namespace CAR_RENTAL_MS_III.Entities
 {
     public class Notification
     {
+        public int Id { get; set; } 
+        public int CustomerId { get; set; } 
+        public int? RentalId { get; set; } 
+        public string Message { get; set; } 
+        public DateTime CreatedAt { get; set; } 
+        public bool IsRead { get; set; } 
 
-        [Key]
-        public int Id { get; set; }
-
-        [ForeignKey("Rental")]
-        public int RentalId { get; set; }
-        public Rental Rental { get; set; }
-
-        public string Type { get; set; } 
-
-        public string Comments { get; set; }
+        // Navigation properties
+        public virtual Customer Customer { get; set; }
+        public virtual Rental Rental { get; set; }
     }
 }

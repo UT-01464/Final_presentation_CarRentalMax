@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental_Max.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241214075836_rent")]
-    partial class rent
+    [Migration("20241217213349_rental")]
+    partial class rental
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,20 +211,32 @@ namespace CarRental_Max.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("RentalId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RentalId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RentalId1")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("RentalId");
+
+                    b.HasIndex("RentalId1");
 
                     b.ToTable("Notifications");
                 });
@@ -464,11 +476,22 @@ namespace CarRental_Max.Migrations
 
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Notification", b =>
                 {
+                    b.HasOne("CAR_RENTAL_MS_III.Entities.Customer", "Customer")
+                        .WithMany("Notifications")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CAR_RENTAL_MS_III.Entities.Rental", "Rental")
                         .WithMany()
                         .HasForeignKey("RentalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CAR_RENTAL_MS_III.Entities.Rental", null)
+                        .WithMany("Notifications")
+                        .HasForeignKey("RentalId1");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Rental");
                 });
@@ -541,6 +564,8 @@ namespace CarRental_Max.Migrations
                 {
                     b.Navigation("Address")
                         .IsRequired();
+
+                    b.Navigation("Notifications");
                 });
 
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Manager", b =>
@@ -551,6 +576,11 @@ namespace CarRental_Max.Migrations
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Model", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Rental", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }

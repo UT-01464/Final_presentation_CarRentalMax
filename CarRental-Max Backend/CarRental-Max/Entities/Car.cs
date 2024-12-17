@@ -8,27 +8,26 @@ namespace CAR_RENTAL_MS_III.Entities
     public class Car
     {
         [Key]
-        public int Id { get; set; } // Unique identifier for the car
+        public int Id { get; set; } 
 
         public decimal PricePerDay { get; set; }
-        public int Year { get; set; } // Model year
-        public string RegistrationNumber { get; set; } // Unique registration number
+        public int Year { get; set; } 
+        public string RegistrationNumber { get; set; } 
         
-        public bool IsAvailable { get; set; } // Availability status
-        public string ImageUrl { get; set; } // URL of the car image
-        public int TransmissionId { get; set; } // Ensure this property exists
-        public int FuelTypeId { get; set; } // Ensure this property exists
-       
+        public bool IsAvailable { get; set; } 
+        public string ImageUrl { get; set; }
+        public int TransmissionId { get; set; } 
+        public int FuelTypeId { get; set; } 
         
 
-        [ForeignKey("Model")] // Explicitly define the foreign key relationship
-        public int ModelId { get; set; } // Foreign key to Model
-        public virtual Model Model { get; set; } // Navigation property for Model
+        [ForeignKey("Model")] 
+        public int ModelId { get; set; } 
+        public virtual Model Model { get; set; } 
 
 
         [ForeignKey("CarCategory")]
-        public int CategoryId { get; set; } // Category of the car
-        public virtual CarCategory Category { get; set; } // Navigation property for Category
+        public int CategoryId { get; set; }
+        public virtual CarCategory Category { get; set; } 
 
         public ICollection<Rental>Rentals { get; set; }
 

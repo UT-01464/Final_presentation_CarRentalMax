@@ -23,24 +23,7 @@ namespace CAR_RENTAL_MS_III.Services
 
         }
 
-        //public async Task<IEnumerable<CarDto>> GetAllCarsAsync()
-        //{
-        //    var cars = await _carRepository.GetAllCarsAsync();
-        //    return cars.Where(c => c.IsAvailable) // Exclude rented cars
-        //               .Select(c => new CarDto
-        //               {
-        //                   Id = c.Id,
-        //                   ModelId = c.ModelId,
-        //                   Year = c.Year,
-        //                   RegistrationNumber = c.RegistrationNumber,
-        //                   CategoryId = c.CategoryId,
-        //                   IsAvailable = c.IsAvailable,
-        //                   PricePerDay= c.PricePerDay,
-        //                   ImageUrl = c.ImageUrl
-        //               }).ToList();
-        //}
-
-
+       
 
         public async Task<IEnumerable<CarDto>> GetAllCarsAsync()
         {
@@ -62,27 +45,6 @@ namespace CAR_RENTAL_MS_III.Services
         }
 
 
-
-
-
-
-        //public async Task<CarDto> GetCarByIdAsync(int id)
-        //{
-        //    var car = await _carRepository.GetCarByIdAsync(id);
-        //    if (car == null) return null;
-
-        //    return new CarDto
-        //    {
-        //        Id = car.Id,
-        //        ModelId = car.ModelId,
-        //        Year = car.Year,
-        //        RegistrationNumber = car.RegistrationNumber,
-        //        CategoryId = car.CategoryId,
-        //        IsAvailable = car.IsAvailable,
-        //        PricePerDay= car.PricePerDay,
-        //        ImageUrl = car.ImageUrl
-        //    };
-        //}
 
 
         public async Task<CarDto> GetCarByIdAsync(int id)
@@ -110,46 +72,6 @@ namespace CAR_RENTAL_MS_III.Services
 
 
 
-
-        //public async Task AddCarAsync(CarDto carDto)
-        //{
-        //    // Validate for duplicate registration number
-        //    var existingCar = await _carRepository.GetCarByRegistrationNumberAsync(carDto.RegistrationNumber);
-        //    if (existingCar != null)
-        //    {
-        //        throw new ArgumentException("A car with the same registration number already exists.");
-        //    }
-
-        //    var car = new Car
-        //    {
-        //        ModelId = carDto.ModelId,
-        //        Year = carDto.Year,
-        //        RegistrationNumber = carDto.RegistrationNumber,
-        //        CategoryId = carDto.CategoryId,
-        //        IsAvailable = carDto.IsAvailable,
-        //        PricePerDay = carDto.PricePerDay,
-        //        ImageUrl = carDto.ImageUrl,
-        //        TransmissionId = carDto.TransmissionId,
-        //        FuelTypeId = carDto.FuelTypeId,
-        //        Features = new List<Feature>(),
-
-        //    };
-
-
-        //    if (carDto.FeatureIds != null)
-        //    {
-        //        foreach (var featureId in carDto.FeatureIds)
-        //        {
-        //            var feature = await _featureRepository.GetFeatureByIdAsync(featureId);
-        //            if (feature != null)
-        //            {
-        //                car.Features.Add(feature);
-        //            }
-        //        }
-        //    }
-
-        //    await _carRepository.AddCarAsync(car);
-        //}
 
 
         public async Task AddCarAsync(CarDto carDto)

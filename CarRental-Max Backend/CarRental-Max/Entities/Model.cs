@@ -6,11 +6,12 @@ namespace CAR_RENTAL_MS_III.Entities
     public class Model
     {
         [Key]
-        public int Id { get; set; } // Unique identifier for the model
-        public string Name { get; set; } // Name of the model
-        public string Make { get; set; } // Brand of the model
-        public int CategoryId { get; set; } // Foreign key to Category
-        public virtual CarCategory Category { get; set; } // Navigation property
-        public virtual ICollection<Car> Cars { get; set; } // Navigation property
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Make { get; set; }
+        public int CategoryId { get; set; }
+        public virtual CarCategory Category { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+
     }
 }

@@ -14,9 +14,10 @@ namespace CAR_RENTAL_MS_III.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<CarCategory> CarCategories { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
+       
         public DbSet<User> Users { get; set; }
 
 
@@ -27,12 +28,14 @@ namespace CAR_RENTAL_MS_III.Data
         public DbSet<Feature> Features { get; set; }
         public DbSet<Seat> Seats { get; set; }
 
+        
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Car>()
-       .HasOne(c => c.Model)
+                 .HasOne(c => c.Model)
        .WithMany(m => m.Cars)
        .HasForeignKey(c => c.ModelId)
        .OnDelete(DeleteBehavior.Restrict);
@@ -61,8 +64,16 @@ namespace CAR_RENTAL_MS_III.Data
                 .HasForeignKey("CarId");
 
 
+            modelBuilder.Entity<Notification>()
+            .HasOne(n => n.Customer)
+            .WithMany(c => c.Notifications)
+            .HasForeignKey(n => n.CustomerId);
 
-
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Rental)
+                .WithMany()
+                .HasForeignKey(n => n.RentalId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 
