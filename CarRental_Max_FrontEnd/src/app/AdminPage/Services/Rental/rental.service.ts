@@ -31,12 +31,6 @@ export class RentalService {
     return this.http.get<Rental[]>(`${this.apiUrl}/details/${nic}`);
   }
 
-  //rentCar(rentalRequest: { customerId: number; carId: number }): Observable<RentalResponse> {
-    //return this.http.post<RentalResponse>(`${this.apiUrl}/rent`, rentalRequest,{
-      //responseType:'text'
-   // });
-//}
-
 
 
 rentCar(rentalRequest:rentalRequest) {
@@ -47,8 +41,7 @@ rentCar(rentalRequest:rentalRequest) {
 returnCar(id:number) {
   return this.http.put("https://localhost:7038/api/Rentals/return?id="+id, id)
 }
-  // Return a rented car
-  // Accept a rental
+  
   acceptRental(rentalId: number): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/accept/${rentalId}`, {});
   }

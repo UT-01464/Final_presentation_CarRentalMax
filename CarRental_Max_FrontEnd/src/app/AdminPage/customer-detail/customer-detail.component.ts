@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customer, CustomerService, RegisterDto } from '../Services/Customer/customer.service';
-import { Rental, RentalService } from '../Services/Rental/rental.service';
+import { Rental, RentalService, RentalStatus } from '../Services/Rental/rental.service';
+import { CarModel, CarService } from '../Services/Cars/car.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -18,6 +19,7 @@ export class CustomerDetailComponent implements OnInit {
   showRentalModal: boolean = false;
   loadingCustomers: boolean = false;
   message: string | null = null;
+   carModels: CarModel[] = []; 
 
   newCustomer: RegisterDto = {
     firstName: '',
@@ -33,7 +35,8 @@ export class CustomerDetailComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private rentalService: RentalService
+    private rentalService: RentalService,
+    private carService : CarService
   ) {}
 
   ngOnInit(): void {
@@ -58,8 +61,10 @@ export class CustomerDetailComponent implements OnInit {
     this.selectedCustomer = { ...customer }; // Create a copy for editing
   }
 
-  onViewRentals(nic: string): void {
-    this.rentalService.getRentalDetails(nic).subscribe({
+  
+
+  onViewRentals(customerId: number): void {
+    this.rentalService.getRentalHistory(customerId).subscribe({
       next: (data) => {
         console.log('Rental History Data:', data); // Log the response
         this.rentalHistory = Array.isArray(data) ? data : [];
@@ -72,6 +77,8 @@ export class CustomerDetailComponent implements OnInit {
       },
     });
   }
+
+
 
   onAddCustomer(): void {
     this.customerService.register(this.newCustomer).subscribe({
@@ -108,7 +115,10 @@ export class CustomerDetailComponent implements OnInit {
 
   onSave(): void {
     if (this.selectedCustomer) {
-      this.customerService.updateCustomer(this.selectedCustomer.id, this.selectedCustomer).subscribe({
+      const updatedCustomer = this.selectedCustomer;
+
+      // Check if any details were updated, otherwise save old details
+      this.customerService.updateCustomer(updatedCustomer.id, updatedCustomer).subscribe({
         next: () => {
           this.selectedCustomer = null;
           this.loadCustomers();
@@ -133,4 +143,25 @@ export class CustomerDetailComponent implements OnInit {
       customer.lastName.toLowerCase().includes(lowerCaseTerm)
     );
   }
+
+
+  getCarModel(id: number): string {
+    const carModel = this.carModels.find(m => m.id === id);
+    return carModel ? carModel.name : 'Unknown'; 
+  }
+
+  getStatus(status: RentalStatus): string {
+      switch (status) {
+        case RentalStatus.Pending: return 'Pending';
+        case RentalStatus.Accepted: return 'Accepted';
+        case RentalStatus.Rejected: return 'Rejected';
+        case RentalStatus.Rented: return 'Rented';
+        case RentalStatus.Returned: return 'Returned';
+        default: return 'Unknown';
+      }
+    }
+
+
+
+
 }

@@ -8,6 +8,7 @@ import { AuthServiceService } from '../../Services/auth-service.service';
 import { CarDto, CarModel, CarService } from '../../AdminPage/Services/Cars/car.service';
 import { CarDetailsServiceService, FuelType, Transmission } from '../../AdminPage/Services/CarDetaile/car-details-service.service';
 import { RentalService } from '../../AdminPage/Services/Rental/rental.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-userpage',
@@ -61,7 +62,8 @@ cars: CarDto[] = [];
 
 
   constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService,
-    private carService: CarService,private cardetailService:CarDetailsServiceService , private rentalService: RentalService
+    private carService: CarService,private cardetailService:CarDetailsServiceService , private rentalService: RentalService,
+    private toastr: ToastrService
    ) {}
 
 
@@ -236,15 +238,10 @@ clearFilters(): void {
 
 
 
-
-
-
-
-logout(): void {
-    console.log('Logging out');
-    // Implement logout logic
+logout() {
+  this.authService.logout(); // Clear the session data
+  this.router.navigate(['/login']); // Redirect to login page
 }
-
 
 
 
@@ -288,12 +285,12 @@ closeRentalModal(): void {
 // Method to confirm rental
 confirmRental(): void {
   if (this.selectedCarId === null) {
-      alert('No car selected.');
+      this.toastr.warning('No car selected. Please select a car to rent.', 'Warning'); // Toastr warning
       return; // Exit if no car is selected
   }
 
   if (this.rentalDays <= 0) {
-      alert('Please enter a valid number of rental days.');
+      this.toastr.warning('Please enter a valid number of rental days.', 'Warning'); // Toastr warning
       return; // Exit if rental days are not valid
   }
 
@@ -306,14 +303,25 @@ confirmRental(): void {
   this.rentalService.rentCar(rentalRequest).subscribe(
       response => {
           console.log('Rental response:', response);
+          this.toastr.info('Your rental request is pending. We will process it shortly.', 'Rental Pending'); // Toastr info message
           this.closeRentalModal(); // Close modal after successful rental
       },
       error => {
           console.error('Error submitting rental request', error);
-          alert('Failed to submit rental request. Please try again.');
+          this.toastr.error('Failed to submit rental request. Please try again.', 'Error'); // Toastr error message
       }
   );
 }
+
+calculateTotalAmount(): number {
+  if (this.rentalDays > 0 && this.selectedCar) {
+      return this.rentalDays * this.selectedCar.pricePerDay;
+  }
+  return 0; // Return 0 if rental days is 0 or car is not selected
+}
+
+
+
 
 
 }

@@ -32,8 +32,8 @@
                 <td>{{ rental.customerName}}</td>
                 <td>{{ rental.customerNIC }}</td>
                 <td>{{ getCarModel(rental.car.modelId) }}</td>
-                <td>{{ rental.rentalDate }}</td>
-                <td>{{ rental.returnDate  }}</td>
+                <td>{{ rental.rentalDate |date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{ rental.returnDate |date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                 <td>
                     <button class="btn btn-success" (click)="Return(rental.id)">Return</button>
                 </td>

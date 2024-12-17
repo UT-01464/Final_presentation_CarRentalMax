@@ -42,7 +42,7 @@
         <th>Model</th>
         <th>Rent Date</th>
         <th>Return Date</th>
-        <th>Overdue</th>
+       
         <th>Status</th>
       </tr>
     </thead>
@@ -53,7 +53,7 @@
         <td>{{ getCarModel(rental.car.modelId) }}</td>
         <td>{{ rental.rentalDate | date }}</td>
         <td>{{ rental.returnDate | date }}</td>
-        <td>{{ rental.isOverdue ? 'Yes' : 'No' }}</td>
+        
         <td>{{ getStatus(rental.status) }}</td>
       </tr>
     </tbody>
@@ -69,6 +69,7 @@
         <th>Model</th>
         <th>Rent Date</th>
         <th>Return Date</th>
+        <th>Overdue</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -79,6 +80,7 @@
         <td>{{ getCarModel(history.car.modelId) }}</td>
         <td>{{ history.rentalDate | date }}</td>
         <td>{{ history.returnDate | date }}</td>
+        <td>{{ history.isOverdue ? 'Yes' : 'No' }}</td>
         <td>{{ getStatus(history.status) }}</td>
       </tr>
     </tbody>

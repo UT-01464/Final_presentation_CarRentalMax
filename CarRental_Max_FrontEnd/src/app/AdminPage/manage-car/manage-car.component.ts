@@ -117,9 +117,21 @@ loadFeatures() {
 }
 
 
+closeStatsModal(): void {
+  this.showStatsModal = false;
+}
+
+closeAddCarModal(): void {
+  this.showAddCarModal = false;
+  this.resetNewCar(); // Reset car form
+}
 
 
-
+  
+getCarModel(id: number): string {
+  const carModel = this.carModels.find(m => m.id === id);
+  return carModel ? carModel.name : 'Unknown'; 
+}
 
 
 
@@ -181,7 +193,10 @@ loadFeatures() {
           console.error('Error adding car:', error);
         }
       );
+      this.closeAddCarModal();
+      this.loadCars();
     }
+    
   }
 
   resetNewCar(): void {

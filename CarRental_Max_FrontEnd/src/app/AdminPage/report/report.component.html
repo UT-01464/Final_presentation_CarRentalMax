@@ -30,11 +30,12 @@
 
     <div class="accordion" id="reportAccordion">
         <!-- Car History Section -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="carHistorySection">
             <h2 class="accordion-header" id="headingCarHistory">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseCarHistory" aria-expanded="true" aria-controls="collapseCarHistory">
-                    Car History
+                    <span>Car History</span>
+                    <i class="bi bi-download ms-3 download-icon-box" (click)="downloadAsPDF('car')"></i>
                 </button>
             </h2>
             <div id="collapseCarHistory" class="accordion-collapse collapse show" aria-labelledby="headingCarHistory"
@@ -60,17 +61,19 @@
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>
 
         <!-- Customer History Section -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="customerHistorySection">
             <h2 class="accordion-header" id="headingCustomerHistory">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseCustomerHistory" aria-expanded="false"
                     aria-controls="collapseCustomerHistory">
-                    Customer History
+                   <span> Customer History</span>
+                    <i class="bi bi-download ms-3 download-icon-box" (click)="downloadAsPDF('customer')"></i>
                 </button>
             </h2>
             <div id="collapseCustomerHistory" class="accordion-collapse collapse"
@@ -94,18 +97,21 @@
                             </tr>
                         </tbody>
                     </table>
+                   
                 </div>
             </div>
         </div>
 
+        
         <!-- Rental History Section -->
-        <!-- Rental History Section -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="rentalHistorySection">
             <h2 class="accordion-header" id="headingRentalHistory">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseRentalHistory" aria-expanded="false" aria-controls="collapseRentalHistory">
-                    Rental History
-                </button>
+                <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseRentalHistory" aria-expanded="false" aria-controls="collapseRentalHistory">
+            <span>Rental History</span>
+            <i class="bi bi-download ms-3 download-icon-box" (click)="downloadAsPDF('rental')"></i> <!-- Bootstrap icon for download -->
+        </button>
+                
             </h2>
             <div id="collapseRentalHistory" class="accordion-collapse collapse" aria-labelledby="headingRentalHistory"
                 data-bs-parent="#reportAccordion">
@@ -127,12 +133,13 @@
                                 <td>{{ rental.customerName }}</td>
                                 <td>{{ rental.car.registrationNumber }}</td>
                                 <td>{{ rental.rentalDate | date:'shortDate' }}</td>
-                                <td>{{ rental.status }}</td>
+                                <td>{{ getStatus(rental.status) }}</td>
                                 <td>{{ rental.returnDate | date:'shortDate' }}</td>
                               </tr>
                               
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>

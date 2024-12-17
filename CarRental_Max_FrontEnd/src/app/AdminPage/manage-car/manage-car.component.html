@@ -24,7 +24,7 @@
             <tr>
                 <th>Image</th>
                 <th>Registration Number</th>
-                <th>Model ID</th>
+                <th>Model</th>
                 <th>Price per Day</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -34,7 +34,7 @@
             <tr *ngFor="let car of paginatedCars">
                 <td><img [src]="car.imageUrl" alt="Car Image" width="100"></td>
                 <td>{{ car.registrationNumber }}</td>
-                <td>{{ car.modelId }}</td>
+                <td>{{ getCarModel(car.modelId) }}</td>
                 <td>{{ car.pricePerDay | currency }}</td>
                 <td>{{ car.isAvailable ? 'Available' : 'Rented' }}</td>
                 <td>
@@ -60,7 +60,7 @@
         <div class="modal-content bg-dark text-white">
             <div class="modal-header">
                 <h5 class="modal-title">{{ newCar.id ? 'Edit Car' : 'Add New Car' }}</h5>
-                <button type="button" class="close" (click)="showAddCarModal = false" style="border: none; background: none; color: white; font-size: 24px;">&times;</button>
+                <button type="button" class="close" (click)="closeAddCarModal()" style="border: none; background: none; color: white; font-size: 24px;">&times;</button>
             </div>
             <form (ngSubmit)="onAddCar()" class="p-3" #carForm="ngForm">
                 <div class="mb-3">

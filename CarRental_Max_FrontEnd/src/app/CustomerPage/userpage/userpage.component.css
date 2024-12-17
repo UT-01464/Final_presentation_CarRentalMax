@@ -16,6 +16,29 @@
     color: #ba68c8; /* Light purple on hover */
 }
 
+/* Add hover effect to navbar links */
+.navbar-nav .nav-item .nav-link {
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect */
+.navbar-nav .nav-item .nav-link:hover {
+  color: #ffd700; /* Gold color for the text on hover */
+  background-color: rgba(0, 0, 0, 0.662); /* Slight background change */
+  border-radius: 10px; /* Optional: Rounded corners on hover */
+}
+
+/* Optional: Change color for navbar when hovering over any link */
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #ffd700; /* Gold color for the text */
+}
+
+
+
+
+
+
+
 .modal {
     background-color: rgba(30, 30, 30, 0.9); /* Semi-transparent dark background for modal */
 }
@@ -78,6 +101,23 @@
     background: #ba68c8; /* Light purple background on hover */
     color: #ffffff; /* White text on hover */
 }
+
+
+
+
+
+
+
+.card-img {
+  width: 100%;        /* Full width of the container */
+  height: 200px;      /* Fixed height */
+  object-fit: cover;  /* Ensure the image covers the area without distorting the aspect ratio */
+  border-radius: 8px 8px 0 0;  /* Optional: Round the top corners of the image */
+}
+
+
+
+
 
 
 
@@ -157,6 +197,44 @@
     margin-right: 5px;
 }
 
+
+
+/* Unique class for the Clear Filters button */
+.btn-clear-filters {
+  background-color: #343a40; /* Dark background */
+  color: #fff;               /* White text */
+  border: 1px solid #495057; /* Subtle border */
+     /* Keep the current padding */
+  border-radius: 5px;        /* Rounded corners */
+  font-size: 16px;           /* Font size remains unchanged */
+  cursor: pointer;          /* Pointer cursor on hover */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+/* Hover effect for the Clear Filters button */
+.btn-clear-filters:hover {
+  background-color: #495057; /* Darker background on hover */
+  border-color: #adb5bd;     /* Lighter border color on hover */
+}
+
+/* Focus effect for the button */
+.btn-clear-filters:focus {
+  outline: none;             /* Remove default outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue outline on focus */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .cars-section {
     margin-top: 20px;
 }
@@ -185,7 +263,6 @@
 
 
   /*---------------------------------------------cars---------------------------------*/
-
   .car h2 {
     color: white;
     text-align: center;
@@ -240,6 +317,23 @@
     background-color: #005bb5;
   }
   
+  .car-section {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.car-section:hover {
+    transform: scale(1.05);
+}
+
+.card-img {
+    width: 100%; /* Full width of the parent */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    border-radius: 8px; /* Optional: to match the section's border radius */
+}
 
 
 
@@ -276,6 +370,13 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+
+
+
+
+
+
 
 
 
@@ -381,4 +482,7 @@
   object-fit: cover; /* Maintain aspect ratio and cover the area */
   border-radius: 8px; /* Optional: to match the section's border radius */
 }
+
+
+
 

@@ -4,7 +4,8 @@
   }
   
   header h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
   }
   
   main {
@@ -19,17 +20,12 @@
   }
   
 
-  /* Remove margin and padding from header */
   header {
     margin: 0; /* Remove margin */
     padding: 1rem; /* Maintain vertical padding */
     width: 100%; /* Full width */
 }
 
-/* Center text in the navbar */
-header h1 {
-    text-align: center;
-}
 
 /* Remove space on the left side of the sidebar */
 .offcanvas-lg {
@@ -50,8 +46,4 @@ header h1 {
 .nav-link.active {
     background-color: #007bff; /* Highlight active link */
     color: #ffffff; /* White text for active link */
-}
-
-header h1 {
-  text-align: center;
 }

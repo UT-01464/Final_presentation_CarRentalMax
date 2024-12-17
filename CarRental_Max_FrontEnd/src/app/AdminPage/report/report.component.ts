@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customer, CustomerService } from '../Services/Customer/customer.service';
-import { Rental, RentalResponse, RentalService } from '../Services/Rental/rental.service';
+import { Rental, RentalResponse, RentalService, RentalStatus } from '../Services/Rental/rental.service';
 import { CarDto, CarModel, CarService } from '../Services/Cars/car.service';
+import { jsPDF } from 'jspdf';
 
 
 @Component({
@@ -29,6 +30,9 @@ export class ReportComponent implements OnInit {
   currentRentalPage: number = 1; // Current page for rental history
   itemsPerPage: number = 5;
   carModels: CarModel[] = []; 
+
+
+  
 
   constructor(
     private carService: CarService,
@@ -162,4 +166,50 @@ export class ReportComponent implements OnInit {
     const carModel = this.carModels.find(m => m.id === id);
     return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
   }
+
+
+  getStatus(status: RentalStatus): string {
+      switch (status) {
+        case RentalStatus.Pending: return 'Pending';
+        case RentalStatus.Accepted: return 'Accepted';
+        case RentalStatus.Rejected: return 'Rejected';
+        case RentalStatus.Rented: return 'Rented';
+        case RentalStatus.Returned: return 'Returned';
+        default: return 'Unknown';
+      }
+    }
+
+
+
+  downloadAsPDF(reportType: string): void {
+    const doc = new jsPDF();
+    let contentToExport;
+    
+    if (reportType === 'car') {
+      contentToExport = document.getElementById('carHistorySection')?.innerHTML;
+    } else if (reportType === 'customer') {
+      contentToExport = document.getElementById('customerHistorySection')?.innerHTML;
+    } else if (reportType === 'rental') {
+      contentToExport = document.getElementById('rentalHistorySection')?.innerHTML;
+    }
+    
+    if (contentToExport) {
+      doc.html(contentToExport, {
+        callback: function (doc) {
+          doc.save(`${reportType}_report.pdf`);
+        }
+      });
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -11,13 +11,14 @@ import { UserpageComponent } from './CustomerPage/userpage/userpage.component';
 import { RentalDetailsComponent } from './CustomerPage/Rentals/rental-details/rental-details.component';
 import { CardetailsComponent } from './LandingPage/CarDetails/cardetails/cardetails.component';
 import { ReturnComponent } from './AdminPage/return/return.component';
+import { AuthGuardService } from './Services/auth-guard.service';
 
 
 export const routes: Routes = [
     {path:'',component:LandingpageComponent},
     {path:'all-cars',component:AllCarsComponent},
     {path:'login',component:LoginComponent},
-    {path:'userpage',component:UserpageComponent},
+    {path:'userpage',component:UserpageComponent, canActivate: [AuthGuardService] },
     {path:'rental-details',component:RentalDetailsComponent},
     {path:'cardetails',component:CardetailsComponent},
     

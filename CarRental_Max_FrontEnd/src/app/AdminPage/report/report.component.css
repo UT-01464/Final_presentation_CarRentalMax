@@ -1,0 +1,7 @@
+.download-icon-box {
+    padding: 5px;
+    border: 2px solid #007bff;  /* Blue border */
+    border-radius: 5px;
+    background-color: #f8f9fa;  /* Light background to contrast */
+    color: #007bff;  /* Blue color for the icon */
+}
