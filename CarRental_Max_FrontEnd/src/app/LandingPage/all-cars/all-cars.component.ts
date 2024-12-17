@@ -41,7 +41,7 @@ export class AllCarsComponent implements OnInit{
     this.carService.getCars().subscribe(
       (data: CarDto[]) => {
         this.cars = data;
-        this.filteredCars = data; // Initialize filteredCars with fetched data
+        this.filteredCars = data; 
       },
       (error) => {
         console.error('Error fetching cars:', error);
@@ -86,7 +86,7 @@ export class AllCarsComponent implements OnInit{
 
   getCarModel(id: number): string {
     const carModel = this.carModels.find(m => m.id === id);
-    return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
+    return carModel ? carModel.name : 'Unknown'; 
   }
 
 
@@ -102,8 +102,8 @@ export class AllCarsComponent implements OnInit{
 
   filterCars(): void {
     this.filteredCars = this.cars.filter((car) => {
-      const modelName = this.getCarModel(car.modelId).toLowerCase(); // Get the model name
-      return modelName.includes(this.filterText.toLowerCase()); // Check if it includes the filter text
+      const modelName = this.getCarModel(car.modelId).toLowerCase(); 
+      return modelName.includes(this.filterText.toLowerCase()); 
     });
     
   }

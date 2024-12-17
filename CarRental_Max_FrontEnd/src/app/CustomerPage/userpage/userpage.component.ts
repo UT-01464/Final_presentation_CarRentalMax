@@ -9,6 +9,7 @@ import { CarDto, CarModel, CarService } from '../../AdminPage/Services/Cars/car.
 import { CarDetailsServiceService, FuelType, Transmission } from '../../AdminPage/Services/CarDetaile/car-details-service.service';
 import { RentalService } from '../../AdminPage/Services/Rental/rental.service';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationService, UserNotification } from '../../Services/Notification/notification.service';
 
 @Component({
   selector: 'app-userpage',
@@ -49,6 +50,8 @@ cars: CarDto[] = [];
   transmissions: Transmission[] = [];
   fuelTypes: FuelType[] = [];
   carModels: CarModel[] = [];
+  notifications: UserNotification[] = [];
+  displayedNotifications: Set<number> = new Set();
 
 
   
@@ -58,12 +61,14 @@ cars: CarDto[] = [];
   isRentalModalOpen: boolean = false;
   rentalDays: number = 0;
   selectedCarId: number | null = null;
+  unreadCount: number = 0;
+
    
 
 
   constructor(private router: Router , private customerService:CustomerService,private authService:AuthServiceService,
     private carService: CarService,private cardetailService:CarDetailsServiceService , private rentalService: RentalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,private notificationService: NotificationService
    ) {}
 
 
@@ -80,6 +85,7 @@ cars: CarDto[] = [];
     this.loadFuelTypes();
     this.loadTransmissions();
     this.loadCarModels();
+    this.fetchNotifications();
   }
 
 
@@ -321,7 +327,35 @@ calculateTotalAmount(): number {
 }
 
 
+fetchNotifications(): void {
+  const userIdString = localStorage.getItem('userId');
+  if (userIdString) {
+    const userId = Number(userIdString);
+    this.notificationService.getNotifications(userId).subscribe(
+      notifications => {
+        this.notifications = notifications;
 
+        notifications.forEach(notification => {
+          if (!this.displayedNotifications.has(notification.id)) {
+            this.showToast(notification); // Show toast for new notifications
+            this.displayedNotifications.add(notification.id); // Mark as displayed
+          }
+        });
+      },
+      error => {
+        console.error('Error fetching notifications:', error);
+      }
+    );
+  }
+}
 
+showToast(notification: UserNotification): void {
+  const messageColor = notification.isAccepted ? 'success' : 'error'; // Determine color based on acceptance
+  this.toastr[messageColor](notification.message, 'Notification', {
+    timeOut: 5000, // Duration for the toast
+    progressBar: true,
+    closeButton: true,
+  });
+}
 
 }
