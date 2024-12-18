@@ -1,4 +1,5 @@
 ﻿using CAR_RENTAL_MS_III.Entities;
+using CarRental_Max.Entities;
 using CarRental_Max.Entities.CarDetails;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,7 @@ namespace CAR_RENTAL_MS_III.Data
         public DbSet<Feature> Features { get; set; }
         public DbSet<Seat> Seats { get; set; }
 
+        public DbSet<Feedback> Feedbacks { get; set; }
         
 
 

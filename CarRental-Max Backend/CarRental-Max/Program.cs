@@ -66,6 +66,8 @@ namespace CarRental_Max
             builder.Services.AddScoped<IFeatureService, FeatureService>();
             builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
+            builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
             // JWT Authentication configuration
             var jwtSection = builder.Configuration.GetSection("Jwt");
