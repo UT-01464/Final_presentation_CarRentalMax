@@ -12,6 +12,7 @@ import { RentalDetailsComponent } from './CustomerPage/Rentals/rental-details/re
 import { CardetailsComponent } from './LandingPage/CarDetails/cardetails/cardetails.component';
 import { ReturnComponent } from './AdminPage/return/return.component';
 import { AuthGuardService } from './Services/auth-guard.service';
+import { FeedbackComponent } from './AdminPage/Feedback/feedback/feedback.component';
 
 
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
           { path: 'cars', component: ManageCarComponent },
           { path: 'reports', component: ReportComponent },
           { path: 'return', component: ReturnComponent },
+          {path:'feedback',component:FeedbackComponent}
         ],
       },
       { path: '', redirectTo: 'admin', pathMatch: 'full' },

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CardetailsComponent } from '../CarDetails/cardetails/cardetails.component';
 import { CarService, CarDto, CarModel } from '../../AdminPage/Services/Cars/car.service';
 import { CarDetailsServiceService, FuelType, Transmission } from '../../AdminPage/Services/CarDetaile/car-details-service.service';
+import { FeedbackService } from '../../Services/Feedback/feedback.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -20,7 +21,9 @@ export class LandingpageComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-  constructor(private router: Router, private carService: CarService,private carDetailsService: CarDetailsServiceService) {}
+  constructor(private router: Router, private carService: CarService,private carDetailsService: CarDetailsServiceService,
+    private feedbackService: FeedbackService 
+  ) {}
 
   getstart() {
     this.router.navigate(['/login']);
@@ -37,6 +40,15 @@ export class LandingpageComponent implements OnInit {
   fuelTypes: FuelType[] = [];
   transmissions: Transmission[] = [];
   carModels: CarModel[] = []; 
+
+
+  contact = {
+    name: '',
+    email: '',
+    message: ''
+  };
+
+  successMessage: string | null = null; 
   
 
   ngOnInit(): void {
@@ -140,6 +152,20 @@ export class LandingpageComponent implements OnInit {
 
   setVisibleCars(): void {
     this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
+  }
+
+
+  submitContactForm(): void {
+    this.feedbackService.submitFeedback(this.contact.email, this.contact.message).subscribe(
+      () => {
+        this.successMessage = 'Your message has been sent successfully!';
+        this.contact = { name: '', email: '', message: '' }; // Reset form
+      },
+      (error) => {
+        console.error('Error sending feedback:', error);
+        this.successMessage = 'There was an error sending your message. Please try again later.';
+      }
+    );
   }
 
 

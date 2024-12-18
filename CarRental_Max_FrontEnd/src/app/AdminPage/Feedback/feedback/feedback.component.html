@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2 class="text-dark">Customer Feedback</h2>
+    <table class="table table-dark mt-3">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Is Responded</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedbackList">
+          <td>{{ feedback.email }}</td>
+          <td>{{ feedback.message }}</td>
+          <td>{{ feedback.isResponded ? 'Yes' : 'No' }}</td>
+          <td>
+            <button class="btn btn-outline-light" (click)="sendResponse(feedback)">Send Response</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
