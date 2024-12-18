@@ -69,8 +69,8 @@ export class LandingpageComponent implements OnInit {
     this.carService.getCars().subscribe(
       (data: CarDto[]) => {
         this.cars = data;
-        this.filteredCars = data; // Initialize filteredCars with fetched data
-        this.setVisibleCars(); // Set visible cars after loading
+        this.filteredCars = data; 
+        this.setVisibleCars(); 
       },
       (error) => {
         console.error('Error fetching cars:', error);
@@ -115,7 +115,7 @@ export class LandingpageComponent implements OnInit {
 
   getCarModel(id: number): string {
     const carModel = this.carModels.find(m => m.id === id);
-    return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
+    return carModel ? carModel.name : 'Unknown'; 
   }
 
 
@@ -132,18 +132,18 @@ export class LandingpageComponent implements OnInit {
 
   filterCars(): void {
     this.filteredCars = this.cars.filter((car) => {
-      const modelName = this.getCarModel(car.modelId).toLowerCase(); // Get the model name
-      return modelName.includes(this.filterText.toLowerCase()); // Check if it includes the filter text
+      const modelName = this.getCarModel(car.modelId).toLowerCase();
+      return modelName.includes(this.filterText.toLowerCase()); 
     });
-    this.setVisibleCars(); // Update visible cars after filtering
+    this.setVisibleCars(); 
   }
 
   openCarDetails(car: CarDto): void {
-    this.selectedCar = car; // Set the selected car
+    this.selectedCar = car; 
   }
 
   closeCarDetails(): void {
-    this.selectedCar = null; // Clear the selected car to close the modal
+    this.selectedCar = null; 
   }
 
   viewAllCars(): void {
@@ -151,7 +151,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   setVisibleCars(): void {
-    this.visibleCars = this.filteredCars.slice(0, 6); // Only show the first 6 cars
+    this.visibleCars = this.filteredCars.slice(0, 6); 
   }
 
 
@@ -159,7 +159,7 @@ export class LandingpageComponent implements OnInit {
     this.feedbackService.submitFeedback(this.contact.email, this.contact.message).subscribe(
       () => {
         this.successMessage = 'Your message has been sent successfully!';
-        this.contact = { name: '', email: '', message: '' }; // Reset form
+        this.contact = { name: '', email: '', message: '' }; 
       },
       (error) => {
         console.error('Error sending feedback:', error);

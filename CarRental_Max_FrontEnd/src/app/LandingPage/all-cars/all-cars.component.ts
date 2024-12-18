@@ -109,11 +109,11 @@ export class AllCarsComponent implements OnInit{
   }
 
   openCarDetails(car: CarDto): void {
-    this.selectedCar = car; // Set the selected car
+    this.selectedCar = car; 
   }
 
   closeCarDetails(): void {
-    this.selectedCar = null; // Clear the selected car to close the modal
+    this.selectedCar = null; 
   }
  
 }

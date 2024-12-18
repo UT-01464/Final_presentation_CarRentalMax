@@ -23,7 +23,7 @@ export class UserpageComponent {
 
   isModalOpen: boolean = false;
   customer: Customer = {
-    id: 0, // Set this to the actual ID of the customer
+    id: 0, 
     firstName: '',
     lastName: '',
     email: '',
@@ -75,7 +75,7 @@ cars: CarDto[] = [];
 
 
   ngOnInit(): void {
-    this.filteredCars = this.cars; // Initialize filteredCars with all cars
+    this.filteredCars = this.cars; 
     this.loadUserData();
    
     this.loadCars();
@@ -92,11 +92,11 @@ cars: CarDto[] = [];
 
 
   loadUserData(): void {
-    const userIdString = localStorage.getItem('userId'); // Retrieve user ID from local storage
+    const userIdString = localStorage.getItem('userId'); 
     if (userIdString) {
-      const userId = Number(userIdString); // Convert to number
+      const userId = Number(userIdString); 
       this.customerService.getCustomerById(userId).subscribe((data) => {
-        this.customer = data; // Set the retrieved customer data
+        this.customer = data; 
       }, error => {
         console.error('Error fetching user data', error);
       });
@@ -137,19 +137,19 @@ cars: CarDto[] = [];
   }
 
   getCarModel(id?: number): string {
-    if (id === undefined) return 'Unknown'; // Handle undefined case
+    if (id === undefined) return 'Unknown'; 
     const carModel = this.carModels.find(m => m.id === id);
-    return carModel ? carModel.name : 'Unknown'; // Return model name or 'Unknown' if not found
+    return carModel ? carModel.name : 'Unknown'; 
 }
 
 getFuelType(id?: number): string {
-    if (id === undefined) return 'Unknown'; // Handle undefined case
+    if (id === undefined) return 'Unknown'; 
     const fuelType = this.fuelTypes.find(f => f.id === id);
     return fuelType ? fuelType.type : 'Unknown';
 }
 
 getTransmissionType(id?: number): string {
-    if (id === undefined) return 'Unknown'; // Handle undefined case
+    if (id === undefined) return 'Unknown'; 
     const transmission = this.transmissions.find(t => t.id === id);
     return transmission ? transmission.type : 'Unknown';
 }
@@ -164,14 +164,14 @@ getTransmissionType(id?: number): string {
 
 
   saveProfile(): void {
-    const customerId = this.customer.id; // Get the customer ID from the customer object
+    const customerId = this.customer.id; 
     this.customerService.updateCustomer(customerId, this.customer).subscribe(() => {
       // Update local storage with the new customer data
       localStorage.setItem('user', JSON.stringify(this.customer));
-      alert('Profile updated successfully!'); // Notify user of success
+      alert('Profile updated successfully!'); 
     }, error => {
       console.error('Failed to update profile', error);
-      alert('Failed to update profile. Please try again.'); // Notify user of error
+      alert('Failed to update profile. Please try again.'); 
     });
   }
 
@@ -192,8 +192,8 @@ getTransmissionType(id?: number): string {
     this.carService.getCars().subscribe(
       (data: CarDto[]) => {
         this.cars = data;
-        console.log('Loaded Cars:', this.cars); // Log the loaded cars for verification
-        this.filteredCars = data; // Initialize filteredCars with fetched data
+        console.log('Loaded Cars:', this.cars); 
+        this.filteredCars = data; 
       },
       (error) => {
         console.error('Error fetching cars:', error);
@@ -245,8 +245,8 @@ clearFilters(): void {
 
 
 logout() {
-  this.authService.logout(); // Clear the session data
-  this.router.navigate(['/login']); // Redirect to login page
+  this.authService.logout(); 
+  this.router.navigate(['/login']); 
 }
 
 

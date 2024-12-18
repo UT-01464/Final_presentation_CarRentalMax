@@ -16,10 +16,10 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   isRegistering = false;
 
-  // Login fields
+  
   loginData: LoginData = { nic: '', password: '' };
 
-  // Registration fields
+ 
   registerData: RegisterData = {
     firstName: '',
     lastName: '',
